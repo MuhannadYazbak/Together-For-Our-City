@@ -1,38 +1,122 @@
-.App {
+.fullScreenStyle {
+  width: 100vw;
+  height: 100vh;
+}
+
+.sideLayoutStyle {
+  width: fit-content;
+  height: 100vh;
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+.menuStyle {
+  background-color: #282c34;
+  color: white;
+  height: 100vh;
+}
+
+.mainLayoutStyle{
+  width: 70vw;
+  height: 100vh;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  background-color: transparent;
+}
+
+.headerStyle {
+  height: 10vh;
+  width: 100vw;
+  background-color:#282c34;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  font-weight: 300;
+}
+
+.contentStyle {
+  height: 80vh;
+  width: 100vw;
+  background-color: white;
+  color: #282c34;
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+.footerStyle {
+  height: 10vh;
+  width: 100vw;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  background-color: #282c34;
+  color: white;
+  font-weight: 200;
+}
+
+.siderStyle {
+  background-color: #282c34;
+  height: 100vh;
+  width: fit-content;
+}
+
+.center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: White;
+}
+
+.buttonStyle {
+  box-shadow: 2px 2px black;
+  transition-duration: 0.4s;
+  border-radius: 20;
+  border-color: black;
+  border-style: solid;
+}
+
+.tableStyleMobile {
+  display:table;
+  box-sizing: border-box;
+  border-style: solid;
+  border-width: 2px;
+  border-spacing: -2px;
+  border-color: black;
+  border-radius: 11px;
+  width: 60vw;
+}
+
+.tableStyle {
+  display:table;
+  margin-left: 5px;
+  box-sizing: border-box;
+  border-style: solid;
+  border-width: 2px;
+  border-spacing: -2px;
+  border-color: black;
+  border-radius: 11px;
+  max-width: 60%;
+}
+
+.formStyle{
+  border-radius: 10px;
+  border-color: black;
+  border-style: groove;
+  border-spacing: 10px;
+  box-sizing: border-box;
+  margin-top: 5px;
+  margin-left: 5px;
+  margin-right: 10px;
+}
+
+.centeredFormStyle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.textStyle {
+  font-size: 16px;
+  color: #282c34;
+  text-align: center;
+  color: black;
 }
