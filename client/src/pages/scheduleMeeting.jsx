@@ -1,7 +1,6 @@
 import React, {useState} from "react";
 import { useNavigate } from "react-router-dom";
 import { Form, Input, Space, Button, Select, DatePicker, TimePicker } from "antd";
-import { useForm } from "rc-field-form";
 
 const ScheduleMeeting = () => {
     const [volunteerName, setVolunteerName] = useState('');
@@ -10,7 +9,6 @@ const ScheduleMeeting = () => {
     const [startTime, setStartTime] = useState('');
     const [endTime, setEndTime] = useState('');
     const navigate = useNavigate();
-    const {form} = useForm();
     var meeting = {}
     var associations = [
             {value: 'Almanara', label: 'Almanara'},
@@ -31,7 +29,7 @@ const ScheduleMeeting = () => {
             navigate('/');
         } else {
             console.warn('Could not schedule, please check the data');
-            form.resetFields([volunteerName, associationName, date, startTime, endTime]);
+            Form.resetFields([volunteerName, associationName, date, startTime, endTime]);
             }
 
         }
@@ -53,8 +51,8 @@ const ScheduleMeeting = () => {
         }
     
     return (
-        <Space direction="vertical">
-            <Form form={form} onFinish={makeMeeting} labelCol={{span: 10}}>
+        <Space className="fullScreenStyle" direction="vertical">
+            <Form className="formStyle" onFinish={makeMeeting} labelCol={{span: 10}} wrapperCol={{span: 6}}>
                 <Form.Item label='Association' required={true}>
                     <Select value={associationName} options={associations} defaultValue='Almanara' onChange={(e) => handleAssociationChange(e)}/>
                 </Form.Item>
@@ -67,11 +65,14 @@ const ScheduleMeeting = () => {
                 <Form.Item label='End Time' required={false}>
                     <TimePicker value={endTime} onChange={(e)=> handleEndTimeChange(e)}/>
                 </Form.Item>
-                <Form.Item>
+                <Form.Item wrapperCol={{offset: 10}}>
                     <Button className="buttonStyle" type="primary" htmlType="submit">Schedule</Button>
                 </Form.Item>
+                <Form.Item wrapperCol={{offset: 10}}>
+                    <Button className="buttonStyle" type="dashed" onClick={()=> navigate(-1)}>Back</Button>
+                </Form.Item>
             </Form>
-            <Button className="buttonStyle" type="dashed" onClick={()=> navigate(-1)}>Back</Button>
+            
         </Space>
     )
 }

@@ -21,7 +21,6 @@ function MakeTable () {
                     title: key,
                     dataIndex: key,
                     key: key,
-                    width: 'max-content',
                     fixed: name === 'id'? 'left' : null,
                     sorter: name === 'age'? (a,b) => parseInt(a.age) - parseInt(b.age): null,
                     filters: name ==='gender'? [
@@ -47,10 +46,10 @@ function MakeTable () {
             <div className="center">
                 <h1>Users Table</h1>
             </div>
-            <Affix className="affixStyle" target={()=> container}>
+            {/* <Affix className="affixStyle" target={()=> container}> */}
             {/* <Table style={{maxWidth: '90vw'}} pagination={{pageSize: 10}} dataSource={dataSource} columns={columns} scroll={{y: 400, x:true}} /> */}
-            <Table className="tableStyle" pagination={{pageSize: 5}} dataSource={dataSource} columns={columns} scroll={{y: 400, x:true}} />
-            </Affix>
+            <Table className="tableStyle" pagination={{pageSize: 15}} dataSource={dataSource} columns={columns} scroll={{x:true}} />
+            {/* </Affix> */}
         </Space>
     )
 }

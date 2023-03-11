@@ -105,14 +105,14 @@ const MeetingsHistory = () => {
       title: "Date",
       dataIndex: "date",
       key: "date",
-      width: "10%",
+      width: "16.5vw",
       sorter: (a, b) => Date.parse(a.date) - Date.parse(b.date),
     },
     {
       title: "Association",
       dataIndex: "association",
       key: "association",
-      width: "50px",
+      width: "16.5vw",
       filters: [
         { text: "Almanara", value: "Almanara" },
         { text: "Oglo", value: "Oglo" },
@@ -126,21 +126,21 @@ const MeetingsHistory = () => {
       title: "Address",
       dataIndex: "address",
       key: "address",
-      width: "50px",
+      width: "16.5vw",
       responsive: ["md"],
     },
     {
       title: "Comment",
       dataIndex: "comment",
       key: "comment",
-      width: "50px",
+      width: "16.5vw",
       responsive: ["md"],
     },
     {
       title: "Actions",
       dataIndex: "actions",
       key: "actions",
-      width: "60px",
+      width: "16.5vw",
       render: () => (
         <Space direction="vertical">
           <Button
@@ -179,14 +179,14 @@ const MeetingsHistory = () => {
           className="tableStyleMobile"
           dataSource={dataSource}
           columns={columns}
-          scroll={{x: 'max-content', y: '40vh'}}
+          scroll={{x: '100vw', y: '50vh'}}
           // pagination= {{pageSize: 3, position: 'top'}}
         />
         <Table
           className="tableStyle"
           dataSource={dataSource}
           columns={columns}
-          scroll={{x: 'max-content', y: '40vh'}}
+          scroll={{y: '50vh'}}
           // pagination= {{pageSize: 3, position: 'top'}}
         />
       </Affix>

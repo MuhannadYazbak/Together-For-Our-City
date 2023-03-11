@@ -16,7 +16,8 @@ const ForgotPassword = () => {
     return response;
   };
   return (
-      <Form onFinish={sendEmail} labelCol={{span: 5}} wrapperCol={{span: 10}}>
+      <Form className="formStyle" onFinish={sendEmail} labelCol={{span: 5}} wrapperCol={{span: 10}}>
+        <br/>
         <Form.Item label="Email" required="true">
           <Input
             type="Email"
@@ -25,12 +26,12 @@ const ForgotPassword = () => {
             }}
           />
         </Form.Item>
-        <Form.Item wrapperCol={{offset: 5}}>
+        <Form.Item wrapperCol={{offset: 8}}>
           <Button className="buttonStyle" type="primary" htmlType="submit">
             OK
           </Button>
         </Form.Item>
-        <Form.Item wrapperCol={{offset: 5}}>
+        <Form.Item wrapperCol={{offset: 8}}>
         <Button className="buttonStyle" type="dashed" onClick={()=> navigate(-1)}>Back</Button>
       </Form.Item>
         <Form.Item wrapperCol={{offset: 5}}>

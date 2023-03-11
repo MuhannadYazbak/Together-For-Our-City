@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Space, Card, Button, Pagination, Avatar } from "antd";
+import { Space, Card, Button, Pagination, Avatar} from "antd";
 import nazareth from "../images/NAZARETH_LOGO3.jpg";
 import boy from "../images/boyAvatar.png";
 import girl from "../images/girlAvatar.png";
@@ -15,10 +15,13 @@ const { Meta } = Card;
 const Cards = () => {
   const navigate = useNavigate();
   const cardsGrid = [];
+  var no;
 
-  for (let i = 1; i <= 31; i++) {
+  for (no = 1; no <= 31; no++) {
+    const i = no;
     cardsGrid.push(
       <Card.Grid
+        onClick={()=>navigate('/content')}
         style={{
           width: 300,
         }}
@@ -34,19 +37,28 @@ const Cards = () => {
           <EllipsisOutlined key="ellipsis" />,
         ]}
       >
+        {no%2 == 0 ? 
         <Meta
-          avatar={<Avatar src={nazareth} />}
+        avatar={<Avatar src= {boy}/>}
+        title={["Content ", i]}
+        description={["This is content ", i]}
+      /> :
+      <Meta
+          avatar={<Avatar src= {girl}/>}
           title={["Content ", i]}
           description={["This is content ", i]}
         />
+        }
       </Card.Grid>
     );
   }
 
   return (
     <Space style={{ width: "100vw", height: "100vh" }} direction="vertical">
-      <Card>{cardsGrid}</Card>
-      <Space direction="horizontal" style={{width: '100vw', height: '2vh', textAlign: 'center'}}>
+      <Card style={{height: '50vh', width: '100vw', overflow: 'auto', marginBottom: '5vh'}}>
+        {cardsGrid}
+        </Card>
+      <Space direction="horizontal"  className="bottomHorizontalStyle">
         <Button className="buttonStyle" onClick={() => navigate(-1)}>
           Back
         </Button>

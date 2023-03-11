@@ -47,12 +47,12 @@ const Register = () => {
             onChange={(e) => setPassword(e.target.value)}
           />
         </Form.Item>
-        <Form.Item wrapperCol={{offset: 1}}>
+        <Form.Item wrapperCol={{offset: 8}}>
           <Button className="buttonStyle" type="primary" htmlType="submit">
             Register
           </Button>
         </Form.Item>
-        <Form.Item wrapperCol={{offset: 1}}>
+        <Form.Item wrapperCol={{offset: 8}}>
         <Button className="buttonStyle" type="dashed" onClick={() => navigate(-1)}>
         Back
       </Button>

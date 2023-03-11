@@ -34,12 +34,12 @@ const Login = () => {
             }}
           />
         </Form.Item>
-        <Form.Item wrapperCol={{offset: 1}}>
+        <Form.Item wrapperCol={{offset: 8}}>
           <Button className="buttonStyle" type="primary" htmlType="submit">
             Log-In
           </Button>
         </Form.Item>
-        <Form.Item wrapperCol={{offset: 1}}>
+        <Form.Item wrapperCol={{offset: 8}}>
         <Button
           className="buttonStyle"
           type="ghost"
@@ -49,7 +49,7 @@ const Login = () => {
           Forgot My Password
         </Button>
         </Form.Item>
-        <Form.Item wrapperCol={{offset: 1}}>
+        <Form.Item wrapperCol={{offset: 8}}>
         <Button className="buttonStyle" type="dashed" onClick={() => navigate(-1)}  >
           Back
         </Button>
