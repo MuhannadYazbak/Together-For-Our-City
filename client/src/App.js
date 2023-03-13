@@ -30,8 +30,8 @@ const App = () => {
   const [logged, setLogged] = useState(true);
   const [itemsLogged, setItemsLogged] = useState([
     { key: 'languages', label: 'Language', icon: <GlobalOutlined />,
-      children : [{key: 'arabic', label: 'Arabic'},
-      {key:'english', label: 'English'},
+      children : [{key:'english', label: 'English'},
+        {key: 'arabic', label: 'Arabic'},
       {key: 'hebrew', label: 'Hebrew'}]},
     { key: 'home', label: 'Home', icon:<HomeOutlined/>, onClick: () => { navigate('/') } },
     { key: 'login', label: 'Log In', icon: <LoginOutlined/>, onClick: () => { navigate('/Login') } },
@@ -63,7 +63,7 @@ const App = () => {
 
   return (
     <Space direction='horizontal' className="fullScreenStyle">
-      <Layout className='sideLayoutStyle'>
+      <Layout >
         <Sider className='siderStyle'  collapsible collapsed={collapse} onCollapse={setCollapse} theme='dark'>
           <Menu className='menuStyle' key='menu' items={ logged ? itemsLogged : itemsNotLogged} />
         </Sider>

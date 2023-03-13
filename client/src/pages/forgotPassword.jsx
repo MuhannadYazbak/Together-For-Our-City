@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { Form, Input, Button, Space } from "antd";
 import { useNavigate } from "react-router-dom";
-import { useForm } from "antd/es/form/Form";
 
 const ForgotPassword = () => {
   const navigate = useNavigate();
+  const [form] = Form.useForm();
   const [email, setEmail] = useState("");
   const [response, setResponse] = useState("");
 
@@ -16,7 +16,7 @@ const ForgotPassword = () => {
     return response;
   };
   return (
-      <Form className="formStyle" onFinish={sendEmail} labelCol={{span: 5}} wrapperCol={{span: 10}}>
+      <Form className="formStyle" form={form} onFinish={sendEmail} labelCol={{span: 5}} wrapperCol={{span: 8}}>
         <br/>
         <Form.Item label="Email" required="true">
           <Input
@@ -26,12 +26,12 @@ const ForgotPassword = () => {
             }}
           />
         </Form.Item>
-        <Form.Item wrapperCol={{offset: 8}}>
+        <Form.Item wrapperCol={{offset: 5}}>
           <Button className="buttonStyle" type="primary" htmlType="submit">
             OK
           </Button>
         </Form.Item>
-        <Form.Item wrapperCol={{offset: 8}}>
+        <Form.Item wrapperCol={{offset: 5}}>
         <Button className="buttonStyle" type="dashed" onClick={()=> navigate(-1)}>Back</Button>
       </Form.Item>
         <Form.Item wrapperCol={{offset: 5}}>

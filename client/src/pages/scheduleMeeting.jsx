@@ -1,8 +1,9 @@
 import React, {useState} from "react";
 import { useNavigate } from "react-router-dom";
-import { Form, Input, Space, Button, Select, DatePicker, TimePicker } from "antd";
+import { Form, Space, Button, Select, DatePicker, TimePicker } from "antd";
 
 const ScheduleMeeting = () => {
+    const [form] = Form.useForm();
     const [volunteerName, setVolunteerName] = useState('');
     const [associationName, setAssociationName] = useState('');
     const [date, setDate] = useState('');
@@ -52,7 +53,7 @@ const ScheduleMeeting = () => {
     
     return (
         <Space className="fullScreenStyle" direction="vertical">
-            <Form className="formStyle" onFinish={makeMeeting} labelCol={{span: 10}} wrapperCol={{span: 6}}>
+            <Form className="formStyle" form={form} onFinish={makeMeeting} labelCol={{span: 10}} wrapperCol={{span: 6}}>
                 <Form.Item label='Association' required={true}>
                     <Select value={associationName} options={associations} defaultValue='Almanara' onChange={(e) => handleAssociationChange(e)}/>
                 </Form.Item>

@@ -1,12 +1,11 @@
 import React, {useEffect, useState} from "react";
-import { Table, Space, Affix } from "antd";
+import { Table, Space } from "antd";
 import '../App.css';
 
 function MakeTable () {
     const dataType = "users";
     const [columns, setColumns] = useState([]);
     const [dataSource, setDataSource] = useState([]);
-    const [container, setContainer] = useState(null);
 
     useEffect(()=>{
         fetch(`https://dummyjson.com/${dataType}`)
@@ -46,10 +45,8 @@ function MakeTable () {
             <div className="center">
                 <h1>Users Table</h1>
             </div>
-            {/* <Affix className="affixStyle" target={()=> container}> */}
-            {/* <Table style={{maxWidth: '90vw'}} pagination={{pageSize: 10}} dataSource={dataSource} columns={columns} scroll={{y: 400, x:true}} /> */}
-            <Table className="tableStyle" pagination={{pageSize: 15}} dataSource={dataSource} columns={columns} scroll={{x:true}} />
-            {/* </Affix> */}
+            <Table className="tableStyle" pagination={{pageSize: 5}} dataSource={dataSource} columns={columns} scroll={{x:true}} />
+            
         </Space>
     )
 }

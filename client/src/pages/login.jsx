@@ -5,6 +5,7 @@ import {logg} from '../App';
 
 const Login = () => {
   const navigate = useNavigate();
+  const [form] = Form.useForm();
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const [logg, setLogged] = useState(false);
@@ -17,7 +18,7 @@ const Login = () => {
   };
   return (
     <Space direction="vertical">
-      <Form className='formStyle' onFinish={login} labelCol={{span: 8}}>
+      <Form className='formStyle' form={form} onFinish={login} labelCol={{span: 8}} wrapperCol={{span: 8}}>
         <Form.Item label="User Name" required={true}>
           <Input
             value={userName}

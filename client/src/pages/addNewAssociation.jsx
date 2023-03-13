@@ -45,7 +45,6 @@ const AddNewAssociation = () => {
   };
 
   return (
-    // <Space className="fullScreenStyle" direction="vertical">
     <div style={{width: '50vw', height: '50vh'}}>
       <Form
         className="formStyle"
@@ -113,15 +112,10 @@ const AddNewAssociation = () => {
             onChange={(e) => setContactPhone(e.target.value)}
           />
         </Form.Item>
-        <Form.Item wrapperCol={{offset: 11}}>
-        <Space className="bottomHorizontalStyle" direction="horizontal">
-        <Form.Item >
-          <Button className="buttonStyle" type="primary" htmlType="submit">
-            Add
-          </Button>
+        <Form.Item wrapperCol={{offset: 12}}>
+          <Button className="buttonStyle" type="primary" htmlType="submit">Add </Button>
         </Form.Item>
-        <Form.Item />
-        <Form.Item >
+        <Form.Item wrapperCol={{offset: 12}} >
           <Button
             className="buttonStyle"
             type="dashed"
@@ -129,8 +123,6 @@ const AddNewAssociation = () => {
           >
             Back
           </Button>
-        </Form.Item>
-        </Space>
         </Form.Item>
       </Form>
       </div>
