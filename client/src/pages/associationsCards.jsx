@@ -11,17 +11,22 @@ import {
 } from "@ant-design/icons";
 import "../App.css";
 const { Meta } = Card;
+var no;
+
+export const sendNo = (value) => {
+   return value;
+}
 
 const Cards = () => {
   const navigate = useNavigate();
   const cardsGrid = [];
-  var no;
 
   for (no = 1; no <= 31; no++) {
     const i = no;
     cardsGrid.push(
       <Card.Grid
-        onClick={()=>navigate('/content')}
+        key={['content',i]}
+        onClick={()=>{sendNo(i); navigate(`/content/:${i}`)}}
         style={{
           width: 300,
         }}
@@ -76,3 +81,5 @@ const Cards = () => {
 };
 
 export default Cards;
+
+

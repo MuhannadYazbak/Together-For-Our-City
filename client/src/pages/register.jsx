@@ -1,66 +1,91 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { Form, Button, Input, Space } from "antd";
+import React, { useRef, useState, useEffect } from "react";
+import { useNavigate, Routes, Route } from "react-router-dom";
+import { Form, Input, Button, Layout } from "antd";
+const { Content } = Layout;
 
 const Register = () => {
-  const navigate = useNavigate();
-  const [userName, setUserName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const regNewUser = () => {
-    const user = {
-      userName: userName,
-      email: email,
-      password: password,
-    };
-    console.log(user);
-    navigate("/LogIn");
-  };
+    const navigate = useNavigate();
+    const [form] = Form.useForm();
+    var current;
+    const [user, setUser] = useState({
+        firstName: '',
+        lastName: '',
+        email: '',
+        phone: '',
+        password: '',
+        confirmPassword: '',
 
-  return (
-    <Space direction="vertical">
-      <Form className='formStyle' onFinish={regNewUser} labelCol={{span: 8}}>
-        <Form.Item label="User Name" required={true}>
-          <Input
-            name="userName"
-            value={userName}
-            type="text"
-            placeholder="Enter a User Name"
-            onChange={(e) => setUserName(e.target.value)}
-          />
-        </Form.Item>
-        <Form.Item label="Email" required={true}>
-          <Input
-            name="Email"
-            value={email}
-            placeholder="Enter Your Email"
-            type="email"
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </Form.Item>
-        <Form.Item label="Password" required={true}>
-          <Input
-            name="password"
-            value={password}
-            type="password"
-            placeholder="Enter A Password"
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </Form.Item>
-        <Form.Item wrapperCol={{offset: 8}}>
-          <Button className="buttonStyle" type="primary" htmlType="submit">
-            Register
-          </Button>
-        </Form.Item>
-        <Form.Item wrapperCol={{offset: 8}}>
-        <Button className="buttonStyle" type="dashed" onClick={() => navigate(-1)}>
-        Back
-      </Button>
-      </Form.Item>
-      </Form>
-      
-    </Space>
-  );
-};
+    });
+
+    const handleChange = (event) => {
+        const { name, value } = event.target;
+        setUser((prevState) => ({
+          ...prevState,
+          [name]: value,
+        }));
+      };
+
+    const resetUser = () => {
+        setUser({
+            firstName: '',
+            lastName: '',
+            email: '',
+            phone: '',
+            password: '',
+            confirmPassword: '',
+        })
+    }
+
+    const createUser = () => {
+        if (user.password === user.confirmPassword) {
+            console.log("password matched");
+            console.log("New user: ", user);
+            form.resetFields();
+    
+        } else {
+            console.warn("Passwords did not match");
+            form.setFieldsValue({'password': '', 'confirmPassword': ''});
+        }
+    }
+
+    useEffect(()=>{
+        // console.log(user)
+    },[user, ""])
+
+    useEffect(()=>{
+        console.log("Password change");
+    },[user.password, user.confirmPassword, ""])
+
+    return (
+        <Content className="fullScreenStyle">
+            <Form form={form} className="formStyle" onFinish={createUser} labelCol={{span: 10}} wrapperCol={{span: 10}} >
+                <Form.Item rules={[{required: true, message: "First Name is required"}]} label="First Name" name="firstName">
+                    <Input type="text" name="firstName" placeholder="First Name" onChange={(e)=> handleChange(e)} />
+                </Form.Item>
+                <Form.Item rules={[{required: true, message: "Last Name is required"}]} label="Last Name" name="lastName">
+                    <Input type="text" name="lastName" placeholder="Last Name" onChange={(e)=> handleChange(e)} />
+                </Form.Item>
+                <Form.Item rules={[{required:true, message: 'Email should contain prefix, @ and suffix'}]} label="Email" name="email">
+                    <Input type="email" name="email" placeholder="Email" onChange={(e)=> handleChange(e)} />
+                </Form.Item>
+                <Form.Item rules={[{required: false}]} label="Phone" name="phone">
+                    <Input type="number" name="phone" placeholder="Phone Number" onChange={(e)=> handleChange(e)} />
+                </Form.Item>
+                <Form.Item rules={[{required: true, message: "Password is required"}]} label="Password" name="password">
+                    <Input value={user.password} type="password" name="password" placeholder="Password" onChange={(e)=> handleChange(e)} />
+                </Form.Item>
+                <Form.Item rules={[{required: true, message: "Confirm Password is required, and must match password"}]} label="Re-Password" name='confirmPassword'>
+                    <Input value={user.confirmPassword} type="password" name="confirmPassword" placeholder="Confirm Passowrd" onChange={(e)=> handleChange(e)} />
+                </Form.Item>
+                <Form.Item wrapperCol={{ offset: 10 }}>
+                    <Button className="buttonStyle" type="primary" htmlType="submit">OK</Button>
+                </Form.Item>
+                <Form.Item wrapperCol={{offset: 10}}>
+                    <Button className="buttonStyle" type="dashed" onClick={()=> navigate(-1)}>Back</Button>
+                </Form.Item>
+            </Form>
+        </Content>
+    )
+}
 
 export default Register;

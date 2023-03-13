@@ -1,15 +1,19 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button, Input, Form, Space } from "antd";
-// import { useForm } from "antd/es/form/Form";
+import {logg} from '../App';
 
 const Login = () => {
   const navigate = useNavigate();
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
+  const [logg, setLogged] = useState(false);
   // const { form } = useForm();
   const login = () => {
-    console.log("logged in  ", { userName });
+    setLogged(! logged);
+    console.log("logged in  ", { userName }, 'stauts: ', {logged});
+    navigate('/MeetingsHistory');
+
   };
   return (
     <Space direction="vertical">
@@ -60,3 +64,4 @@ const Login = () => {
 };
 
 export default Login;
+export const logged = true;
