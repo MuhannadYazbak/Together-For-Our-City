@@ -3,6 +3,20 @@
   height: 100vh;
 }
 
+.none{
+  display: none;
+}
+
+.red{
+  color: red;
+  font-size: 18px;
+  font-weight: 300;
+}
+
+.green{
+  background-color: green;
+}
+
 .sideLayoutStyle {
   width: fit-content;
   height: 100vh;
@@ -58,9 +72,10 @@
   width: fit-content;
 }
 
-.bottomHorizontalStyle {
-  height: 6vh;
+.horizontalStyle {
+  height: 12vh;
   width: 80vw;
+  justify-content: space-between;
 }
 
 .center {

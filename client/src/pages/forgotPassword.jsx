@@ -18,9 +18,13 @@ const ForgotPassword = () => {
   return (
       <Form className="formStyle" form={form} onFinish={sendEmail} labelCol={{span: 5}} wrapperCol={{span: 8}}>
         <br/>
+        <Form.Item wrapperCol={{offset: 5}}>
+          <span className="associationSubFormTitle">Forgot Password</span>
+        </Form.Item>
         <Form.Item label="Email" required="true">
           <Input
             type="Email"
+            placeholder="Enter Your Email"
             onChange={(e) => {
               setEmail(e.target.value);
             }}
@@ -28,7 +32,7 @@ const ForgotPassword = () => {
         </Form.Item>
         <Form.Item wrapperCol={{offset: 5}}>
           <Button className="buttonStyle" type="primary" htmlType="submit">
-            OK
+            Reset Password
           </Button>
         </Form.Item>
         <Form.Item wrapperCol={{offset: 5}}>

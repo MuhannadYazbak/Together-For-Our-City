@@ -54,6 +54,9 @@ const ScheduleMeeting = () => {
     return (
         <Space className="fullScreenStyle" direction="vertical">
             <Form className="formStyle" form={form} onFinish={makeMeeting} labelCol={{span: 10}} wrapperCol={{span: 6}}>
+            <Form.Item wrapperCol={{offset: 10}}>
+          <span className="associationSubFormTitle">Schedule New Meeting</span>
+        </Form.Item>
                 <Form.Item label='Association' required={true}>
                     <Select value={associationName} options={associations} defaultValue='Almanara' onChange={(e) => handleAssociationChange(e)}/>
                 </Form.Item>
