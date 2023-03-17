@@ -4,6 +4,7 @@ import { Space, Card, Button, Pagination, Avatar} from "antd";
 import nazareth from "../images/NAZARETH_LOGO3.jpg";
 import boy from "../images/boyAvatar.png";
 import girl from "../images/girlAvatar.png";
+import { Modal } from "antd";
 import {
   EditOutlined,
   EllipsisOutlined,
@@ -17,16 +18,43 @@ export const sendNo = (value) => {
    return value;
 }
 
+const MiniWindow = ({ content, visible, onClose }) => {
+  return (
+    <Modal
+      title={content.title}
+      visible={visible}
+      onCancel={onClose}
+      footer={[
+        <Button key="close" onClick={onClose}>
+          Close
+        </Button>,
+      ]}
+    >
+      <p>{content.description}</p>
+    </Modal>
+  );
+};
+
 const Cards = () => {
   const navigate = useNavigate();
+  const [miniWindowVisible, setMiniWindowVisible] = useState(false);
+  const [selectedCard, setSelectedCard] = useState(null);
   const cardsGrid = [];
+
 
   for (no = 1; no <= 31; no++) {
     const i = no;
+    const content = {
+    title: `Content ${i}`,
+      description: `This is content ${i}`,
+    };
     cardsGrid.push(
       <Card.Grid
         key={['content',i]}
-        onClick={()=>{sendNo(i); navigate(`/content/:${i}`)}}
+        onClick={() => {
+          setSelectedCard(content);
+          setMiniWindowVisible(true);
+        }}
         style={{
           width: 300,
         }}
@@ -76,6 +104,16 @@ const Cards = () => {
           defaultCurrent={1}
         />
       </Space>
+            {selectedCard && (
+        <Modal
+          visible={miniWindowVisible}
+          onCancel={() => setMiniWindowVisible(false)}
+          footer={null}
+        >
+          <h3>{`Content ${selectedCard}`}</h3>
+          <p>{`This is content ${selectedCard}`}</p>
+        </Modal>
+      )}
     </Space>
   );
 };
