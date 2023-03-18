@@ -27,6 +27,7 @@
   background-color: #282c34;
   color: white;
   height: 100vh;
+  overflow: auto;
 }
 
 .mainLayoutStyle{
@@ -44,6 +45,7 @@
   margin-top: 0px;
   margin-bottom: 0px;
   font-weight: 300;
+  display: flex;
 }
 
 .contentStyle {
@@ -70,6 +72,7 @@
   background-color: #282c34;
   height: 100vh;
   width: fit-content;
+  overflow: auto;
 }
 
 .horizontalStyle {
@@ -169,6 +172,13 @@
   text-align: start;
   padding-left: 15px;
   color: black;
+  display: flexbox;
+}
+
+.nazareth{
+  width: 300px ;
+  height: 300px;
+  place-self:initial;
 }
 
 .spanStyle {
@@ -204,5 +214,28 @@
   }
   .spanStyle{
     font-size: x-large;
+  }
+}
+
+@media (max-height: 530px){
+  .fullScreenStyle{
+    width: 100vw;
+    height: fit-content;
+  }
+  /* .sideLayoutStyle{
+    height: fit-content;
+  } */
+  .footerStyle{
+    height: fit-content;
+  }
+  .contentStyle{
+    height: fit-content;
+  }
+  .headerStyle{
+    height: fit-content;
+  }
+  .nazareth{
+    width: 70px;
+    height: 70px;
   }
 }

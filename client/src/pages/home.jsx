@@ -11,8 +11,8 @@ const Home = () => {
     <Space className="fullScreenStyle" direction="vertical">
         <p className="textStyle">{t('INTRODUCTION.abstract')}</p>
       <div className="center">
-        <Tooltip title="Nazareth">
-          <img alt="Nazareth" src={nazareth} width="250px" height="200px" />
+        <Tooltip className="nazareth" title="Nazareth" style={{placeContent: 'start'}}>
+          <img  alt="Nazareth" src={nazareth} />
         </Tooltip>
       </div>
     </Space>
