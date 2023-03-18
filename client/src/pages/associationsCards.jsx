@@ -1,18 +1,19 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Space, Card, Button, Pagination, Avatar} from "antd";
+import { Space, Card, Button, Pagination, Avatar, Modal} from "antd";
 import nazareth from "../images/NAZARETH_LOGO3.jpg";
 import boy from "../images/boyAvatar.png";
 import girl from "../images/girlAvatar.png";
-import { Modal } from "antd";
+import { useTranslation } from "react-i18next";
 import {
   EditOutlined,
   EllipsisOutlined,
   SettingOutlined,
 } from "@ant-design/icons";
 import "../App.css";
+import { t } from "i18next";
 const { Meta } = Card;
-var no;
+ var no;
 
 export const sendNo = (value) => {
    return value;
@@ -21,7 +22,7 @@ export const sendNo = (value) => {
 const MiniWindow = ({ content, visible, onClose }) => {
   return (
     <Modal
-      title={content.title}
+      title={t('Content.content')}
       visible={visible}
       onCancel={onClose}
       footer={[
@@ -30,37 +31,41 @@ const MiniWindow = ({ content, visible, onClose }) => {
         </Button>,
       ]}
     >
-      <p>{content.description}</p>
+      <p>{t('Content.desc')}</p>
     </Modal>
   );
 };
 
 const Cards = () => {
   const navigate = useNavigate();
+  const {t, i18n} = useTranslation();
+  const [i, setI] = useState(-1);
   const [miniWindowVisible, setMiniWindowVisible] = useState(false);
   const [selectedCard, setSelectedCard] = useState(null);
   const cardsGrid = [];
 
 
   for (no = 1; no <= 31; no++) {
-    const i = no;
+    //const i = no;
     const content = {
-    title: `Content ${i}`,
-      description: `This is content ${i}`,
+    title: [t('Content.content'), ' ', no],
+      description: [t('Content.desc'), ' ', no],
     };
     cardsGrid.push(
       <Card.Grid
-        key={['content',i]}
+        key={['content',no]}
         onClick={() => {
           setSelectedCard(content);
           setMiniWindowVisible(true);
+          setI(no);
+          sendNo(no);
         }}
         style={{
           width: 300,
         }}
         cover={
           <img
-            alt={["Content", i]}
+            alt={["Content", no]}
             src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"
           />
         }
@@ -73,13 +78,13 @@ const Cards = () => {
         {no%2 == 0 ? 
         <Meta
         avatar={<Avatar src= {boy}/>}
-        title={["Content ", i]}
-        description={["This is content ", i]}
+        title={[t('Content.content'),' ', no]}
+        description={[t('Content.desc'), no]}
       /> :
       <Meta
           avatar={<Avatar src= {girl}/>}
-          title={["Content ", i]}
-          description={["This is content ", i]}
+          title={[t('Content.content'),' ', no]}
+          description={[t('Content.desc'), no]}
         />
         }
       </Card.Grid>
@@ -93,7 +98,7 @@ const Cards = () => {
         </Card>
       <Space direction="horizontal"  className="bottomHorizontalStyle">
         <Button className="buttonStyle" onClick={() => navigate(-1)}>
-          Back
+          {t('Schedule.BACK')}
         </Button>
         <Pagination
           total={30}

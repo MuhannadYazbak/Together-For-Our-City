@@ -4,7 +4,7 @@ import { Button, Space } from "antd";
 import {sendNo} from './associationsCards';
 //var no1 = no;
 
-const ContentI = (sendNo) => {
+const ContentI = (props) => {
   const navigate = useNavigate();
   const no = sendNo;
   useEffect(()=>{
@@ -12,7 +12,7 @@ const ContentI = (sendNo) => {
   },[])
   return (
     <Space className="fullScreenStyle" direction="vertical">
-      <p>This is content {no} page</p>
+      <p>This is content {props} page</p>
       <Button
         className="buttonStyle"
         type="dashed"

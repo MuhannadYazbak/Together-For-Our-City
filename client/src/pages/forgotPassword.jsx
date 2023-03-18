@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import { Form, Input, Button, Space } from "antd";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const ForgotPassword = () => {
   const navigate = useNavigate();
+  const {t, i18n} = useTranslation();
   const [form] = Form.useForm();
   const [email, setEmail] = useState("");
   const [response, setResponse] = useState("");
@@ -19,9 +21,9 @@ const ForgotPassword = () => {
       <Form className="formStyle" form={form} onFinish={sendEmail} labelCol={{span: 5}} wrapperCol={{span: 8}}>
         <br/>
         <Form.Item wrapperCol={{offset: 5}}>
-          <span className="associationSubFormTitle">Forgot Password</span>
+          <span className="associationSubFormTitle">{t('Forgot.title')}</span>
         </Form.Item>
-        <Form.Item label="Email" required="true">
+        <Form.Item label={t('Forgot.email')} required="true">
           <Input
             type="Email"
             placeholder="Enter Your Email"
@@ -32,11 +34,11 @@ const ForgotPassword = () => {
         </Form.Item>
         <Form.Item wrapperCol={{offset: 5}}>
           <Button className="buttonStyle" type="primary" htmlType="submit">
-            Reset Password
+            {t('Forgot.reset')}
           </Button>
         </Form.Item>
         <Form.Item wrapperCol={{offset: 5}}>
-        <Button className="buttonStyle" type="dashed" onClick={()=> navigate(-1)}>Back</Button>
+        <Button className="buttonStyle" type="dashed" onClick={()=> navigate(-1)}>{t('Forgot.BACK')}</Button>
       </Form.Item>
         <Form.Item wrapperCol={{offset: 5}}>
           <h1>{Response}</h1>

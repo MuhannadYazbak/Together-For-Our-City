@@ -2,10 +2,11 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Affix ,Space, Pagination, Table, Button, Input } from "antd";
 import { DeleteFilled, EditFilled } from "@ant-design/icons";
-import { useForm } from "rc-field-form";
+import { useTranslation } from "react-i18next";
 
 const MeetingsHistory = () => {
   const navigate = useNavigate();
+  const {t, i18n} = useTranslation();
   const [meetings, setMeeting] = useState("");
   const [container, setContainer] = useState(null);
   const { Search } = Input;
@@ -102,42 +103,42 @@ const MeetingsHistory = () => {
 
   const columns = [
     {
-      title: "Date",
+      title: t('MeetingsHistory.date'),
       dataIndex: "date",
       key: "date",
       width: "16.5vw",
       sorter: (a, b) => Date.parse(a.date) - Date.parse(b.date),
     },
     {
-      title: "Association",
+      title: t('MeetingsHistory.assoc'),
       dataIndex: "association",
       key: "association",
       width: "16.5vw",
       filters: [
-        { text: "Almanara", value: "Almanara" },
-        { text: "Oglo", value: "Oglo" },
-        { text: "Saint-Hanne", value: "Saint-Hanne" },
+        { text: t('Schedule.Associations.1'), value: "Almanara" },
+        { text: t('Schedule.Associations.2'), value: "Oggo" },
+        { text: t('Schedule.Associations.3'), value: "Saint-Anne" },
       ],
       filterMode: "tree",
       filterSearch: ["sm"],
       onFilter: (value, record) => record.association.startsWith(value),
     },
     {
-      title: "Address",
+      title: t('MeetingsHistory.adress'),
       dataIndex: "address",
       key: "address",
       width: "16.5vw",
       responsive: ["md"],
     },
     {
-      title: "Comment",
+      title: t('MeetingsHistory.comment'),
       dataIndex: "comment",
       key: "comment",
       width: "16.5vw",
       responsive: ["md"],
     },
     {
-      title: "Actions",
+      title: t('MeetingsHistory.actions'),
       dataIndex: "actions",
       key: "actions",
       width: "16.5vw",
@@ -170,7 +171,7 @@ const MeetingsHistory = () => {
       <Search
         className='searchStyle'
         type="search"
-        placeholder="Search by association name"
+        placeholder={t('MeetingsHistory.search')}
         onChange={(e) => handleSearch(e.target.value)}
         // style={{ width: "70vw" }}
       />
@@ -198,7 +199,7 @@ const MeetingsHistory = () => {
         type="dashed"
         onClick={() => navigate(-1)}
       >
-        Back
+        {t('Schedule.BACK')}
       </Button>
       </div>
     </Space>

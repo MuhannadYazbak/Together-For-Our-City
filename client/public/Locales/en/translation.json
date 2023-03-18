@@ -1,0 +1,93 @@
+{
+    "INTRODUCTION":{
+        "abstract": "Since Nazareth is our beloved city, we want to feel more connected to it. Here we are going to collect all diferrent associations to volunteer in, and thus improve the city and maybe decrease violence"
+    },
+    "HEADTITLE":{
+        "title": "Together for Nazareth, our magical city"
+    },
+    "FOOTER":{
+        "dev": "Developed by Muhannad Yazbak and Ezz Marie © 2023"
+    },
+    "ADDASSOC":{
+        "assocD": "Association Details",
+        "contactD":"Contact Details",
+        "assocName": "Association Name",
+        "assocDesc": "Association Description",
+        "assocSpec": "Association Speciality",
+        "assocWeb": "Association Website",
+        "contactName": "Contact Name",
+        "contactEmail": "Contact Email",
+        "contactPhone": "Contact Phone",
+        "ADD": "Add",
+        "BACK": "Back"
+    },
+    "SideNav":{
+        "lang": "Language",
+        "home": "Home",
+        "addAssoc": "Add Association",
+        "newMeeting": "Book Meeting",
+        "meetingsHistory": "Meetings History",
+        "table": "table",
+        "assocs": "Assoications",
+        "carousel": "Carousel",
+        "calendar": "Calendar",
+        "login": "Login",
+        "register": "Register",
+        "logOut": "Logout",
+        "try": "Try"
+    },
+    "Login": {
+        "email" : "Email",
+        "password": "Password",
+        "login": "Log-In",
+        "forgot": "Forgot Password",
+        "BACK": "Back"
+    },
+    "Forgot":{
+        "title": "Forgot Password",
+        "email": "Email",
+        "reset": "Reset Password",
+        "BACK": "Back"
+    },
+    "Register": {
+        "title": "New User Register",
+        "first": "First Name",
+        "last": "Last Name",
+        "email": "Email",
+        "phone": "Phone",
+        "password": "Password",
+        "rePass": "Re-Password",
+        "register": "Register",
+        "BACK": "Back"
+    },
+    "Schedule":{
+        "title": "Schedule A New Meeting",
+        "assoc": "Association",
+        "date": "Date",
+        "start": "Start Time",
+        "end": "End Time",
+        "schedule": "Schedule",
+        "BACK": "Back",
+        "Associations":{
+            "1": "Almanara",
+            "2": "Oggo",
+            "3": "Saint-Anne"
+        }
+    },
+    "MeetingsHistory": {
+        "date": "Date",
+        "assoc": "Association",
+        "adress": "Adress",
+        "comment": "Comment",
+        "actions": "Actions",
+        "search": "Search by Association Name"
+    },
+    "Content": {
+        "content": "Association",
+        "desc": "This is Association "
+    },
+    "NotAuth": {
+        "text": "Sorry, You're not authorized to access this page, please sign in",
+        "signin": "Sign In"
+    }
+}

@@ -1,11 +1,13 @@
 import React, { useRef, useState, useEffect } from "react";
 import { useNavigate, Routes, Route } from "react-router-dom";
 import { Form, Input, Button, Layout } from "antd";
+import { useTranslation } from "react-i18next";
 const { Content } = Layout;
 
 const Register = () => {
   const navigate = useNavigate();
   const [form] = Form.useForm();
+  const {t, i18n} = useTranslation();
   var current;
   const [user, setUser] = useState({
     firstName: "",
@@ -64,11 +66,11 @@ const Register = () => {
         wrapperCol={{ span: 10 }}
       >
         <Form.Item wrapperCol={{ offset: 10 }}>
-          <span className="associationSubFormTitle">New User Register</span>
+          <span className="associationSubFormTitle">{t('Register.title')}</span>
         </Form.Item>
         <Form.Item
           rules={[{ required: true, message: "First Name is required" }]}
-          label="First Name"
+          label={t('Register.first')}
           name="firstName"
         >
           <Input
@@ -80,7 +82,7 @@ const Register = () => {
         </Form.Item>
         <Form.Item
           rules={[{ required: true, message: "Last Name is required" }]}
-          label="Last Name"
+          label={t('Register.last')}
           name="lastName"
         >
           <Input
@@ -97,7 +99,7 @@ const Register = () => {
               message: "Email should contain prefix, @ and suffix",
             },
           ]}
-          label="Email"
+          label={t('Register.email')}
           name="email"
         >
           <Input
@@ -107,7 +109,7 @@ const Register = () => {
             onChange={(e) => handleChange(e)}
           />
         </Form.Item>
-        <Form.Item rules={[{ required: false }]} label="Phone" name="phone">
+        <Form.Item rules={[{ required: false }]} label={t('Register.phone')} name="phone">
           <Input
             type="number"
             name="phone"
@@ -117,7 +119,7 @@ const Register = () => {
         </Form.Item>
         <Form.Item
           rules={[{ required: true, message: "Password is required" }]}
-          label="Password"
+          label={t('Register.password')}
           name="password"
         >
           <Input
@@ -135,7 +137,7 @@ const Register = () => {
               message: "Confirm Password is required, and must match password",
             },
           ]}
-          label="Re-Password"
+          label={t('Register.rePass')}
           name="confirmPassword"
         >
           <Input
@@ -148,7 +150,7 @@ const Register = () => {
         </Form.Item>
         <Form.Item wrapperCol={{ offset: 10 }}>
           <Button className="buttonStyle" type="primary" htmlType="submit">
-            Register
+          {t('Register.register')}
           </Button>
         </Form.Item>
         <Form.Item wrapperCol={{ offset: 10 }}>
@@ -157,7 +159,7 @@ const Register = () => {
             type="dashed"
             onClick={() => navigate(-1)}
           >
-            Back
+            {t('Register.BACK')}
           </Button>
         </Form.Item>
       </Form>

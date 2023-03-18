@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Space, Form, Input, Button } from "antd";
 import { useNavigate } from "react-router-dom";
+import {useTranslation} from 'react-i18next';
 
 const AddNewAssociation = () => {
   const [assocName, setAssocName] = useState("");
@@ -11,6 +12,7 @@ const AddNewAssociation = () => {
   const [contactEmail, setContactEmail] = useState("");
   const [contactPhone, setContactPhone] = useState("");
   const navigate = useNavigate();
+  const {t, i18n}= useTranslation();
   var contact = {};
   var association = {};
 
@@ -54,31 +56,31 @@ const AddNewAssociation = () => {
       >
         <Form.Item wrapperCol={{ offset: 11 }}>
           <span className="associationSubFormTitle">
-            Association Details
+            {t('ADDASSOC.assocD')}
           </span>
         </Form.Item>
-        <Form.Item className="formLabelStyle" label="Association Name" required={true}>
+        <Form.Item className="formLabelStyle" label={t("ADDASSOC.assocName")} required={true}>
           <Input
             value={assocName}
             type="text"
             onChange={(e) => setAssocName(e.target.value)}
           />
         </Form.Item>
-        <Form.Item label="Association Description" required={true}>
+        <Form.Item label={t("ADDASSOC.assocDesc")} required={true}>
           <Input
             value={description}
             type="text"
             onChange={(e) => setDescription(e.target.value)}
           />
         </Form.Item>
-        <Form.Item label="Association Speciality" required={false}>
+        <Form.Item label={t("ADDASSOC.assocSpec")} required={false}>
           <Input
             value={speciality}
             type="text"
             onChange={(e) => setSpeciality(e.target.value)}
           />
         </Form.Item>
-        <Form.Item label="Association Website" required={false}>
+        <Form.Item label={t("ADDASSOC.assocWeb")} required={false}>
           <Input
             value={website}
             type="text"
@@ -88,24 +90,24 @@ const AddNewAssociation = () => {
         <Form.Item />
         <Form.Item wrapperCol={{ offset: 11 }}>
           <span className="associationSubFormTitle">
-            Contact Details
+            {t('ADDASSOC.contactD')}
           </span>
         </Form.Item>
-        <Form.Item label="Contact Name" required={true}>
+        <Form.Item label={t("ADDASSOC.contactName")} required={true}>
           <Input
             value={contactName}
             type="text"
             onChange={(e) => setContactName(e.target.value)}
           />
         </Form.Item>
-        <Form.Item label="Contact Email" required={true}>
+        <Form.Item label={t("ADDASSOC.contactEmail")} required={true}>
           <Input
             value={contactEmail}
             type="email"
             onChange={(e) => setContactEmail(e.target.value)}
           />
         </Form.Item>
-        <Form.Item label="Contact Phone" required={true}>
+        <Form.Item label={t("ADDASSOC.contactPhone")} required={true}>
           <Input
             value={contactPhone}
             type="number"
@@ -113,7 +115,7 @@ const AddNewAssociation = () => {
           />
         </Form.Item>
         <Form.Item wrapperCol={{offset: 12}}>
-          <Button className="buttonStyle" type="primary" htmlType="submit">Add </Button>
+          <Button className="buttonStyle" type="primary" htmlType="submit">{t("ADDASSOC.ADD")} </Button>
         </Form.Item>
         <Form.Item wrapperCol={{offset: 12}} >
           <Button
@@ -121,7 +123,7 @@ const AddNewAssociation = () => {
             type="dashed"
             onClick={() => navigate(-1)}
           >
-            Back
+            {t('ADDASSOC.BACK')}
           </Button>
         </Form.Item>
       </Form>
