@@ -17,9 +17,8 @@ const CalendarApi = () => {
     // }
     return (
         <Space className="fullScreenStyle" direction="vertical">
-            <Calendar
-             style={{ overflow: 'auto', height: '68vh', width: '90vw'}}
-            //  onClick={(date)=> {{setSelectedDate(date); console.log(selectedDate)}}}
+            <Calendar className="calendarStyle"
+            //  style={{ overflow: 'auto', height: '68vh', width: '90vw'}}
             onSelect={(date) => {{setSelectedDate(date); console.log('Selected date ', date);}}}
              disabledDate={(date)=>{
                 if (new Date(date) < new Date())
