@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate, Routes, Route } from "react-router-dom";
+import { useNavigate, Routes, Route, Link } from "react-router-dom";
 import {useTranslation} from 'react-i18next';
 import { Space, Layout, Menu } from "antd";
 import { HomeOutlined, LoginOutlined, LogoutOutlined, UserAddOutlined, DatabaseOutlined, ClockCircleOutlined, CalendarOutlined, GroupOutlined, GlobalOutlined, TableOutlined, SlidersOutlined, InfoOutlined } from '@ant-design/icons';
@@ -45,8 +45,8 @@ const App = () => {
       { key: 'hebrew', label: 'Hebrew', onClick:()=>handleLanguage('he') }]
     },
     { key: 'home', label: t('SideNav.home'), icon: <HomeOutlined />, onClick: () => { navigate('/') } },
-    { key: 'login', label: t('SideNav.login'), icon: <LoginOutlined />, onClick: () => { navigate('/Login') } },
-    { key: 'register', label: t('SideNav.register'), icon: <UserAddOutlined />, onClick: () => { navigate('/Register') } },
+    // { key: 'login', label: t('SideNav.login'), icon: <LoginOutlined />, onClick: () => { navigate('/Login') } },
+    // { key: 'register', label: t('SideNav.register'), icon: <UserAddOutlined />, onClick: () => { navigate('/Register') } },
     { key: 'addAssociation', label: t('SideNav.addAssoc'), icon: <DatabaseOutlined />, onClick: () => { navigate('/AddNewAssociation') } },
     { key: 'bookMeeting', label: t('SideNav.newMeeting'), icon: <ClockCircleOutlined />, onClick: () => { navigate('/ScheduleMeeting') } },
     { key: 'meetings', label: t('SideNav.meetingsHistory'), icon: <CalendarOutlined />, onClick: () => { navigate('/MeetingsHistory') } },
@@ -54,37 +54,24 @@ const App = () => {
     { key: 'associations', label: t('SideNav.assocs'), icon: <GroupOutlined />, onClick: () => { navigate('/Cards') } },
     { key: 'carousel', label: t('SideNav.carousel'), icon: <SlidersOutlined />, onClick: () => { navigate('/carousel') } },
     { key: 'calendar', label: t('SideNav.calendar'), icon: <CalendarOutlined />, onClick: () => { navigate('/calendar') } },
-  ])
-
-  const [itemsLogged, setItemsLogged] = useState([
-    {
-      key: 'languages', label: t('SideNav.lang'), icon: <GlobalOutlined />,
-      children: [{ key: 'english', label: 'English', onClick: ()=>{handleLanguage('en')} },
-      { key: 'arabic', label: 'Arabic', onClick: ()=>{handleLanguage('ar')} },
-      { key: 'hebrew', label: 'Hebrew', onClick: ()=>{handleLanguage('he')} }]
-    },
-    { key: 'home', label: t('SideNav.home'), icon: <HomeOutlined />, onClick: () => { navigate('/') } },
-    { key: 'addAssociation', label: t('SideNav.addAssoc'), icon: <DatabaseOutlined />, onClick: () => { navigate('/AddNewAssociation') } },
-    { key: 'bookMeeting', label: t('SideNav.newMeeting'), icon: <ClockCircleOutlined />, onClick: () => { navigate('/ScheduleMeeting') } },
-    { key: 'meetings', label: t('SideNav.meetingsHistory'), icon: <CalendarOutlined />, onClick: () => { navigate('/MeetingsHistory') } },
-    { key: 'table', label: t('SideNav.table'), icon: <TableOutlined />, onClick: () => { navigate('/MakeTable') } },
-    { key: 'associations', label: t('SideNav.assocs'), icon: <GroupOutlined />, onClick: () => { navigate('/Cards') } },
-    { key: 'carousel', label: t('SideNav.carousel'), icon: <SlidersOutlined />, onClick: () => { navigate('/carousel') } },
-    { key: 'calendar', label: t('SideNav.calendar'), icon: <CalendarOutlined />, onClick: () => { navigate('/calendar') } },
-    { key: 'logout', label: t('SideNav.logout'), icon: <LogoutOutlined />, onClick: () => { setLogged(false); navigate('/') } },
   ])
 
   return (
     <Space className="fullScreenStyle" direction="horizontal">
       <Layout className="sideLayoutStyle">
         <Sider className="siderStyle" collapsible collapsed={collapsed} onCollapse={() => setCollapsed(!collapsed)}>
-          <Menu className="menuStyle" mode="vertical" items={logged ? itemsLogged : items} defaultChecked={'home'} />
+          <Menu className="menuStyle" mode="vertical" items={items} defaultChecked={'home'} />
         </Sider>
         <Layout className="mainLayoutStyle">
           <Header className="headerStyle">
             <Space className="horizontalStyle" direction="horizontal">
-              <span className="spanStyle" placement='right'>{t('HEADTITLE.title')}</span>
-              <img src={nazareth} style={{ height: '8vh', width: '9vw' }} placement='left' />
+            <Space mode="inline">
+                <Link to='/Login' element={<Login />} style={{color: 'white', display: logged? 'none': 'flex'}}>{t('SideNav.login')}</Link>
+                <Link to='/Register' element={<Register />} style={{color: 'white', display: logged? 'none': 'flex'}}>{t('SideNav.register')}</Link>
+                <Link style={{color: 'white', display: logged? 'flex': 'none'}} onClick={()=>{setLogged(false); navigate('/')}}>{t('SideNav.logout')}</Link>
+              </Space>
+              <span className="spanStyle" >{t('HEADTITLE.title')}</span>
+              <img src={nazareth} style={{ height: '8vh', width: '9vw' }}  />
             </Space>
           </Header>
           <Content className="contentStyle">

@@ -1,6 +1,7 @@
 {
     "INTRODUCTION":{
         "greeting": "Welcome ",
+        "reg": "Not yet a user, register new user",
         "abstract": "Since Nazareth is our beloved city, we want to feel more connected to it. Here we are going to collect all diferrent associations to volunteer in, and thus improve the city and maybe decrease violence"
     },
     "HEADTITLE":{
@@ -34,7 +35,7 @@
         "calendar": "Calendar",
         "login": "Login",
         "register": "Register",
-        "logOut": "Logout",
+        "logout": "Logout",
         "try": "Try"
     },
     "Login": {

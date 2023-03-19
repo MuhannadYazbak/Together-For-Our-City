@@ -30,6 +30,18 @@
   overflow: auto;
 }
 
+.menuItemStyle{
+  display: flex;
+}
+
+.logreg {
+  display: flex;
+}
+
+.lout {
+  display: flex;
+}
+
 .mainLayoutStyle{
   width: 70vw;
   height: 100vh;
@@ -176,15 +188,15 @@
 .textStyle {
   font-size: 16px;
   color: #282c34;
+  /* color: purple; */
   text-align: start;
   padding-left: 15px;
-  color: black;
   display: flexbox;
 }
 
 .nazareth{
-  width: 300px ;
-  height: 300px;
+  width: 30vw;
+  height: 45vh;
   place-self:initial;
 }
 
@@ -208,6 +220,10 @@
   }
   .spanStyle{
     font-size: smaller;
+  }
+  .nazareth{
+    height: 20vh;
+    width: 30vw;
   }
   
   
@@ -235,13 +251,14 @@
   }
   .contentStyle{
     height: fit-content;
+    overflow: auto;
   }
   .headerStyle{
     height: fit-content;
   }
   .nazareth{
-    width: 70px;
-    height: 70px;
+    width: 10vw;
+    height: 10vh;
   }
   .tableStyle{
     height: 70vh;
@@ -255,6 +272,10 @@
   .calendarStyle{
     width: 70vw;
     height: 55vh;
+  }
+  .textStyle{
+    font-size: 12px;
+    display: flex;
   }
   
 
