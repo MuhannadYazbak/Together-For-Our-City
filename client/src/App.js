@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate, Routes, Route, Link } from "react-router-dom";
 import {useTranslation} from 'react-i18next';
 import { Space, Layout, Menu } from "antd";
-import { HomeOutlined, LoginOutlined, LogoutOutlined, UserAddOutlined, DatabaseOutlined, ClockCircleOutlined, CalendarOutlined, GroupOutlined, GlobalOutlined, TableOutlined, SlidersOutlined, InfoOutlined } from '@ant-design/icons';
+import { HomeOutlined, LoginOutlined, LogoutOutlined, UserAddOutlined, DatabaseOutlined, ClockCircleOutlined, CalendarOutlined, PieChartOutlined, GroupOutlined, GlobalOutlined, TableOutlined, SlidersOutlined, InfoOutlined } from '@ant-design/icons';
 import './App.css';
 import Home from './pages/home';
 import Login from './pages/login';
@@ -19,6 +19,7 @@ import CarouselGrid from './pages/carousel';
 import CalendarApi from './pages/calendar';
 import nazareth from './images/NAZARETH_LOGO3.jpg';
 import PageNotFound from "./pages/pageNotFound";
+import Dashboard from "./pages/dashboard";
 const { Header, Content, Footer, Sider } = Layout;
 const gotNo = sendNo;
 
@@ -54,6 +55,7 @@ const App = () => {
     { key: 'associations', label: t('SideNav.assocs'), icon: <GroupOutlined />, onClick: () => { navigate('/Cards') } },
     { key: 'carousel', label: t('SideNav.carousel'), icon: <SlidersOutlined />, onClick: () => { navigate('/carousel') } },
     { key: 'calendar', label: t('SideNav.calendar'), icon: <CalendarOutlined />, onClick: () => { navigate('/calendar') } },
+    { key: 'dashboard', label: t('SideNav.dashboard'), icon: <PieChartOutlined/>, onClick: ()=> { navigate('/dashboard')}},
   ])
 
   return (
@@ -90,6 +92,7 @@ const App = () => {
               <Route path='/carousel' element={<CarouselGrid />} />
               <Route path='/calendar' element={<CalendarApi />} />
               <Route path='/Content' state={{data: data}} element={<ContentI />} />
+              <Route path='/dashboard' element={<Dashboard/>} />
               <Route path='*' element={<PageNotFound />} />
             </Routes>
           </Content>

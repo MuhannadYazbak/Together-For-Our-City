@@ -194,6 +194,15 @@
   display: flexbox;
 }
 
+.dashboardStyle{
+  width: 25vw;
+  height: 25vh;
+  display: flexbox;
+  overflow: auto;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
 .nazareth{
   width: 30vw;
   height: 45vh;
