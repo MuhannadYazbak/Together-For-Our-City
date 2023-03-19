@@ -1,15 +1,16 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Affix ,Space, Pagination, Table, Button, Input } from "antd";
+import { Affix ,Space, Table, Button, Input } from "antd";
 import { DeleteFilled, EditFilled } from "@ant-design/icons";
 import { useTranslation } from "react-i18next";
 
 const MeetingsHistory = () => {
   const navigate = useNavigate();
   const {t, i18n} = useTranslation();
-  const [meetings, setMeeting] = useState("");
   const [container, setContainer] = useState(null);
   const { Search } = Input;
+  
+  // dummy data to fill the meetings history table
   const dataSource = [
     {
       key: "1",
@@ -101,19 +102,22 @@ const MeetingsHistory = () => {
     },
   ];
 
+  // the columns of the meetings history table
   const columns = [
     {
       title: t('MeetingsHistory.date'),
       dataIndex: "date",
       key: "date",
       width: "16.5vw",
-      sorter: (a, b) => Date.parse(a.date) - Date.parse(b.date),
+      sorter: (a, b) => Date.parse(a.date) - Date.parse(b.date), //to sort the data by date
     },
     {
       title: t('MeetingsHistory.assoc'),
       dataIndex: "association",
       key: "association",
       width: "16.5vw",
+      
+      // filters the table data according to association name
       filters: [
         { text: t('Schedule.Associations.1'), value: "Almanara" },
         { text: t('Schedule.Associations.2'), value: "Oggo" },
@@ -142,6 +146,8 @@ const MeetingsHistory = () => {
       dataIndex: "actions",
       key: "actions",
       width: "16.5vw",
+      
+      // fills the actions columns with two action buttons which will automatically be added to each row
       render: () => (
         <Space direction="vertical">
           <Button
@@ -162,35 +168,33 @@ const MeetingsHistory = () => {
 
   const showTotal = (total) => `Total ${total} dataSource`;
 
+  // apply search by association name
   const handleSearch = (value) => {
     console.log("You searched for ", value);
   };
 
   return (
-    <Space direction="vertical" style={{width: '80vw', height: '70vh'}}>
+    <Space className="fullScreenStyle" direction="vertical">
       <Search
         className='searchStyle'
         type="search"
         placeholder={t('MeetingsHistory.search')}
         onChange={(e) => handleSearch(e.target.value)}
-        // style={{ width: "70vw" }}
       />
-      <Affix className='affixStyle' target={()=> container}>
+      {/* <Affix style={{height: '65vh', width: '90vw'}}  target={()=> container}> */}
         <Table
           className="tableStyleMobile"
           dataSource={dataSource}
           columns={columns}
           scroll={{x: '100vw', y: '50vh'}}
-          // pagination= {{pageSize: 3, position: 'top'}}
         />
         <Table
           className="tableStyle"
           dataSource={dataSource}
           columns={columns}
           scroll={{y: '50vh'}}
-          // pagination= {{pageSize: 3, position: 'top'}}
         />
-      </Affix>
+      {/* </Affix> */}
 
       <div className="center">
       <Button

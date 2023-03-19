@@ -1,5 +1,6 @@
 {
     "INTRODUCTION":{
+        "greeting": "Welcome ",
         "abstract": "Since Nazareth is our beloved city, we want to feel more connected to it. Here we are going to collect all diferrent associations to volunteer in, and thus improve the city and maybe decrease violence"
     },
     "HEADTITLE":{
@@ -89,5 +90,8 @@
     "NotAuth": {
         "text": "Sorry, You're not authorized to access this page, please sign in",
         "signin": "Sign In"
+    },
+    "NotFound": {
+        "message": "Page does not exist, please navigate back to home page"
     }
 }

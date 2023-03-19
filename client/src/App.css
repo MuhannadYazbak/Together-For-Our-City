@@ -45,7 +45,7 @@
   margin-top: 0px;
   margin-bottom: 0px;
   font-weight: 300;
-  display: flex;
+  display: flexbox;
 }
 
 .contentStyle {
@@ -203,7 +203,8 @@
     display: none;
   }
   .tableStyleMobile{
-    width: 250px;
+    width: 80vw;
+    height: 60vh;
   }
   .spanStyle{
     font-size: smaller;
@@ -229,9 +230,6 @@
     width: 100vw;
     height: fit-content;
   }
-  /* .sideLayoutStyle{
-    height: fit-content;
-  } */
   .footerStyle{
     height: fit-content;
   }

@@ -1,4 +1,4 @@
-import React, { useState, createContext } from "react";
+import React, { useState } from "react";
 import { useNavigate, Routes, Route } from "react-router-dom";
 import {useTranslation} from 'react-i18next';
 import { Space, Layout, Menu } from "antd";
@@ -17,8 +17,8 @@ import Cards, {sendNo} from './pages/associationsCards';
 import ContentI from './pages/content';
 import CarouselGrid from './pages/carousel';
 import CalendarApi from './pages/calendar';
-import Try from './pages/trying';
 import nazareth from './images/NAZARETH_LOGO3.jpg';
+import PageNotFound from "./pages/pageNotFound";
 const { Header, Content, Footer, Sider } = Layout;
 const gotNo = sendNo;
 
@@ -27,9 +27,10 @@ const App = () => {
   const navigate = useNavigate();
   const [logged, setLogged] = useState(false);
   const [data, setData] = useState(gotNo);
-  const isLogged = createContext(logged);
   const [collapsed, setCollapsed] = useState(false);
   const {t, i18n} = useTranslation();
+  const [num, setNum] = useState(0); // to passdata between passdata and getdata routes
+  const [user, setUser] = useState('');
 
   function handleLanguage(lang){
     i18n.changeLanguage(lang);
@@ -53,7 +54,6 @@ const App = () => {
     { key: 'associations', label: t('SideNav.assocs'), icon: <GroupOutlined />, onClick: () => { navigate('/Cards') } },
     { key: 'carousel', label: t('SideNav.carousel'), icon: <SlidersOutlined />, onClick: () => { navigate('/carousel') } },
     { key: 'calendar', label: t('SideNav.calendar'), icon: <CalendarOutlined />, onClick: () => { navigate('/calendar') } },
-    { key: 'try', label: t('SideNav.try'),icon: <InfoOutlined />, onClick: () => { navigate('/Try') } },
   ])
 
   const [itemsLogged, setItemsLogged] = useState([
@@ -72,7 +72,6 @@ const App = () => {
     { key: 'carousel', label: t('SideNav.carousel'), icon: <SlidersOutlined />, onClick: () => { navigate('/carousel') } },
     { key: 'calendar', label: t('SideNav.calendar'), icon: <CalendarOutlined />, onClick: () => { navigate('/calendar') } },
     { key: 'logout', label: t('SideNav.logout'), icon: <LogoutOutlined />, onClick: () => { setLogged(false); navigate('/') } },
-    { key: 'try', label: t('SideNav.try'), icon: <InfoOutlined />, onClick: () => { navigate('/Try') } },
   ])
 
   return (
@@ -90,8 +89,8 @@ const App = () => {
           </Header>
           <Content className="contentStyle">
             <Routes>
-              <Route path='/' element={<Home />} />
-              <Route path='/Login' element={< Login />} />
+              <Route path='/' element={<Home user={user} />} />
+              <Route path='/Login' element={< Login setUser={setUser} setLogged={setLogged} />} />
               <Route path='/Register' element={< Register />} />
               <Route path='/ForgotPassword' element={< Forget />} />
               <Route path='/AddNewAssociation' element={logged ? < AddNewAssociation /> : < NotAuthorized />} />
@@ -103,8 +102,8 @@ const App = () => {
               <Route path={'/content/:sendNo'} element={< ContentI />} />
               <Route path='/carousel' element={<CarouselGrid />} />
               <Route path='/calendar' element={<CalendarApi />} />
-              <Route path='/Try' element={< Try />} />
               <Route path='/Content' state={{data: data}} element={<ContentI />} />
+              <Route path='*' element={<PageNotFound />} />
             </Routes>
           </Content>
           <Footer className="footerStyle">

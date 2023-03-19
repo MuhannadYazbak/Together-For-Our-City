@@ -4,18 +4,17 @@ import { Button, Input, Form, Space } from "antd";
 import { useTranslation } from "react-i18next";
 
 
-const Login = () => {
+const Login = ({setUser, setLogged}) => {
   const navigate = useNavigate();
   const {t, i18n} = useTranslation();
   const [form] = Form.useForm();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [logged, setLogged] = useState(false);
-  
 
   const login = () => {
-    setLogged(!logged);
-    console.log("logged in  ", { email }, "stauts: ", { logged });
+    setLogged(true);
+    console.log("logged in  ", { email }, "stauts: Logged");
+    setUser(email);
     navigate("/MeetingsHistory");
   };
 

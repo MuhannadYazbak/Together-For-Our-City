@@ -4,11 +4,12 @@ import { Space, Tooltip } from "antd";
 import nazareth from "../images/NAZARETH_LOGO3.jpg";
 import {useTranslation} from 'react-i18next';
 
-const Home = () => {
+const Home = ({user}) => {
   const {t, i18n} = useTranslation();
 
   return (
     <Space className="fullScreenStyle" direction="vertical">
+      <p>{user ? [t('INTRODUCTION.greeting'), user]: null}</p>
         <p className="textStyle">{t('INTRODUCTION.abstract')}</p>
       <div className="center">
         <Tooltip className="nazareth" title="Nazareth" style={{placeContent: 'start'}}>
