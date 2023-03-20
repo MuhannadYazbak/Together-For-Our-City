@@ -2,6 +2,7 @@ import React, { useRef, useState, useEffect } from "react";
 import { useNavigate, Routes, Route } from "react-router-dom";
 import { Form, Input, Button, Layout } from "antd";
 import { useTranslation } from "react-i18next";
+import { ArrowLeftOutlined } from '@ant-design/icons';
 const { Content } = Layout;
 
 const Register = () => {
@@ -158,6 +159,7 @@ const Register = () => {
             className="buttonStyle"
             type="dashed"
             onClick={() => navigate(-1)}
+            icon={<ArrowLeftOutlined />}
           >
             {t('Register.BACK')}
           </Button>

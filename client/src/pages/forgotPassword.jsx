@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Form, Input, Button, Space } from "antd";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { ArrowLeftOutlined } from '@ant-design/icons';
 
 const ForgotPassword = () => {
   const navigate = useNavigate();
@@ -38,7 +39,7 @@ const ForgotPassword = () => {
           </Button>
         </Form.Item>
         <Form.Item wrapperCol={{offset: 5}}>
-        <Button className="buttonStyle" type="dashed" onClick={()=> navigate(-1)}>{t('Forgot.BACK')}</Button>
+        <Button className="buttonStyle" type="dashed" onClick={()=> navigate(-1)} icon={<ArrowLeftOutlined />}>{t('Forgot.BACK')}</Button>
       </Form.Item>
         <Form.Item wrapperCol={{offset: 5}}>
           <h1>{Response}</h1>

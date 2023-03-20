@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Affix ,Space, Table, Button, Input } from "antd";
 import { DeleteFilled, EditFilled } from "@ant-design/icons";
 import { useTranslation } from "react-i18next";
+import { ArrowLeftOutlined } from '@ant-design/icons';
 
 const MeetingsHistory = () => {
   const navigate = useNavigate();
@@ -202,6 +203,7 @@ const MeetingsHistory = () => {
         style={{marginLeft: '-25px'}}
         type="dashed"
         onClick={() => navigate(-1)}
+        icon={<ArrowLeftOutlined />}
       >
         {t('Schedule.BACK')}
       </Button>

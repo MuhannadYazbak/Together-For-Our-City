@@ -2,6 +2,7 @@ import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button, Input, Form, Space } from "antd";
 import { useTranslation } from "react-i18next";
+import { ArrowLeftOutlined } from '@ant-design/icons';
 
 
 const Login = ({setUser, setLogged}) => {
@@ -70,6 +71,7 @@ const Login = ({setUser, setLogged}) => {
             className="buttonStyle"
             type="dashed"
             onClick={() => navigate(-1)}
+            icon={<ArrowLeftOutlined />}
           >
             {t('Login.BACK')}
           </Button>

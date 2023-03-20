@@ -194,13 +194,25 @@
   display: flexbox;
 }
 
-.dashboardStyle{
-  width: 25vw;
-  height: 25vh;
-  display: flexbox;
-  overflow: auto;
+.dashboardCircleStyle{
+  width: 15vw;
+  height: 15vh;
   margin-left: 5px;
   margin-right: 5px;
+}
+
+.dashboardSqaureStyle{
+  width: 28vw;
+  height: 30vh;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.chartsSpaceStyle{
+  display: flexbox;
+  overflow: auto;
+  width: 85vw;
+  height: 50vh;
 }
 
 .nazareth{
@@ -247,6 +259,8 @@
   }
   .spanStyle{
     font-size: x-large;
+    font-weight: 400;
+    text-decoration: wavy;
   }
 }
 

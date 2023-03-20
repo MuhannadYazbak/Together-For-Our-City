@@ -9,6 +9,7 @@ import {
   EditOutlined,
   EllipsisOutlined,
   SettingOutlined,
+  ArrowLeftOutlined,
 } from "@ant-design/icons";
 import "../App.css";
 import { t } from "i18next";
@@ -97,7 +98,7 @@ const Cards = () => {
         {cardsGrid}
         </Card>
       <Space direction="horizontal"  className="bottomHorizontalStyle">
-        <Button className="buttonStyle" onClick={() => navigate(-1)}>
+        <Button className="buttonStyle" onClick={() => navigate(-1)} icon={<ArrowLeftOutlined/>}>
           {t('Schedule.BACK')}
         </Button>
         <Pagination

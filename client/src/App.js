@@ -20,6 +20,7 @@ import CalendarApi from './pages/calendar';
 import nazareth from './images/NAZARETH_LOGO3.jpg';
 import PageNotFound from "./pages/pageNotFound";
 import Dashboard from "./pages/dashboard";
+import READ from "./pages/read";
 const { Header, Content, Footer, Sider } = Layout;
 const gotNo = sendNo;
 
@@ -68,9 +69,9 @@ const App = () => {
           <Header className="headerStyle">
             <Space className="horizontalStyle" direction="horizontal">
             <Space mode="inline">
-                <Link to='/Login' element={<Login />} style={{color: 'white', display: logged? 'none': 'flex'}}>{t('SideNav.login')}</Link>
-                <Link to='/Register' element={<Register />} style={{color: 'white', display: logged? 'none': 'flex'}}>{t('SideNav.register')}</Link>
-                <Link style={{color: 'white', display: logged? 'flex': 'none'}} onClick={()=>{setLogged(false); navigate('/')}}>{t('SideNav.logout')}</Link>
+                <Link to='/Login' element={<Login />} style={{color: 'white', textDecoration: 'underline' , display: logged? 'none': 'flex'}}>{t('SideNav.login')}</Link>
+                <Link to='/Register' element={<Register />} style={{color: 'white', textDecoration: 'underline', display: logged? 'none': 'flex'}}>{t('SideNav.register')}</Link>
+                <Link style={{color: 'white', textDecoration: 'underline', display: logged? 'flex': 'none'}} onClick={()=>{setLogged(false); navigate('/')}}>{t('SideNav.logout')}</Link>
               </Space>
               <span className="spanStyle" >{t('HEADTITLE.title')}</span>
               <img src={nazareth} style={{ height: '8vh', width: '9vw' }}  />
@@ -94,6 +95,7 @@ const App = () => {
               <Route path='/Content' state={{data: data}} element={<ContentI />} />
               <Route path='/dashboard' element={<Dashboard/>} />
               <Route path='*' element={<PageNotFound />} />
+              <Route path='/read' element={<READ />} />
             </Routes>
           </Content>
           <Footer className="footerStyle">

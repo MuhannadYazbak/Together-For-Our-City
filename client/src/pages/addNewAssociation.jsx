@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Space, Form, Input, Button } from "antd";
 import { useNavigate } from "react-router-dom";
 import {useTranslation} from 'react-i18next';
+import { ArrowLeftOutlined } from '@ant-design/icons';
 
 const AddNewAssociation = () => {
   const [assocName, setAssocName] = useState("");
@@ -122,6 +123,7 @@ const AddNewAssociation = () => {
             className="buttonStyle"
             type="dashed"
             onClick={() => navigate(-1)}
+            icon={<ArrowLeftOutlined/>}
           >
             {t('ADDASSOC.BACK')}
           </Button>

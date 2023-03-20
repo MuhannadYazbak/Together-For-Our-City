@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button,Space, Calendar, Badge} from "antd";
-import {CalendarOutlined} from '@ant-design/icons'
+import {ArrowLeftOutlined} from '@ant-design/icons'
 import '../App.css';
 
 const CalendarApi = () => {
@@ -49,7 +49,7 @@ const CalendarApi = () => {
               >
                 {/* <Button type='dashed' onClick={makeMeeting('11')}>+</Button> */}
               </Calendar>
-            <Button className="buttonStyle" type="dashed" onClick={()=> navigate(-1)}>Back</Button>
+            <Button className="buttonStyle" type="dashed" onClick={()=> navigate(-1)} icon={<ArrowLeftOutlined />}>Back</Button>
         </Space>
     )
 }

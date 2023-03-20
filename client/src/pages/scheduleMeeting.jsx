@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import { useNavigate } from "react-router-dom";
 import { Form, Space, Button, Select, DatePicker, TimePicker } from "antd";
 import { useTranslation } from "react-i18next";
+import { ArrowLeftOutlined } from '@ant-design/icons';
 
 const ScheduleMeeting = () => {
     const [form] = Form.useForm();
@@ -75,7 +76,7 @@ const ScheduleMeeting = () => {
                     <Button className="buttonStyle" type="primary" htmlType="submit">{t('Schedule.schedule')}</Button>
                 </Form.Item>
                 <Form.Item wrapperCol={{offset: 10}}>
-                    <Button className="buttonStyle" type="dashed" onClick={()=> navigate(-1)}>{t('Schedule.BACK')}</Button>
+                    <Button className="buttonStyle" type="dashed" onClick={()=> navigate(-1)} icon={<ArrowLeftOutlined />}>{t('Schedule.BACK')}</Button>
                 </Form.Item>
             </Form>
             

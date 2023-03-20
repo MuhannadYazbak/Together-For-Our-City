@@ -8,6 +8,7 @@ import {
   SettingOutlined,
   EditOutlined,
   EllipsisOutlined,
+  ArrowLeftOutlined,
 } from "@ant-design/icons";
 const { Meta } = Card;
 
@@ -56,6 +57,7 @@ const CarouselGrid = () => {
         className="buttonStyle"
         type="dashed"
         onClick={() => navigate(-1)}
+        icon={<ArrowLeftOutlined />}
       >
         Back
       </Button>
