@@ -27,6 +27,19 @@
   background-color: #282c34;
   color: white;
   height: 100vh;
+  overflow: auto;
+}
+
+.menuItemStyle{
+  display: flex;
+}
+
+.logreg {
+  display: flex;
+}
+
+.lout {
+  display: flex;
 }
 
 .mainLayoutStyle{
@@ -44,6 +57,7 @@
   margin-top: 0px;
   margin-bottom: 0px;
   font-weight: 300;
+  display: flexbox;
 }
 
 
@@ -72,6 +86,7 @@
   background-color: #282c34;
   height: 100vh;
   width: fit-content;
+  overflow: auto;
 }
 
 .horizontalStyle {
@@ -165,11 +180,47 @@
   font-size: 14px;
 }
 
+.calendarStyle{
+  width: 80vw;
+  height: 65vh;
+  display: flexbox;
+  overflow: auto;
+}
+
 .textStyle {
   font-size: 16px;
   color: #282c34;
-  text-align: center;
-  color: black;
+  /* color: purple; */
+  text-align: start;
+  padding-left: 15px;
+  display: flexbox;
+}
+
+.dashboardCircleStyle{
+  width: 15vw;
+  height: 15vh;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.dashboardSqaureStyle{
+  width: 28vw;
+  height: 30vh;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.chartsSpaceStyle{
+  display: flexbox;
+  overflow: auto;
+  width: 85vw;
+  height: 50vh;
+}
+
+.nazareth{
+  width: 30vw;
+  height: 45vh;
+  place-self:initial;
 }
 
 .spanStyle {
@@ -187,10 +238,15 @@
     display: none;
   }
   .tableStyleMobile{
-    width: 250px;
+    width: 80vw;
+    height: 60vh;
   }
   .spanStyle{
     font-size: smaller;
+  }
+  .nazareth{
+    height: 20vh;
+    width: 30vw;
   }
   
   
@@ -205,5 +261,47 @@
   }
   .spanStyle{
     font-size: x-large;
+    font-weight: 400;
+    text-decoration: wavy;
   }
+}
+
+@media (max-height: 530px){
+  .fullScreenStyle{
+    width: 100vw;
+    height: fit-content;
+  }
+  .footerStyle{
+    height: fit-content;
+  }
+  .contentStyle{
+    height: fit-content;
+    overflow: auto;
+  }
+  .headerStyle{
+    height: fit-content;
+  }
+  .nazareth{
+    width: 10vw;
+    height: 10vh;
+  }
+  .tableStyle{
+    height: 70vh;
+  }
+  .tableStyleMobile{
+    height: 70vh;
+  }
+  .carouselDiv{
+    height: 30vh;
+  }
+  .calendarStyle{
+    width: 70vw;
+    height: 55vh;
+  }
+  .textStyle{
+    font-size: 12px;
+    display: flex;
+  }
+  
+
 }

@@ -1,9 +1,14 @@
 import React, {useEffect, useState} from "react";
-import { Table, Space } from "antd";
+import { useNavigate } from "react-router-dom";
+import { Table, Space, Button } from "antd";
+import { useTranslation } from "react-i18next";
 import '../App.css';
+import { ArrowLeftOutlined } from '@ant-design/icons';
 
 function MakeTable () {
     const dataType = "users";
+    const {t, i18n} = useTranslation();
+    const navigate = useNavigate();
     const [columns, setColumns] = useState([]);
     const [dataSource, setDataSource] = useState([]);
 
@@ -46,6 +51,7 @@ function MakeTable () {
                 <h1>Users Table</h1>
             </div>
             <Table className="tableStyle" pagination={{pageSize: 5}} dataSource={dataSource} columns={columns} scroll={{x:true}} />
+            <Button className="buttonStyle" type='dashed' onClick={()=>navigate(-1)} icon={<ArrowLeftOutlined />}>{t('Schedule.BACK')}</Button>
             
         </Space>
     )

@@ -1,33 +1,46 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { Button, Space } from "antd";
+import { Button, Space, Tooltip } from "antd";
 import nazareth from "../images/NAZARETH_LOGO3.jpg";
+import { useTranslation } from "react-i18next";
+import { UserAddOutlined, LoginOutlined } from "@ant-design/icons";
 
-const Home = () => {
+const Home = ({ user }) => {
+  const { t, i18n } = useTranslation();
   const navigate = useNavigate();
 
-  const handleJoinClick = () => {
-    // navigate to the associations page or sign-up page
-  };
-
   return (
-    <Space direction="vertical">
-      <h1>Welcome to the Nazareth Volunteering Hub!</h1>
-      <img alt="Nazareth" src={nazareth} width="35%" height="40%" />
-      <p>
-        Thank you for visiting our website! We're excited to help you find opportunities to volunteer and make a difference in Nazareth.
-      </p>
-      <p>
-        Our platform connects you with a variety of associations in the area, providing you with the tools to find the perfect match for your skills, interests, and schedule.
-      </p>
-      <ul>
-        <li>Discover new ways to give back to your community and make a positive impact.</li>
-        <li>Develop new skills, gain valuable experience, and enhance your resume.</li>
-        <li>Meet like-minded people, expand your social network, and have fun!</li>
-      </ul>
-      <Button type="primary" size="large" onClick={handleJoinClick}>
-        Join an Association
-      </Button>
+    <Space className="fullScreenStyle" direction="vertical">
+      <p>{user ? [t("INTRODUCTION.greeting"), user] : null}</p>
+      <p className="textStyle">{t("INTRODUCTION.abstract")}</p>
+      <div className="center">
+        <Tooltip
+          className="nazareth"
+          title="Nazareth"
+          style={{ placeContent: "start" }}
+        >
+          <img alt="Nazareth" src={nazareth} />
+        </Tooltip>
+      </div>
+      <Space direction="vertical" className="center">
+        <Button
+          className="buttonStyle"
+          type="primary"
+          onClick={() => navigate("/Login")}
+          icon={<LoginOutlined />}
+        >
+          {t("SideNav.login")}
+        </Button>
+        <span className="textStyle">{t("INTRODUCTION.reg")}</span>
+        <Button
+          className="buttonStyle"
+          type="primary"
+          onClick={() => navigate("/Register")}
+          icon={<UserAddOutlined />}
+        >
+          {t("SideNav.register")}
+        </Button>
+      </Space>
     </Space>
   );
 };

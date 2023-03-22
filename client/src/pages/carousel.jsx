@@ -1,17 +1,20 @@
 import React, { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { Space, Carousel, Card, Button, Avatar } from "antd";
+import { useTranslation } from "react-i18next";
 import "../App.css";
 import boy from "../images/boyAvatar.png";
 import {
   SettingOutlined,
   EditOutlined,
   EllipsisOutlined,
+  ArrowLeftOutlined,
 } from "@ant-design/icons";
 const { Meta } = Card;
 
 const CarouselGrid = () => {
   const navigate = useNavigate();
+  const {t, i18n} = useTranslation();
   const ref = useRef();
   const [cards, setCards] = useState([]);
 
@@ -36,13 +39,13 @@ const CarouselGrid = () => {
           ref={ref}
           className="carouselDiv"
         >
-            <Card className="cardCarouselStyle" title="Card 1" about="1" />
-            <Card className="cardCarouselStyle" title="Card 2" />
-            <Card className="cardCarouselStyle" title="Card 3" />
-            <Card className="cardCarouselStyle" title="Card 4" />
-            <Card className="cardCarouselStyle" title="Card 5" />
-            <Card className="cardCarouselStyle" title="Card 6" />
-            <Card className="cardCarouselStyle" title="Card 7" />
+            <Card className="cardCarouselStyle" title={[t('Content.content'), ' 1']} />
+            <Card className="cardCarouselStyle" title={[t('Content.content'), ' 2']} />
+            <Card className="cardCarouselStyle" title={[t('Content.content'), ' 3']} />
+            <Card className="cardCarouselStyle" title={[t('Content.content'), ' 4']} />
+            <Card className="cardCarouselStyle" title={[t('Content.content'), ' 5']} />
+            <Card className="cardCarouselStyle" title={[t('Content.content'), ' 6']} />
+            <Card className="cardCarouselStyle" title={[t('Content.content'), ' 7']} />
         </Carousel>
       </div>
       <div>
@@ -54,6 +57,7 @@ const CarouselGrid = () => {
         className="buttonStyle"
         type="dashed"
         onClick={() => navigate(-1)}
+        icon={<ArrowLeftOutlined />}
       >
         Back
       </Button>

@@ -1,40 +1,55 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { Button,Space, Calendar} from "antd";
-import {CalendarOutlined} from '@ant-design/icons'
+import { Button,Space, Calendar, Badge} from "antd";
+import {ArrowLeftOutlined} from '@ant-design/icons'
 import '../App.css';
 
 const CalendarApi = () => {
     const navigate = useNavigate();
     const [selectedDate, setSelectedDate] = useState(null);
-    let check;
+    let listData = [];
+    
+    function makeMeeting(date){
+        listData.push({date: date, text: 'New Activity'});
+        console.log('List Data: ', listData);
+    }
 
-    // function checkOldDate (date) {
-    //     if (new Date(date) < new Date())
-    //         return true;
-    //     else
-    //         return false;
-    // }
+    function dateCellRender (value) {
+        const data = listData;
+        return (
+          <ul>
+              <li key={value}>
+                {data.map((item)=>
+                <Badge status={item.date} text={item.text} />,
+                () => makeMeeting(value)
+                )}
+                
+              </li>
+          </ul>
+        );
+      };
+
+      useEffect(()=>{
+
+      },[listData])
+
     return (
         <Space className="fullScreenStyle" direction="vertical">
-            <Calendar
-             style={{ overflow: 'auto', height: '68vh', width: '90vw'}}
-            //  onClick={(date)=> {{setSelectedDate(date); console.log(selectedDate)}}}
-            onSelect={(date) => {{setSelectedDate(date); console.log('Selected date ', date);}}}
+            <Calendar className="calendarStyle"
+            onSelect={(date) => {{setSelectedDate(date); dateCellRender(date)}}}
              disabledDate={(date)=>{
                 if (new Date(date) < new Date())
                     return true;
                 else 
                     return false;
              }}
-             dateCellRender={(date)=>{
-                if (new Date(date) >= setSelectedDate && new Date(date).getMonth() === selectedDate.getMonth() && new Date(date).getFullYear === selectedDate.getFullYear())
-                    return <h5>Activity</h5>
-                // else 
-                //     console.log("tried to render ", date, ' but selected ', selectedDate);
-             }}
-              />
-            <Button className="buttonStyle" type="dashed" onClick={()=> navigate(-1)}>Back</Button>
+             //dateCellRender={(date) => date === selectedDate ? dateCellRender(date): null}
+                // if (new Date(date) >= selectedDate && new Date(date).getMonth() === selectedDate.getMonth() && new Date(date).getFullYear === selectedDate.getFullYear())
+                //     return <h5>Activity</h5>
+              >
+                {/* <Button type='dashed' onClick={makeMeeting('11')}>+</Button> */}
+              </Calendar>
+            <Button className="buttonStyle" type="dashed" onClick={()=> navigate(-1)} icon={<ArrowLeftOutlined />}>Back</Button>
         </Space>
     )
 }
