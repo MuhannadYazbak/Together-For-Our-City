@@ -46,18 +46,20 @@
   font-weight: 300;
 }
 
+
 .contentStyle {
   height: 76vh;
   width: 90vw;
   background-color: white;
   color: #282c34;
   margin-top: 0px;
-  margin-bottom: 0px;
+  margin-bottom: 50px;
 }
 
 .footerStyle {
-  display: flex;
-  height: 12vh;
+  position: fixed;
+  bottom: 0;
+  height: 10vh;
   width: 100vw;
   margin-top: 0px;
   margin-bottom: 0px;

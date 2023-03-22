@@ -26,8 +26,7 @@ const App = () => {
   const [logged, setLogged] = useState(true);
   const isLogged = createContext(logged);
   const [collapsed, setCollapsed] = useState(false);
-  const setSelected = (e) => {
-  }
+
   const [items, setItems] = useState([
     {
       key: 'languages', label: 'Language', icon: <GlobalOutlined />,
@@ -100,7 +99,7 @@ const App = () => {
             </Routes>
           </Content>
           <Footer className="footerStyle">
-            <span className="spanStyle"> Developed by Muhannad Yazbak and Ezz Marie © 2023
+            <span className="spanStyle"> Developed by Muhannad Yazbak and Ezz Maree © 2023
             </span>
           </Footer>
         </Layout>
