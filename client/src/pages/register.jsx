@@ -1,172 +1,241 @@
-import React, { useRef, useState, useEffect } from "react";
-import { useNavigate, Routes, Route } from "react-router-dom";
-import { Form, Input, Button, Layout } from "antd";
-import { useTranslation } from "react-i18next";
-import { ArrowLeftOutlined } from '@ant-design/icons';
-const { Content } = Layout;
+import {
+  AutoComplete,
+  Button,
+  Cascader,
+  Checkbox,
+  Col,
+  Form,
+  Input,
+  InputNumber,
+  Row,
+  Select,
+} from 'antd';
+import React, { useState } from 'react';
 
-const Register = () => {
-  const navigate = useNavigate();
+const { Option } = Select;
+
+const residences = [
+  {
+    value: 'zhejiang',
+    label: 'Zhejiang',
+    children: [
+      {
+        value: 'hangzhou',
+        label: 'Hangzhou',
+        children: [
+          {
+            value: 'xihu',
+            label: 'West Lake',
+          },
+        ],
+      },
+    ],
+  },
+  {
+    value: 'jiangsu',
+    label: 'Jiangsu',
+    children: [
+      {
+        value: 'nanjing',
+        label: 'Nanjing',
+        children: [
+          {
+            value: 'zhonghuamen',
+            label: 'Zhong Hua Men',
+          },
+        ],
+      },
+    ],
+  },
+];
+
+const formItemLayout = {
+  labelCol: {
+    xs: { span: 24 },
+    sm: { span: 8 },
+  },
+  wrapperCol: {
+    xs: { span: 24 },
+    sm: { span: 16 },
+  },
+};
+
+const tailFormItemLayout = {
+  wrapperCol: {
+    xs: {
+      span: 24,
+      offset: 0,
+    },
+    sm: {
+      span: 16,
+      offset: 8,
+    },
+  },
+};
+
+const App = () => {
   const [form] = Form.useForm();
-  const {t, i18n} = useTranslation();
-  var current;
-  const [user, setUser] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    phone: "",
-    password: "",
-    confirmPassword: "",
-  });
 
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-    setUser((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }));
+  const onFinish = (values) => {
+    console.log('Received values of form: ', values);
   };
 
-  const resetUser = () => {
-    setUser({
-      firstName: "",
-      lastName: "",
-      email: "",
-      phone: "",
-      password: "",
-      confirmPassword: "",
-    });
-  };
+  const prefixSelector = (
+    <Form.Item name="prefix" noStyle>
+      <Select style={{ width: 70 }}>
+        <Option value="972">+972</Option>
+        <Option value="87">+87</Option>
+      </Select>
+    </Form.Item>
+  );
 
-  const createUser = () => {
-    if (user.password === user.confirmPassword) {
-      console.log("password matched");
-      console.log("New user: ", user);
-      form.resetFields();
-    } else {
-      console.warn("Passwords did not match");
-      form.setFieldsValue({ password: "", confirmPassword: "" });
-    }
-  };
-
-  useEffect(() => {
-    // console.log(user)
-  }, [user, ""]);
-
-  useEffect(() => {
-    console.log("Password change");
-  }, [user.password, user.confirmPassword, ""]);
+  const [autoCompleteResult, setAutoCompleteResult] = useState([]);
 
   return (
-    <Content className="fullScreenStyle">
-      <Form
-        form={form}
-        className="formStyle"
-        onFinish={createUser}
-        labelCol={{ span: 10 }}
-        wrapperCol={{ span: 10 }}
+    <div className="register-container">
+    <Form
+      {...formItemLayout}
+      form={form}
+      className="register-form"
+      name="register"
+      onFinish={onFinish}
+      initialValues={{ residence: ['zhejiang', 'hangzhou', 'xihu'], prefix: '86' }}
+      style={{ maxWidth: 600 }}
+      scrollToFirstError
+    >
+      <Form.Item
+        name="email"
+        label="E-mail"
+        rules={[
+          {
+            type: 'email',
+            message: 'The input is not valid E-mail!',
+          },
+          {
+            required: true,
+            message: 'Please input your E-mail!',
+          },
+        ]}
       >
-        <Form.Item wrapperCol={{ offset: 10 }}>
-          <span className="associationSubFormTitle">{t('Register.title')}</span>
-        </Form.Item>
-        <Form.Item
-          rules={[{ required: true, message: "First Name is required" }]}
-          label={t('Register.first')}
-          name="firstName"
-        >
-          <Input
-            type="text"
-            name="firstName"
-            placeholder="First Name"
-            onChange={(e) => handleChange(e)}
-          />
-        </Form.Item>
-        <Form.Item
-          rules={[{ required: true, message: "Last Name is required" }]}
-          label={t('Register.last')}
-          name="lastName"
-        >
-          <Input
-            type="text"
-            name="lastName"
-            placeholder="Last Name"
-            onChange={(e) => handleChange(e)}
-          />
-        </Form.Item>
-        <Form.Item
-          rules={[
-            {
-              required: true,
-              message: "Email should contain prefix, @ and suffix",
+        <Input />
+      </Form.Item>
+
+      <Form.Item
+        name="password"
+        label="Password"
+        rules={[
+          {
+            required: true,
+            message: 'Please input your password!',
+          },
+        ]}
+        hasFeedback
+      >
+        <Input.Password />
+      </Form.Item>
+
+      <Form.Item
+        name="confirm"
+        label="Confirm Password"
+        dependencies={['password']}
+        hasFeedback
+        rules={[
+          {
+            required: true,
+            message: 'Please confirm your password!',
+          },
+          ({ getFieldValue }) => ({
+            validator(_, value) {
+              if (!value || getFieldValue('password') === value) {
+                return Promise.resolve();
+              }
+              return Promise.reject(new Error('The two passwords that you entered do not match!'));
             },
-          ]}
-          label={t('Register.email')}
-          name="email"
-        >
-          <Input
-            type="email"
-            name="email"
-            placeholder="Email"
-            onChange={(e) => handleChange(e)}
-          />
-        </Form.Item>
-        <Form.Item rules={[{ required: false }]} label={t('Register.phone')} name="phone">
-          <Input
-            type="number"
-            name="phone"
-            placeholder="Phone Number"
-            onChange={(e) => handleChange(e)}
-          />
-        </Form.Item>
-        <Form.Item
-          rules={[{ required: true, message: "Password is required" }]}
-          label={t('Register.password')}
-          name="password"
-        >
-          <Input
-            value={user.password}
-            type="password"
-            name="password"
-            placeholder="Password"
-            onChange={(e) => handleChange(e)}
-          />
-        </Form.Item>
-        <Form.Item
-          rules={[
-            {
-              required: true,
-              message: "Confirm Password is required, and must match password",
-            },
-          ]}
-          label={t('Register.rePass')}
-          name="confirmPassword"
-        >
-          <Input
-            value={user.confirmPassword}
-            type="password"
-            name="confirmPassword"
-            placeholder="Confirm Passowrd"
-            onChange={(e) => handleChange(e)}
-          />
-        </Form.Item>
-        <Form.Item wrapperCol={{ offset: 10 }}>
-          <Button className="buttonStyle" type="primary" htmlType="submit">
-          {t('Register.register')}
-          </Button>
-        </Form.Item>
-        <Form.Item wrapperCol={{ offset: 10 }}>
-          <Button
-            className="buttonStyle"
-            type="dashed"
-            onClick={() => navigate(-1)}
-            icon={<ArrowLeftOutlined />}
-          >
-            {t('Register.BACK')}
-          </Button>
-        </Form.Item>
-      </Form>
-    </Content>
+          }),
+        ]}
+      >
+        <Input.Password />
+      </Form.Item>
+
+      <Form.Item
+        name="nickname"
+        label="Nickname"
+        tooltip="What do you want others to call you?"
+        rules={[{ required: true, message: 'Please input your nickname!', whitespace: true }]}
+      >
+        <Input />
+      </Form.Item>
+
+      <Form.Item
+        name="residence"
+        label="Habitual Residence"
+        rules={[
+          { type: 'array', required: true, message: 'Please select your habitual residence!' },
+        ]}
+      >
+        <Cascader options={residences} />
+      </Form.Item>
+
+      <Form.Item
+        name="phone"
+        label="Phone Number"
+        rules={[{ required: true, message: 'Please input your phone number!' }]}
+      >
+        <Input addonBefore={prefixSelector} style={{ width: '100%' }} />
+      </Form.Item>
+
+      <Form.Item
+        name="gender"
+        label="Gender"
+        rules={[{ required: true, message: 'Please select gender!' }]}
+      >
+        <Select placeholder="select your gender">
+          <Option value="male">Male</Option>
+          <Option value="female">Female</Option>
+          <Option value="other">Other</Option>
+        </Select>
+      </Form.Item>
+
+      <Form.Item label="Captcha" extra="We must make sure that your are a human.">
+        <Row gutter={8}>
+          <Col span={12}>
+            <Form.Item
+              name="captcha"
+              noStyle
+              rules={[{ required: true, message: 'Please input the captcha you got!' }]}
+            >
+              <Input />
+            </Form.Item>
+          </Col>
+          <Col span={12}>
+            <Button>Get captcha</Button>
+          </Col>
+        </Row>
+      </Form.Item>
+
+      <Form.Item
+        name="agreement"
+        valuePropName="checked"
+        rules={[
+          {
+            validator: (_, value) =>
+              value ? Promise.resolve() : Promise.reject(new Error('Should accept agreement')),
+          },
+        ]}
+        {...tailFormItemLayout}
+      >
+        <Checkbox>
+          I have read the <a href="">agreement</a>
+        </Checkbox>
+      </Form.Item>
+      <Form.Item {...tailFormItemLayout}>
+        <Button type="primary" htmlType="submit">
+          Register
+        </Button>
+      </Form.Item>
+    </Form>
+    </div>
   );
 };
 
-export default Register;
+export default App;
