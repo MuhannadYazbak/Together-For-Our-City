@@ -2,6 +2,7 @@ import React, { useRef, useState, useEffect } from "react";
 import { useNavigate, Routes, Route } from "react-router-dom";
 import { Form, Input, Button, Layout } from "antd";
 import { useTranslation } from "react-i18next";
+import axios from 'axios';
 import { ArrowLeftOutlined } from '@ant-design/icons';
 const { Content } = Layout;
 
@@ -18,6 +19,18 @@ const Register = () => {
     password: "",
     confirmPassword: "",
   });
+
+  async function AddUser  (){
+    console.log("User: "+user.name+" "+user.email + " "+ user.password+" "+user.type);
+    try{
+        const res = await axios.post("http://localhost:3001/Register", user);
+        if(res.status === 200){
+          navigate("/Login");
+        }
+    }catch(err){
+        console.log("Error happened "+ err);
+    }
+}
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -62,7 +75,7 @@ const Register = () => {
       <Form
         form={form}
         className="formStyle"
-        onFinish={createUser}
+        onFinish={AddUser}
         labelCol={{ span: 10 }}
         wrapperCol={{ span: 10 }}
       >
