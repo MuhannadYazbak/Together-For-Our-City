@@ -8,46 +8,14 @@ import {
   Input,
   InputNumber,
   Row,
+  DatePicker,
   Select,
+  Modal
 } from 'antd';
 import React, { useState } from 'react';
+import moment from 'moment';
 
 const { Option } = Select;
-
-const residences = [
-  {
-    value: 'zhejiang',
-    label: 'Zhejiang',
-    children: [
-      {
-        value: 'hangzhou',
-        label: 'Hangzhou',
-        children: [
-          {
-            value: 'xihu',
-            label: 'West Lake',
-          },
-        ],
-      },
-    ],
-  },
-  {
-    value: 'jiangsu',
-    label: 'Jiangsu',
-    children: [
-      {
-        value: 'nanjing',
-        label: 'Nanjing',
-        children: [
-          {
-            value: 'zhonghuamen',
-            label: 'Zhong Hua Men',
-          },
-        ],
-      },
-    ],
-  },
-];
 
 const formItemLayout = {
   labelCol: {
@@ -73,6 +41,17 @@ const tailFormItemLayout = {
   },
 };
 
+// A list of cities in Israel
+const cities = [
+  'Jerusalem',
+  'Tel Aviv',
+  'Haifa',
+  'Beersheba',
+  'Mashhad',
+  'Nazareth',
+  // Add more cities here
+];
+
 const App = () => {
   const [form] = Form.useForm();
 
@@ -80,16 +59,20 @@ const App = () => {
     console.log('Received values of form: ', values);
   };
 
-  const prefixSelector = (
-    <Form.Item name="prefix" noStyle>
-      <Select style={{ width: 70 }}>
-        <Option value="972">+972</Option>
-        <Option value="87">+87</Option>
-      </Select>
-    </Form.Item>
-  );
-
   const [autoCompleteResult, setAutoCompleteResult] = useState([]);
+
+  const [showAgreementModal, setShowAgreementModal] = useState(false);
+
+  const [birthdate, setBirthdate] = useState("");
+
+  const handleAgreementClick = (e) => {
+    e.preventDefault();
+    setShowAgreementModal(true);
+  };
+
+  const handleAgreementModalClose = () => {
+    setShowAgreementModal(false);
+  };
 
   return (
     <div className="register-container">
@@ -99,7 +82,7 @@ const App = () => {
       className="register-form"
       name="register"
       onFinish={onFinish}
-      initialValues={{ residence: ['zhejiang', 'hangzhou', 'xihu'], prefix: '86' }}
+      initialValues={{ prefix: '86' , birthdate: moment('2000-01-01')}}
       style={{ maxWidth: 600 }}
       scrollToFirstError
     >
@@ -123,10 +106,19 @@ const App = () => {
       <Form.Item
         name="password"
         label="Password"
+        tooltip="Password must be at least 8 characters long and include at least one uppercase letter and one digit"
         rules={[
           {
             required: true,
             message: 'Please input your password!',
+          },
+          {
+            min: 8,
+            message: 'Password must be at least 8 characters long!',
+          },
+          {
+            pattern: /^(?=.*[A-Z])(?=.*\d).+$/,
+            message: 'Password must contain at least one uppercase letter and one number!',
           },
         ]}
         hasFeedback
@@ -158,31 +150,66 @@ const App = () => {
       </Form.Item>
 
       <Form.Item
-        name="nickname"
-        label="Nickname"
-        tooltip="What do you want others to call you?"
-        rules={[{ required: true, message: 'Please input your nickname!', whitespace: true }]}
+        name="firstname"
+        label="Firstname"
+        rules={[{ required: true, message: 'Please input your firstname!', whitespace: true }]}
       >
         <Input />
       </Form.Item>
 
       <Form.Item
-        name="residence"
-        label="Habitual Residence"
-        rules={[
-          { type: 'array', required: true, message: 'Please select your habitual residence!' },
-        ]}
+        name="lastname"
+        label="Lastname"
+        rules={[{ required: true, message: 'Please input your lastname!', whitespace: true }]}
       >
-        <Cascader options={residences} />
+        <Input />
+      </Form.Item>
+
+      <Form.Item 
+      name="birthdate"
+      label="Birthdate"
+      rules={[{ required: true, message: 'Please input your birthdate!'}]}
+      >
+        <div style={{ width: '100%' }}>
+    <DatePicker style={{ width: '100%' }} />
+  </div>
       </Form.Item>
 
       <Form.Item
-        name="phone"
-        label="Phone Number"
-        rules={[{ required: true, message: 'Please input your phone number!' }]}
+        name="residence"
+        label="Residence"
+        rules={[
+        { required: true, message: 'Please select your residence!' },
+        ]}
       >
-        <Input addonBefore={prefixSelector} style={{ width: '100%' }} />
-      </Form.Item>
+      <AutoComplete
+      options={cities.map((city) => ({ value: city }))}
+      filterOption={(inputValue, option) =>
+      option.value.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1
+      }
+      placeholder="Select your residence"
+    />
+</Form.Item>
+
+      <Form.Item
+  name="phone"
+  label="Phone Number"
+  rules={[
+    { required: true, message: 'Please input your phone number!' },
+    {
+      validator: (_, value) => {
+        const phoneNumberRegex = /^\+?\d{10,14}$/; // This matches a phone number with 10-14 digits, optionally starting with '+'
+        if (value && !phoneNumberRegex.test(value)) {
+          return Promise.reject(new Error('Please enter a valid phone number!'));
+        }
+        return Promise.resolve();
+      },
+    },
+  ]}
+>
+  <Input />
+</Form.Item>
+
 
       <Form.Item
         name="gender"
@@ -196,7 +223,7 @@ const App = () => {
         </Select>
       </Form.Item>
 
-      <Form.Item label="Captcha" extra="We must make sure that your are a human.">
+      {/* <Form.Item label="Captcha" extra="We must make sure that your are a human.">
         <Row gutter={8}>
           <Col span={12}>
             <Form.Item
@@ -211,9 +238,9 @@ const App = () => {
             <Button>Get captcha</Button>
           </Col>
         </Row>
-      </Form.Item>
+      </Form.Item> */}
 
-      <Form.Item
+<Form.Item
         name="agreement"
         valuePropName="checked"
         rules={[
@@ -225,9 +252,20 @@ const App = () => {
         {...tailFormItemLayout}
       >
         <Checkbox>
-          I have read the <a href="">agreement</a>
+          I have read the <a href="#" onClick={handleAgreementClick}>agreement</a>
         </Checkbox>
       </Form.Item>
+
+      <Modal
+        title="Agreement"
+        open={showAgreementModal}
+        onCancel={handleAgreementModalClose}
+        footer={null}
+      >
+        <p>
+          Here's the agreement text. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam vel sapien libero.
+        </p>
+      </Modal>
       <Form.Item {...tailFormItemLayout}>
         <Button type="primary" htmlType="submit">
           Register
