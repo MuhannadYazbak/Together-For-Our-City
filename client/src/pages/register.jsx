@@ -54,6 +54,16 @@ const cities = [
 
 const App = () => {
   const [form] = Form.useForm();
+  const {t, i18n} = useTranslation();
+  var current;
+  const [user, setUser] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: "",
+    password: "",
+    confirmPassword: "",
+  });
 
   const onFinish = (values) => {
     console.log('Received values of form: ', values);
@@ -75,30 +85,13 @@ const App = () => {
   };
 
   return (
-    <div className="register-container">
-    <Form
-      {...formItemLayout}
-      form={form}
-      className="register-form"
-      name="register"
-      onFinish={onFinish}
-      initialValues={{ prefix: '86' , birthdate: moment('2000-01-01')}}
-      style={{ maxWidth: 600 }}
-      scrollToFirstError
-    >
-      <Form.Item
-        name="email"
-        label="E-mail"
-        rules={[
-          {
-            type: 'email',
-            message: 'The input is not valid E-mail!',
-          },
-          {
-            required: true,
-            message: 'Please input your E-mail!',
-          },
-        ]}
+    <Content className="fullScreenStyle">
+      <Form
+        form={form}
+        className="formStyle"
+        onFinish={createUser}
+        labelCol={{ span: 10 }}
+        wrapperCol={{ span: 10 }}
       >
         <Input />
       </Form.Item>

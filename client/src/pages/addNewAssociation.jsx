@@ -40,7 +40,7 @@ export default function AddNewAssociation (){
                 <Form.Item label='Association Website' name={'assocWebsite'} rules={[{ required: true, message: 'Please enter association website'}]}>
                     <Input type='text' />
                 </Form.Item>
-                <Form.Item wrapperCol={{offset: 10}}>
+                <Form.Item wrapperCol={{offset: 11}}>
                     <Button className="buttonStyle" type="primary" htmlType="submit" icon={<ArrowRightOutlined />}>Next</Button>
                 </Form.Item>
             </Form>
@@ -67,7 +67,7 @@ export default function AddNewAssociation (){
                 <Form.Item label='Postal code' name={'postalCode'} rules={[{ required: false, message: 'Please enter postal code'}]}>
                     <Input type='number' />
                 </Form.Item>
-                <Form.Item wrapperCol={{offset: 10}}>
+                <Form.Item wrapperCol={{offset: 11}}>
                     <Button className="buttonStyle" type="primary" htmlType="submit" icon={<ArrowRightOutlined />}>Next</Button>
                 </Form.Item>
             </Form>
@@ -91,7 +91,7 @@ export default function AddNewAssociation (){
                 <Form.Item label='Phone Number' name={'contactPhone'} rules={[{ required: true, message: 'Please enter contact phone number'}]}>
                     <Input type='text' />
                 </Form.Item>
-                <Form.Item wrapperCol={{offset: 10}}>
+                <Form.Item wrapperCol={{offset: 11}}>
                     <Button className="buttonStyle" type="primary" htmlType="submit" icon={<ArrowRightOutlined />}>Next</Button>
                 </Form.Item>
             </Form>
@@ -108,7 +108,7 @@ export default function AddNewAssociation (){
                 <Form.Item wrapperCol={{offset: 10}}>
                     <h1>All set to add a new association</h1>
                 </Form.Item>
-                <Form.Item wrapperCol={{offset: 10}}>
+                <Form.Item wrapperCol={{offset: 11}}>
                     <Button className="buttonStyle" type='primary' htmlType="submit">Add Association</Button>
                 </Form.Item>
             </Form>
@@ -131,7 +131,7 @@ export default function AddNewAssociation (){
             <Steps.Step title='Finish' icon={<CheckCircleOutlined />} disabled={disabledStep(3)} />
         </Steps>
         {forms[current]}
-        <Button className="buttonStyle" type='dashed' onClick={()=> navigate(-1)} icon={<ArrowLeftOutlined />}>{t('Schedule.BACK')}</Button>
+            <Button className="buttonStyle" type='dashed' style={{marginLeft: '37vw'}} onClick={()=> navigate(-1)} icon={<ArrowLeftOutlined />}>{t('Schedule.BACK')}</Button>
         </Space>
     );
 };
