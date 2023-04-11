@@ -8,9 +8,9 @@ const Organization = new mongoose.Schema(
         associationDescription: { type: String, required: true},
         activityName: { type: String, required: false},
 		activityDate: { type: Date, required: true },
-        associationAddress: {type: Address, required: true},
+        associationAddress: {type: String, required: true},
 		associationWebsite: {type: String, required: true},
-		associationContact: {type: Collection, required: true}
+		associationContact: {type: [Number], required: true}
 	},
 	{ 	timestamps: true,
 		collection: 'Organizations' }

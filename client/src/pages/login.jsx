@@ -2,10 +2,26 @@ import React from 'react';
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import { Button, Checkbox, Form, Input } from 'antd';
 import "../App.css";
+import axios from 'axios';
+import { useNavigate, Routes, Route } from "react-router-dom";
 
 const App = () => {
-  const onFinish = (values) => {
+  const navigate = useNavigate();
+  const onFinish = async (values) => {
     console.log('Received values of form: ', values);
+    const user = {
+      email: values.username,
+      password: values.password
+    };
+    try {
+      const res = await axios.post("http://localhost:3001/Login", user);
+      if (res.status === 200) {
+        console.log("User logged in");
+        navigate('/');
+      }
+    } catch (err) {
+      console.log("Error happened " + err);
+    }
   };
 
   return (

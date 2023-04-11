@@ -13,29 +13,29 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-mongoose.connect('mongodb+srv://yazbakm:muhannad123@togetherfornazareth.3x9t2iv.mongodb.net/?retryWrites=true&w=majority', {
+mongoose.connect('mongodb+srv://yazbakm:muhannad123@togetherfornazareth.3x9t2iv.mongodb.net/LetsVolunteer?retryWrites=true&w=majority', {
   useNewUrlParser: true,
 });
 
 app.post("/Register", async (req, res) => {
-    const firstName = req.body.firstName;
-    const lastName = req.body.lastName;
+    const firstName = req.body.firstname;
+    const lastName = req.body.lastname;
     const email = req.body.email;
     const phone = req.body.phone;
     const type = req.body.type;
     const password = req.body.password;
     const status = req.body.status;
-    const birthDate = req.body.birthDate;
+    const birthDate = req.body.birthdate;
     const registerDate = new Date();
     const gender = req.body.gender;
-    const address = req.body.address;
-    const newPassword = await bcrypt.hash(password, 10)
+    const address = req.body.residence;
+    const hashedPassword = await bcrypt.hash(password, 10); // hash the password with salt factor of 10
     const user = new userModel({
       firstName: firstName,
       lastName: lastName,
       email: email,
       phone: phone,
-      password: newPassword,
+      password: hashedPassword,
       type: type,
       status: status,
       birthDate: birthDate,
@@ -46,10 +46,25 @@ app.post("/Register", async (req, res) => {
     });
     try {
       await user.save();
-      res.send(200, ["Inserted user", user]);
+      // res.send(200, ["Inserted user", user]);
+      res.status(200).send(["Inserted user", user]);
+      console.log("Inserted");
     } catch (err) {
       console.log(err);
     }
+  });
+
+  app.post("/Login", async (req, res) => {
+    const { email, password } = req.body;
+    const user = await userModel.findOne({ email });
+    if (!user) {
+      return res.status(401).send("Invalid email or password");
+    }
+    const passwordMatch = await bcrypt.compare(password, user.password);
+    if (!passwordMatch) {
+      return res.status(401).send("Invalid email or password");
+    }
+    res.status(200).send("Login successful");
   });
 
 

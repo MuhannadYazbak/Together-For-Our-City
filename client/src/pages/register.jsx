@@ -14,6 +14,8 @@ import {
 } from 'antd';
 import React, { useState } from 'react';
 import moment from 'moment';
+import axios from 'axios';
+import { useNavigate, Routes, Route } from "react-router-dom";
 
 const { Option } = Select;
 
@@ -52,12 +54,33 @@ const cities = [
   // Add more cities here
 ];
 
-const App = () => {
+const Register = () => {
   const [form] = Form.useForm();
+  const navigate = useNavigate();
+  const [user, setUser] = useState({
+    firstname: "",
+    lastname: "",
+    email: "",
+    phone: "",
+    password: "",
+    confirmPassword: "",
+    birthdate: "",
+    residence: "",
+    gender: "",
+  });
 
-  const onFinish = (values) => {
-    console.log('Received values of form: ', values);
-  };
+  async function addUser(user){
+    console.log("FirstName: " + user.firstname + "LastName: " + user.lastname + " " + user.email + " "+ user.password);
+    try{
+        const res = await axios.post("http://localhost:3001/Register", user);
+        if(res.status === 200){
+          navigate("/Login");
+        }
+    }catch(err){
+        console.log("Error happened "+ err);
+    }
+}
+  
 
   const [autoCompleteResult, setAutoCompleteResult] = useState([]);
 
@@ -75,13 +98,30 @@ const App = () => {
   };
 
   return (
-    <Content className="fullScreenStyle">
-      <Form
-        form={form}
-        className="formStyle"
-        onFinish={createUser}
-        labelCol={{ span: 10 }}
-        wrapperCol={{ span: 10 }}
+    <div className="register-container">
+    <Form
+      {...formItemLayout}
+      form={form}
+      className="register-form"
+      name="register"
+      onFinish={addUser}
+      initialValues={{ prefix: '86' , birthdate: moment('2000-01-01')}}
+      style={{ maxWidth: 600 }}
+      scrollToFirstError
+    >
+      <Form.Item
+        name="email"
+        label="E-mail"
+        rules={[
+          {
+            type: 'email',
+            message: 'The input is not valid E-mail!',
+          },
+          {
+            required: true,
+            message: 'Please input your E-mail!',
+          },
+        ]}
       >
         <Input />
       </Form.Item>
@@ -110,7 +150,7 @@ const App = () => {
       </Form.Item>
 
       <Form.Item
-        name="confirm"
+        name="confirmPassword"
         label="Confirm Password"
         dependencies={['password']}
         hasFeedback
@@ -259,4 +299,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default Register;
