@@ -8,6 +8,7 @@ const organizationModel = require("./models/organizationModel");
 const activityModel = require("./models/activityModel");
 const UserFeedbackModel = require("./models/feedBackModelForUser");
 const OrganizationFeedbackModel = require("./models/feedbackModelForOrganization");
+const nodemailer = require('nodemailer');
 
 const app = express();
 app.use(cors());
@@ -77,6 +78,43 @@ app.post("/Register", async (req, res) => {
     }
   });
   
+app.post("/SendEmail", async (req, res) => {
+  // const email = req.body.email;
+
+  // console.log(req.body.to);
+
+  // const user = await userModel.findOne({ email });
+
+  // if (!user) {
+  //   return res.status(401).send("Email does not exist in the database");
+  // }
+
+  const transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+      user: 'finalProjectResetPW@gmail.com',
+      pass: 'voxlgaondzmwexke'
+    }
+  });
+
+  const mailOptions = {
+    from: 'finalProjectResetPW@gmail.com',
+    to: req.body.to,
+    subject: req.body.subject,
+    text: req.body.text
+  };
+
+  transporter.sendMail(mailOptions, function(error, info){
+    if (error) {
+      console.log(error);
+      res.status(500).send("Email not sent");
+    } else {
+      console.log('Email sent: ' + info.response);
+      res.status(200).send("An email was sent, follow instructions to change password");
+    }
+  });
+});
+
 
 
 app.listen(3001, ()=>{
