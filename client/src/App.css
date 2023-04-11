@@ -167,7 +167,7 @@
   border-radius: 11px;
 }
 
-.formStyle{
+/* .formStyle{
   display: flexbox;
   border-radius: 10px;
   border-color: black;
@@ -180,6 +180,26 @@
   overflow:auto;
   height: 50vh;
   width: 100vw;
+} */
+
+.forgot-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.forgot-form {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
+  max-width: 400px;
+  width: 100%;
+}
+
+.forgot-button {
+  width: 100%;
 }
 
 .associationSubFormTitle{

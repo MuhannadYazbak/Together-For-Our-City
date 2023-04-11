@@ -29,6 +29,10 @@ const App = () => {
     message.error(errorMsg);
   };
 
+  const onForgotPasswordClick = () => {
+    navigate('/ForgotPassword'); // Navigate to the forgot password page
+  };
+
   return (
     <div className="login-container">
       <Form
@@ -58,7 +62,7 @@ const App = () => {
             <Checkbox>Remember me</Checkbox>
           </Form.Item>
 
-          <a className="login-form-forgot" href="">
+          <a className="login-form-forgot" onClick={onForgotPasswordClick}>
             Forgot password
           </a>
         </Form.Item>

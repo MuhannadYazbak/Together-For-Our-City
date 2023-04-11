@@ -67,6 +67,17 @@ app.post("/Register", async (req, res) => {
     res.status(200).send("Login successful");
   });
 
+  app.post("/ForgotPassword", async (req, res) => {
+    const email = req.body.email;
+    const user = await userModel.findOne({ email });
+    if (user) {
+      res.status(200).send("Email exists in the database");
+    } else {
+      res.status(401).send("Email does not exist in the database");
+    }
+  });
+  
+
 
 app.listen(3001, ()=>{
     console.log("Server running on port 3001 ...");
