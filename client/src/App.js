@@ -98,10 +98,10 @@ const App = () => {
               <Route path='/read' element={<READ />} />
             </Routes>
           </Content>
-          <Footer className="footerStyle">
-            <span className="spanStyle">{t('FOOTER.dev')} 
+          {/* <Footer className="footerStyle">
+            <span className="spanStyle"> Developed by Muhannad Yazbak and Ezz Marie © 2023
             </span>
-          </Footer>
+          </Footer> */}
         </Layout>
       </Layout>
     </Space>
