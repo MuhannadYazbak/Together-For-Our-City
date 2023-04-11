@@ -54,16 +54,6 @@ const cities = [
 
 const App = () => {
   const [form] = Form.useForm();
-  const {t, i18n} = useTranslation();
-  var current;
-  const [user, setUser] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    phone: "",
-    password: "",
-    confirmPassword: "",
-  });
 
   const onFinish = (values) => {
     console.log('Received values of form: ', values);
