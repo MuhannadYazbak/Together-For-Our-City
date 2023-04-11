@@ -1,6 +1,6 @@
 import React from 'react';
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
-import { Button, Checkbox, Form, Input } from 'antd';
+import { Button, Checkbox, Form, Input, message } from 'antd';
 import "../App.css";
 import axios from 'axios';
 import { useNavigate, Routes, Route } from "react-router-dom";
@@ -20,8 +20,13 @@ const App = () => {
         navigate('/');
       }
     } catch (err) {
+      showError('Login failed. Please try again.'); // display error message
       console.log("Error happened " + err);
     }
+  };
+
+  const showError = (errorMsg) => {
+    message.error(errorMsg);
   };
 
   return (

@@ -10,7 +10,8 @@ import {
   Row,
   DatePicker,
   Select,
-  Modal
+  Modal,
+  message,
 } from 'antd';
 import React, { useState } from 'react';
 import moment from 'moment';
@@ -74,12 +75,23 @@ const Register = () => {
     try{
         const res = await axios.post("http://localhost:3001/Register", user);
         if(res.status === 200){
+          showMessage('Account Created Successfully!');
           navigate("/Login");
         }
     }catch(err){
         console.log("Error happened "+ err);
     }
 }
+
+// Initialize message
+message.config({
+  duration: 2, // duration of each message display (in seconds)
+  maxCount: 1, // maximum number of messages to display at once
+});
+
+const showMessage = (m) => {
+  message.success(m);
+};
   
 
   const [autoCompleteResult, setAutoCompleteResult] = useState([]);
