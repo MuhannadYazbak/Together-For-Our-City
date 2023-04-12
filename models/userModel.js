@@ -14,7 +14,8 @@ const User = new mongoose.Schema(
 		birthDate: {type: Date, required: true},
 		gender: {type: String, required: true},
 		registerDate: {type: Date, required: false},
-		lastSeen: {type: Date, required: false}
+		lastSeen: {type: Date, required: false},
+		resetPasswordToken : { type: String, required: false },
 	},
 	
 	{ 	timestamps: true,

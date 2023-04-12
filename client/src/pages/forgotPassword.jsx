@@ -10,27 +10,13 @@ const ForgotPassword = () => {
   const {t, i18n} = useTranslation();
   const [form] = Form.useForm();
   const [email, setEmail] = useState("");
-
-  // const onFinish = async () => {
-  //   const res = await axios.post("http://localhost:3001/ForgotPassword", { email });
-  //   if (res.status === 200) {
-  //     try {
-  //       await axios.post("http://localhost:3001/send-email", { to: email, subject: "Password Reset", text: "Follow instructions to reset your password" });
-  //       message.success("An email was sent, follow instructions to change password");
-  //     } catch (err) {
-  //       console.log("Error happened " + err);
-  //     }
-  //   } else {
-  //     message.error("Email not found, Please check again");
-  //   }
-  // };
   
   const onFinish = async () => {
     try {
       const res = await axios.post("http://localhost:3001/ForgotPassword", { email });
       if (res.status === 200) {
         // send email
-        await axios.post("http://localhost:3001/SendEmail", { to: email, subject: "Password Reset", text: "Follow instructions to reset your password" });
+        await axios.post("http://localhost:3001/SendEmail", { to: email, subject: "Password Reset", text: "Please click on this link to reset your password:" });
         message.success("An email was sent, follow instructions to change password");
       }
     } catch (err) {

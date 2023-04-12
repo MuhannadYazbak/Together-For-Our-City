@@ -77,43 +77,83 @@ app.post("/Register", async (req, res) => {
       res.status(401).send("Email does not exist in the database");
     }
   });
-  
-app.post("/SendEmail", async (req, res) => {
-  // const email = req.body.email;
 
-  // console.log(req.body.to);
+  app.post("/SendEmail", async (req, res) => {
+    const email = req.body.to;
+    const user = await userModel.findOne({ email });
+    if (user) {
+      // Generate a unique token for the user
+      const token = await bcrypt.genSalt(10);
+      // Store the token in the database for the user
+      await userModel.updateOne({ email }, { resetPasswordToken: token });
+      // Send an email with the reset password link
+      const transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+          user: 'finalProjectResetPW@gmail.com',
+          pass: 'voxlgaondzmwexke'
+        }
+      });
 
-  // const user = await userModel.findOne({ email });
+      // wont work on local host
+      const resetPasswordLink = `http://localhost:3000/ResetPassword/${encodeURIComponent(token)}`; // Replace with your reset password page URL
 
-  // if (!user) {
-  //   return res.status(401).send("Email does not exist in the database");
-  // }
-
-  const transporter = nodemailer.createTransport({
-    service: 'gmail',
-    auth: {
-      user: 'finalProjectResetPW@gmail.com',
-      pass: 'voxlgaondzmwexke'
-    }
-  });
-
-  const mailOptions = {
-    from: 'finalProjectResetPW@gmail.com',
-    to: req.body.to,
-    subject: req.body.subject,
-    text: req.body.text
-  };
-
-  transporter.sendMail(mailOptions, function(error, info){
-    if (error) {
-      console.log(error);
-      res.status(500).send("Email not sent");
+      const mailOptions = {
+        from: 'finalProjectResetPW@gmail.com',
+        to: email,
+        subject: req.body.subject,
+        text: `${req.body.text} ${resetPasswordLink}`
+      };
+      transporter.sendMail(mailOptions, function(error, info){
+        if (error) {
+          console.log(error);
+          res.status(500).send("Email not sent");
+        } else {
+          console.log('Email sent: ' + info.response);
+          res.status(200).send("An email was sent, follow instructions to change password");
+        }
+      });
     } else {
-      console.log('Email sent: ' + info.response);
-      res.status(200).send("An email was sent, follow instructions to change password");
+      res.status(401).send("Email does not exist in the database");
     }
   });
-});
+
+  // app.get("/ResetPassword/:token", async (req, res) => {
+  //   const token = req.params.token;
+  //   const user = await userModel.findOne({ resetPasswordToken: token });
+  //   if (!user) {
+  //     return res.status(401).send("Invalid or expired reset token");
+  //   }
+  //   res.status(200).send("Reset password page");
+  // });
+  
+// app.post("/SendEmail", async (req, res) => {
+
+//   const transporter = nodemailer.createTransport({
+//     service: 'gmail',
+//     auth: {
+//       user: 'finalProjectResetPW@gmail.com',
+//       pass: 'voxlgaondzmwexke'
+//     }
+//   });
+
+//   const mailOptions = {
+//     from: 'finalProjectResetPW@gmail.com',
+//     to: req.body.to,
+//     subject: req.body.subject,
+//     text: req.body.text
+//   };
+
+//   transporter.sendMail(mailOptions, function(error, info){
+//     if (error) {
+//       console.log(error);
+//       res.status(500).send("Email not sent");
+//     } else {
+//       console.log('Email sent: ' + info.response);
+//       res.status(200).send("An email was sent, follow instructions to change password");
+//     }
+//   });
+// });
 
 
 

@@ -21,6 +21,7 @@ import nazareth from './images/NAZARETH_LOGO3.jpg';
 import PageNotFound from "./pages/pageNotFound";
 import Dashboard from "./pages/dashboard";
 import READ from "./pages/read";
+import ResetPassword from "./pages/resetPassword";
 const { Header, Content, Footer, Sider } = Layout;
 const gotNo = sendNo;
 
@@ -96,6 +97,7 @@ const App = () => {
               <Route path='/dashboard' element={<Dashboard/>} />
               <Route path='*' element={<PageNotFound />} />
               <Route path='/read' element={<READ />} />
+              <Route path='/ResetPassword' element={<ResetPassword/>}/>
             </Routes>
           </Content>
           {/* <Footer className="footerStyle">
