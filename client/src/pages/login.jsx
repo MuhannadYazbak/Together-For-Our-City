@@ -33,6 +33,10 @@ const App = () => {
     navigate('/ForgotPassword'); // Navigate to the forgot password page
   };
 
+  const onRegisterClick = () => {
+    navigate('/Register'); // Navigate to the forgot password page
+  };
+
   return (
     <div className="login-container">
       <Form
@@ -71,7 +75,7 @@ const App = () => {
           <Button type="primary" htmlType="submit" className="login-form-button">
             Log in
           </Button>
-          Or <a href="">register now!</a>
+          Or <a onClick={onRegisterClick}>register now!</a>
         </Form.Item>
       </Form>
     </div>

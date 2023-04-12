@@ -78,6 +78,7 @@ app.post("/Register", async (req, res) => {
     }
   });
 
+
   app.post("/SendEmail", async (req, res) => {
     const email = req.body.to;
     const user = await userModel.findOne({ email });
@@ -115,6 +116,30 @@ app.post("/Register", async (req, res) => {
       });
     } else {
       res.status(401).send("Email does not exist in the database");
+    }
+  });
+
+  app.post('/UpdatePassword', async (req, res) => {
+    const email = 'kk@gmail.com';
+    const pw = req.body.password;
+    const hashedPassword = await bcrypt.hash(pw, 10); // hash the password with salt factor of 10
+
+    try {
+      // Find the user with the specified email
+      const user = await userModel.findOne({ email });
+      if (!user) {
+          res.status(401).send("User not found!");
+      }
+  
+      // Update the user's password
+      user.password = hashedPassword;
+      await user.save();
+  
+      // Send a success response
+      res.status(200).send("Password updated successfully");
+    } catch (error) {
+      console.error(error.message);
+      res.status(500).send('Server error');
     }
   });
 

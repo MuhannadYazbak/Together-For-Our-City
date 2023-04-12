@@ -18,6 +18,7 @@ const ForgotPassword = () => {
         // send email
         await axios.post("http://localhost:3001/SendEmail", { to: email, subject: "Password Reset", text: "Please click on this link to reset your password:" });
         message.success("An email was sent, follow instructions to change password");
+        navigate('/ResetPassword');
       }
     } catch (err) {
       message.error("Email not found, Please check again");
@@ -29,9 +30,6 @@ const ForgotPassword = () => {
     <div className="forgot-container">
     <Form className="forgot-form" form={form} onFinish={onFinish}>
       <br/>
-      <Form.Item wrapperCol={{offset: 5}}>
-        <span className="associationSubFormTitle">{t('Forgot.title')}</span>
-      </Form.Item>
       <Form.Item label={t('Forgot.email')} required="true">
         <Input
           type="Email"
