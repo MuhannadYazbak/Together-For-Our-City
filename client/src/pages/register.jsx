@@ -65,13 +65,13 @@ const Register = () => {
     phone: "",
     password: "",
     confirmPassword: "",
-    birthdate: "",
+    birthdate: moment(),
     residence: "",
     gender: "",
   });
 
   async function addUser(user){
-    console.log("FirstName: " + user.firstname + "LastName: " + user.lastname + " " + user.email + " "+ user.password);
+    console.log(user.email + " "+ user.password + " " + user.birthdate);
     try{
         const res = await axios.post("http://localhost:3001/Register", user);
         if(res.status === 200){
@@ -117,7 +117,7 @@ const showMessage = (m) => {
       className="register-form"
       name="register"
       onFinish={addUser}
-      initialValues={{ prefix: '86' , birthdate: moment('2000-01-01')}}
+      initialValues={{ prefix: '86'}}
       style={{ maxWidth: 600 }}
       scrollToFirstError
     >
@@ -205,9 +205,10 @@ const showMessage = (m) => {
       label="Birthdate"
       rules={[{ required: true, message: 'Please input your birthdate!'}]}
       >
-        <div style={{ width: '100%' }}>
-    <DatePicker style={{ width: '100%' }} />
-  </div>
+        <DatePicker 
+    style={{ width: '100%' }} 
+  />
+
       </Form.Item>
 
       <Form.Item
