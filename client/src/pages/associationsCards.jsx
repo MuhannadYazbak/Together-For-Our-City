@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Space, Card, Button, Pagination, Avatar, Modal} from "antd";
+import { Space, Card, Button, Pagination, Avatar, Modal } from "antd";
 import nazareth from "../images/NAZARETH_LOGO3.jpg";
 import boy from "../images/boyAvatar.png";
 import girl from "../images/girlAvatar.png";
@@ -14,16 +14,16 @@ import {
 import "../App.css";
 import { t } from "i18next";
 const { Meta } = Card;
- var no;
+var no;
 
 export const sendNo = (value) => {
-   return value;
-}
+  return value;
+};
 
 const MiniWindow = ({ content, visible, onClose }) => {
   return (
     <Modal
-      title={t('Content.content')}
+      title={t("Content.content")}
       visible={visible}
       onCancel={onClose}
       footer={[
@@ -32,29 +32,28 @@ const MiniWindow = ({ content, visible, onClose }) => {
         </Button>,
       ]}
     >
-      <p>{t('Content.desc')}</p>
+      <p>{t("Content.desc")}</p>
     </Modal>
   );
 };
 
 const Cards = () => {
   const navigate = useNavigate();
-  const {t, i18n} = useTranslation();
+  const { t, i18n } = useTranslation();
   const [i, setI] = useState(-1);
   const [miniWindowVisible, setMiniWindowVisible] = useState(false);
   const [selectedCard, setSelectedCard] = useState(null);
   const cardsGrid = [];
 
-
   for (no = 1; no <= 31; no++) {
     //const i = no;
     const content = {
-    title: [t('Content.content'), ' ', no],
-      description: [t('Content.desc'), ' ', no],
+      title: [t("Content.content"), " ", no],
+      description: [t("Content.desc"), " ", no],
     };
     cardsGrid.push(
       <Card.Grid
-        key={['content',no]}
+        key={["content", no]}
         onClick={() => {
           setSelectedCard(content);
           setMiniWindowVisible(true);
@@ -76,30 +75,42 @@ const Cards = () => {
           <EllipsisOutlined key="ellipsis" />,
         ]}
       >
-        {no%2 == 0 ? 
-        <Meta
-        avatar={<Avatar src= {boy}/>}
-        title={[t('Content.content'),' ', no]}
-        description={[t('Content.desc'), no]}
-      /> :
-      <Meta
-          avatar={<Avatar src= {girl}/>}
-          title={[t('Content.content'),' ', no]}
-          description={[t('Content.desc'), no]}
-        />
-        }
+        {no % 2 == 0 ? (
+          <Meta
+            avatar={<Avatar src={boy} />}
+            title={[t("Content.content"), " ", no]}
+            description={[t("Content.desc"), no]}
+          />
+        ) : (
+          <Meta
+            avatar={<Avatar src={girl} />}
+            title={[t("Content.content"), " ", no]}
+            description={[t("Content.desc"), no]}
+          />
+        )}
       </Card.Grid>
     );
   }
 
   return (
     <Space style={{ width: "100vw", height: "100vh" }} direction="vertical">
-      <Card style={{height: '50vh', width: '100vw', overflow: 'auto', marginBottom: '5vh'}}>
+      <Card
+        style={{
+          height: "50vh",
+          width: "100vw",
+          overflow: "auto",
+          marginBottom: "5vh",
+        }}
+      >
         {cardsGrid}
-        </Card>
-      <Space direction="horizontal"  className="bottomHorizontalStyle">
-        <Button className="buttonStyle" onClick={() => navigate(-1)} icon={<ArrowLeftOutlined/>}>
-          {t('Schedule.BACK')}
+      </Card>
+      <Space direction="horizontal" className="bottomHorizontalStyle">
+        <Button
+          className="buttonStyle"
+          onClick={() => navigate(-1)}
+          icon={<ArrowLeftOutlined />}
+        >
+          {t("Schedule.BACK")}
         </Button>
         <Pagination
           total={30}
@@ -110,7 +121,7 @@ const Cards = () => {
           defaultCurrent={1}
         />
       </Space>
-            {selectedCard && (
+      {selectedCard && (
         <Modal
           visible={miniWindowVisible}
           onCancel={() => setMiniWindowVisible(false)}
@@ -125,5 +136,3 @@ const Cards = () => {
 };
 
 export default Cards;
-
-

@@ -14,7 +14,7 @@ const { Meta } = Card;
 
 const CarouselGrid = () => {
   const navigate = useNavigate();
-  const {t, i18n} = useTranslation();
+  const { t, i18n } = useTranslation();
   const ref = useRef();
   const [cards, setCards] = useState([]);
 
@@ -39,13 +39,34 @@ const CarouselGrid = () => {
           ref={ref}
           className="carouselDiv"
         >
-            <Card className="cardCarouselStyle" title={[t('Content.content'), ' 1']} />
-            <Card className="cardCarouselStyle" title={[t('Content.content'), ' 2']} />
-            <Card className="cardCarouselStyle" title={[t('Content.content'), ' 3']} />
-            <Card className="cardCarouselStyle" title={[t('Content.content'), ' 4']} />
-            <Card className="cardCarouselStyle" title={[t('Content.content'), ' 5']} />
-            <Card className="cardCarouselStyle" title={[t('Content.content'), ' 6']} />
-            <Card className="cardCarouselStyle" title={[t('Content.content'), ' 7']} />
+          <Card
+            className="cardCarouselStyle"
+            title={[t("Content.content"), " 1"]}
+          />
+          <Card
+            className="cardCarouselStyle"
+            title={[t("Content.content"), " 2"]}
+          />
+          <Card
+            className="cardCarouselStyle"
+            title={[t("Content.content"), " 3"]}
+          />
+          <Card
+            className="cardCarouselStyle"
+            title={[t("Content.content"), " 4"]}
+          />
+          <Card
+            className="cardCarouselStyle"
+            title={[t("Content.content"), " 5"]}
+          />
+          <Card
+            className="cardCarouselStyle"
+            title={[t("Content.content"), " 6"]}
+          />
+          <Card
+            className="cardCarouselStyle"
+            title={[t("Content.content"), " 7"]}
+          />
         </Carousel>
       </div>
       <div>

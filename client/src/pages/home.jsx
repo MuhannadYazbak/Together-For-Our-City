@@ -7,7 +7,7 @@ import {
   LoginOutlined,
   FacebookOutlined,
   TwitterOutlined,
-  InstagramOutlined
+  InstagramOutlined,
 } from "@ant-design/icons";
 
 import nazarethLogo from "../images/NAZARETH_LOGO3.jpg";
@@ -20,18 +20,18 @@ const Home = ({ user }) => {
     {
       name: "Facebook",
       icon: <FacebookOutlined />,
-      link: "https://www.facebook.com"
+      link: "https://www.facebook.com",
     },
     {
       name: "Twitter",
       icon: <TwitterOutlined />,
-      link: "https://www.twitter.com"
+      link: "https://www.twitter.com",
     },
     {
       name: "Instagram",
       icon: <InstagramOutlined />,
-      link: "https://www.instagram.com"
-    }
+      link: "https://www.instagram.com",
+    },
   ];
 
   return (
@@ -67,7 +67,11 @@ const Home = ({ user }) => {
         </Button>
         <div className="center">
           {socialMediaLinks.map((link, index) => (
-            <Tooltip key={index} title={link.name} style={{ placeContent: "start" }}>
+            <Tooltip
+              key={index}
+              title={link.name}
+              style={{ placeContent: "start" }}
+            >
               <Button
                 type="text"
                 icon={link.icon}
@@ -84,8 +88,6 @@ const Home = ({ user }) => {
 };
 
 export default Home;
-
-
 
 // import React from "react";
 // import { useNavigate } from "react-router-dom";
