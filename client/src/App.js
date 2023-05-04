@@ -16,6 +16,7 @@ import {
   TableOutlined,
   SlidersOutlined,
   InfoOutlined,
+  PlusCircleOutlined,
 } from "@ant-design/icons";
 import "./App.css";
 import Home from "./pages/home";
@@ -36,12 +37,14 @@ import PageNotFound from "./pages/pageNotFound";
 import Dashboard from "./pages/dashboard";
 import READ from "./pages/read";
 import ResetPassword from "./pages/resetPassword";
+import AddActivity from "./pages/addActivity";
+
 const { Header, Content, Footer, Sider } = Layout;
 const gotNo = sendNo;
 
 const App = () => {
   const navigate = useNavigate();
-  const [logged, setLogged] = useState(false);
+  const [logged, setLogged] = useState(true);
   const [data, setData] = useState(gotNo);
   const [collapsed, setCollapsed] = useState(false);
   const { t, i18n } = useTranslation();
@@ -117,6 +120,15 @@ const App = () => {
         navigate("/Cards");
       },
     },
+    {
+      key: "addActivity",
+      label: "Add Activity", // Replace this with your desired label or a translation function
+      icon: <PlusCircleOutlined  />, // Replace with an appropriate icon from '@ant-design/icons'
+      onClick: () => {
+        navigate("/AddActivity");
+      },
+    },
+
     {
       key: "carousel",
       label: t("SideNav.carousel"),
@@ -236,6 +248,10 @@ const App = () => {
               <Route path="*" element={<PageNotFound />} />
               <Route path="/read" element={<READ />} />
               <Route path="/ResetPassword" element={<ResetPassword />} />
+              <Route
+                path="/AddActivity"
+                element={logged ? <AddActivity /> : <NotAuthorized />}
+              />
             </Routes>
           </Content>
           {/* <Footer className="footerStyle">

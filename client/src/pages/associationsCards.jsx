@@ -37,6 +37,19 @@ const MiniWindow = ({ content, visible, onClose }) => {
   );
 };
 
+const generateMockActivity = (activityNo) => {
+  return {
+    associationName: `Association Name ${activityNo}`,
+    associationSpeciality: `Association Speciality ${activityNo}`,
+    associationDescription: `Association Description ${activityNo}`,
+    activityName: `Activity Name ${activityNo}`,
+    activityDate: new Date(),
+    associationAddress: `Association Address ${activityNo}`,
+    associationWebsite: `https://www.example.com/${activityNo}`,
+    associationContact: `Association Contact ${activityNo}`,
+  };
+};
+
 const Cards = () => {
   const navigate = useNavigate();
   const { t, i18n } = useTranslation();
@@ -55,7 +68,7 @@ const Cards = () => {
       <Card.Grid
         key={["content", no]}
         onClick={() => {
-          setSelectedCard(content);
+          setSelectedCard(generateMockActivity(no));
           setMiniWindowVisible(true);
           setI(no);
           sendNo(no);
@@ -121,16 +134,39 @@ const Cards = () => {
           defaultCurrent={1}
         />
       </Space>
-      {selectedCard && (
-        <Modal
-          visible={miniWindowVisible}
-          onCancel={() => setMiniWindowVisible(false)}
-          footer={null}
+  {selectedCard && (
+    <Modal
+      open={miniWindowVisible}
+      onCancel={() => setMiniWindowVisible(false)}
+      footer={[
+        <Button
+          key="joinActivity"
+          type="primary"
+          onClick={() => {
+            console.log("Joining activity:", selectedCard.activityName);
+            setMiniWindowVisible(false);
+          }}
         >
-          <h3>{`Content ${selectedCard}`}</h3>
-          <p>{`This is content ${selectedCard}`}</p>
-        </Modal>
-      )}
+          Join Activity
+        </Button>,
+        <Button key="close" onClick={() => setMiniWindowVisible(false)}>
+          Close
+        </Button>,
+      ]}
+    >
+      <h3>{selectedCard.activityName}</h3>
+      <p><strong>Association Name:</strong> {selectedCard.associationName}</p>
+      <p><strong>Association Speciality:</strong> {selectedCard.associationSpeciality}</p>
+      <p><strong>Association Description:</strong> {selectedCard.associationDescription}</p>
+      <p><strong>Activity Date:</strong> {selectedCard.activityDate.toLocaleDateString()}</p>
+      <p><strong>Association Address:</strong> {selectedCard.associationAddress}</p>
+      <p><strong>Association Website:</strong> <a href={selectedCard.associationWebsite} target="_blank" rel="noopener noreferrer">{selectedCard.associationWebsite}</a></p>
+      <p><strong>Association Contact:</strong> {selectedCard.associationContact}</p>
+    </Modal>
+  )}
+  
+
+
     </Space>
   );
 };

@@ -143,6 +143,82 @@ app.post("/Register", async (req, res) => {
     }
   });
 
+  // add activity
+  app.post("/activity", async (req, res) => {
+    const activity = new activityModel(req.body);
+  
+    try {
+      await activity.save();
+      res.status(201).send(activity);
+    } catch (error) {
+      res.status(400).send(error);
+    }
+  });
+
+  // fetch activities
+  app.get("/activities", async (req, res) => {
+    try {
+      const activities = await activityModel.find({});
+      res.status(200).send(activities);
+    } catch (error) {
+      res.status(500).send(error);
+    }
+  });
+
+  // update activity
+  app.patch("/activity/:id", async (req, res) => {
+    const updates = Object.keys(req.body);
+    const allowedUpdates = [
+      "associationName",
+      "associationSpeciality",
+      "associationDescription",
+      "activityName",
+      "activityDate",
+      "associationAddress",
+      "associationWebsite",
+      "associationContact",
+    ];
+    const isValidOperation = updates.every((update) =>
+      allowedUpdates.includes(update)
+    );
+  
+    if (!isValidOperation) {
+      return res.status(400).send({ error: "Invalid updates!" });
+    }
+  
+    try {
+      const activity = await activityModel.findByIdAndUpdate(
+        req.params.id,
+        req.body,
+        { new: true, runValidators: true }
+      );
+  
+      if (!activity) {
+        return res.status(404).send();
+      }
+  
+      res.send(activity);
+    } catch (error) {
+      res.status(400).send(error);
+    }
+  });
+
+  // delete activity
+  app.delete("/activity/:id", async (req, res) => {
+    try {
+      const activity = await activityModel.findByIdAndDelete(req.params.id);
+  
+      if (!activity) {
+        res.status(404).send();
+      }
+  
+      res.send(activity);
+    } catch (error) {
+      res.status(500).send();
+    }
+  });
+  
+
   // app.get("/ResetPassword/:token", async (req, res) => {
   //   const token = req.params.token;
   //   const user = await userModel.findOne({ resetPasswordToken: token });
