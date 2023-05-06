@@ -176,17 +176,6 @@ app.post("/Register", async (req, res) => {
       res.status(400).send(error);
     }
   });
-  
-  // app.post("/AddActivity", async (req, res) => {
-  //   const activity = new activityModel(req.body);
-  
-  //   try {
-  //     await activity.save();
-  //     res.status(201).send(activity);
-  //   } catch (error) {
-  //     res.status(400).send(error);
-  //   }
-  // });
 
   // fetch activities
   app.get("/GetActivities", async (req, res) => {
