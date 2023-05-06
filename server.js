@@ -144,19 +144,52 @@ app.post("/Register", async (req, res) => {
   });
 
   // add activity
-  app.post("/activity", async (req, res) => {
-    const activity = new activityModel(req.body);
+  app.post("/AddActivity", async (req, res) => {
+    const {
+      associationName,
+      associationSpeciality,
+      associationDescription,
+      activityName,
+      activityDate,
+      associationAddress,
+      associationWebsite,
+      associationContact,
+    } = req.body;
+  
+    const activity = new activityModel({
+      associationName,
+      associationSpeciality,
+      associationDescription,
+      activityName,
+      activityDate,
+      associationAddress,
+      associationWebsite,
+      associationContact,
+    });
   
     try {
       await activity.save();
-      res.status(201).send(activity);
+      res.status(200).send(["Inserted Activity", activity]);
+      console.log("Inserted Activity");
+      // res.status(201).send(activity);
     } catch (error) {
       res.status(400).send(error);
     }
   });
+  
+  // app.post("/AddActivity", async (req, res) => {
+  //   const activity = new activityModel(req.body);
+  
+  //   try {
+  //     await activity.save();
+  //     res.status(201).send(activity);
+  //   } catch (error) {
+  //     res.status(400).send(error);
+  //   }
+  // });
 
   // fetch activities
-  app.get("/activities", async (req, res) => {
+  app.get("/GetActivities", async (req, res) => {
     try {
       const activities = await activityModel.find({});
       res.status(200).send(activities);
