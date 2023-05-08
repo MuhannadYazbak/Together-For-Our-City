@@ -5,6 +5,7 @@ import nazareth from "../images/NAZARETH_LOGO3.jpg";
 import boy from "../images/boyAvatar.png";
 import girl from "../images/girlAvatar.png";
 import { useTranslation } from "react-i18next";
+import axios from "axios";
 import {
   EditOutlined,
   EllipsisOutlined,
@@ -112,6 +113,25 @@ const Cards = () => {
     );
   });
 
+  const joinActivity = async (activityId, userId) => {
+    console.log("Activity: " + activityId);
+    console.log("User: " + userId);
+    try {
+      const response = await axios.post("http://localhost:3001/joinActivity", {
+        activityId,
+        userId,
+      });
+  
+      if (response.status === 200) {
+        console.log(response.data);
+      } else {
+        throw new Error("Error joining activity");
+      }
+    } catch (error) {
+      console.error("Error joining activity:", error.message);
+    }
+  };
+  
   return (
     <Space style={{ width: "100vw", height: "100vh" }} direction="vertical">
       <Card
@@ -154,6 +174,7 @@ const Cards = () => {
               type="primary"
               onClick={() => {
                 console.log("Joining activity:", selectedCard.activityName);
+                joinActivity(selectedCard._id);
                 setMiniWindowVisible(false);
               }}
             >

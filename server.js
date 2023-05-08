@@ -239,6 +239,31 @@ app.post("/Register", async (req, res) => {
       res.status(500).send();
     }
   });
+
+  app.post('/joinActivity', async (req, res) => {
+    const { userId, activityId } = req.body;
+    try {
+      const user = await userModel.findById(userId);
+      const activity = await activityModel.findById(activityId);
+  
+      console.log("The user: " + user);
+      console.log("The Activity: " + activity);
+
+      if (!user || !activity) {
+        console.log("yes");
+        return res.status(404).send("User or activity not found");
+      }
+  
+      if (!user.joinedActivities.includes(activityId)) {
+        user.joinedActivities.push(activityId);
+        await user.save();
+      }
+  
+      res.status(200).send("Activity joined successfully.");
+    } catch (error) {
+      res.status(500).send("Server error.");
+    }
+  });
   
 
   // app.get("/ResetPassword/:token", async (req, res) => {

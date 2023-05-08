@@ -16,6 +16,7 @@ const User = new mongoose.Schema(
 		registerDate: {type: Date, required: false},
 		lastSeen: {type: Date, required: false},
 		resetPasswordToken : { type: String, required: false },
+		joinedActivities: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Activities' }],
 	},
 	
 	{ 	timestamps: true,
