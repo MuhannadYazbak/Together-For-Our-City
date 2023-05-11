@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { Button, Steps, Form, Input, Space } from "antd";
+import { Button, Steps, Form, Input, Space, message } from "antd";
 import {
   ArrowRightOutlined,
   ArrowLeftOutlined,
@@ -11,6 +11,7 @@ import {
   CheckCircleOutlined,
 } from "@ant-design/icons";
 import "../App.css";
+import axios from "axios";
 
 export default function AddNewAssociation() {
   const navigate = useNavigate();
@@ -19,6 +20,7 @@ export default function AddNewAssociation() {
   const [assocDetails, setAssocDetails] = useState(null);
   const [addressDetails, setAddressDetails] = useState(null);
   const [contactDetails, setContactDetails] = useState(null);
+  const [form] = Form.useForm();
 
   function disabledStep(stepNo) {
     if (stepNo === 0) return false;
@@ -32,10 +34,35 @@ export default function AddNewAssociation() {
       );
   }
 
+  // Go back to previous step
+  const goBack = () => {
+    if (current > 0) {
+      setCurrent(current - 1);
+    } else {
+      navigate(-1);
+    }
+  };
+
   const onFinishStepOne = (values) => {
     setAssocDetails(values);
     setCurrent(1);
   };
+
+  async function addOrganization(values) {
+    console.log(values);
+    try {
+      const res = await axios.post(
+        "http://localhost:3001/AddOrganization",
+        values
+      );
+      if (res.status === 200) {
+        message.success("Organization Added Successfully!");
+      }
+    } catch (err) {
+      console.log("Error happened " + err.message);
+      message.error("Error happened while adding organization");
+    }
+  }
 
   function AssocDetailsForm({ onFinish, initialValues }) {
     return (
@@ -47,14 +74,14 @@ export default function AddNewAssociation() {
       >
         <Form.Item
           label="Association Name"
-          name={"assocName"}
+          name={"associationName"}
           rules={[{ required: true, message: "Please enter association name" }]}
         >
           <Input type="text" />
         </Form.Item>
         <Form.Item
           label="Association Description"
-          name={"assocDescription"}
+          name={"associationDescription"}
           rules={[
             { required: true, message: "Please enter association description" },
           ]}
@@ -63,7 +90,7 @@ export default function AddNewAssociation() {
         </Form.Item>
         <Form.Item
           label="Association Speciality"
-          name={"assocSpeciality"}
+          name={"associationSpeciality"}
           rules={[
             { required: true, message: "Please enter association speciality" },
           ]}
@@ -72,7 +99,7 @@ export default function AddNewAssociation() {
         </Form.Item>
         <Form.Item
           label="Association Website"
-          name={"assocWebsite"}
+          name={"associationWebsite"}
           rules={[
             { required: true, message: "Please enter association website" },
           ]}
@@ -123,12 +150,13 @@ export default function AddNewAssociation() {
           <Input type="text" />
         </Form.Item>
         <Form.Item
-          label="Street"
-          name={"street"}
-          rules={[{ required: true, message: "Please enter street name" }]}
+          label="Street No"
+          name={"streetNo"}
+          rules={[{ required: true, message: "Please enter street number" }]}
         >
           <Input type="text" />
         </Form.Item>
+
         <Form.Item
           label="Postal code"
           name={"postalCode"}
@@ -174,7 +202,11 @@ export default function AddNewAssociation() {
           label="Email"
           name={"contactEmail"}
           rules={[
-            { required: true, message: "Please enter a valid contact email" },
+            {
+              required: true,
+              type: "email",
+              message: "Please enter a valid contact email",
+            },
           ]}
         >
           <Input type="email" />
@@ -183,7 +215,11 @@ export default function AddNewAssociation() {
           label="Phone Number"
           name={"contactPhone"}
           rules={[
-            { required: true, message: "Please enter contact phone number" },
+            {
+              required: true,
+              pattern: new RegExp(/^[0-9\b]+$/),
+              message: "Please enter a valid phone number",
+            },
           ]}
         >
           <Input type="text" />
@@ -203,8 +239,19 @@ export default function AddNewAssociation() {
   }
 
   const onFinishLastStep = () => {
+    const allDetails = {
+      ...assocDetails,
+      ...addressDetails,
+      associationContact: {
+        contactName: contactDetails.contactFullName,
+        contactEmail: contactDetails.contactEmail,
+        contactPhone: contactDetails.contactPhone,
+      },
+    };
+    addOrganization(allDetails);
     navigate("/");
   };
+  
 
   function LastForm({ onFinish }) {
     return (
@@ -237,39 +284,41 @@ export default function AddNewAssociation() {
     <LastForm onFinish={onFinishLastStep} />,
   ];
 
+  const steps = [
+    {
+      title: "Association Details",
+      icon: <InfoCircleOutlined />,
+      disabled: disabledStep(0),
+    },
+    {
+      title: "Association Address",
+      icon: <HeatMapOutlined />,
+      disabled: disabledStep(1),
+    },
+    {
+      title: "Contact Details",
+      icon: <ContactsOutlined />,
+      disabled: disabledStep(2),
+    },
+    {
+      title: "Finish",
+      icon: <CheckCircleOutlined />,
+      disabled: disabledStep(3),
+    },
+  ];
+
   return (
     <Space
       style={{ width: "80vw", height: "80vh", overflow: "auto" }}
       direction="vertical"
     >
-      <Steps onChange={setCurrent} current={current}>
-        <Steps.Step
-          title="Association Details"
-          icon={<InfoCircleOutlined />}
-          disabled={disabledStep(0)}
-        />
-        <Steps.Step
-          title="Association Address"
-          icon={<HeatMapOutlined />}
-          disabled={disabledStep(1)}
-        />
-        <Steps.Step
-          title="Contact Details"
-          icon={<ContactsOutlined />}
-          disabled={disabledStep(2)}
-        />
-        <Steps.Step
-          title="Finish"
-          icon={<CheckCircleOutlined />}
-          disabled={disabledStep(3)}
-        />
-      </Steps>
+      <Steps current={current} onChange={setCurrent} items={steps} />
       {forms[current]}
       <Button
         className="buttonStyle"
         type="dashed"
         style={{ marginLeft: "37vw" }}
-        onClick={() => navigate(-1)}
+        onClick={goBack}
         icon={<ArrowLeftOutlined />}
       >
         {t("Schedule.BACK")}

@@ -6,11 +6,15 @@ const Organization = new mongoose.Schema(
 		associationName: { type: String, required: true, unique: true},
         associationSpeciality: { type: String, required: true},
         associationDescription: { type: String, required: true},
-        activityName: { type: String, required: false},
-		activityDate: { type: Date, required: true },
-        associationAddress: {type: String, required: true},
+        activityName: { type: String, required: false}, // this will be added when creating a new activity
+		activityDate: { type: Date, required: false }, // this will be added when creating a new activity
+        associationAddress: {type: mongoose.Schema.Types.ObjectId, ref: 'Addresses'},
 		associationWebsite: {type: String, required: true},
-		associationContact: {type: [Number], required: true}
+		associationContact: {
+			contactName: { type: String, required: true },
+			contactEmail: { type: String, required: true },
+			contactPhone: { type: String, required: true },
+		  },
 	},
 	{ 	timestamps: true,
 		collection: 'Organizations' }
@@ -18,4 +22,4 @@ const Organization = new mongoose.Schema(
 
 const organizationModel = mongoose.model('Organizations', Organization)
 
-module.exports = organizationModel;
+module.exports = organizationModel;  
