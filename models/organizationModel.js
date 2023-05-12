@@ -14,7 +14,9 @@ const Organization = new mongoose.Schema(
 			contactName: { type: String, required: true },
 			contactEmail: { type: String, required: true },
 			contactPhone: { type: String, required: true },
+			password: { type: String, required: true },
 		  },
+		
 	},
 	{ 	timestamps: true,
 		collection: 'Organizations' }

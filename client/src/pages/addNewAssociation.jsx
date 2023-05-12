@@ -108,7 +108,15 @@ export default function AddNewAssociation() {
         </Form.Item>
         <Form.Item wrapperCol={{ offset: 11 }}>
           <Button
-            className="buttonStyle"
+            type="default"
+            onClick={goBack}
+            icon={<ArrowLeftOutlined />}
+            style={{ marginRight: "10px" }}
+            disabled={current === 0}
+          >
+            Back
+          </Button>
+          <Button
             type="primary"
             htmlType="submit"
             icon={<ArrowRightOutlined />}
@@ -166,7 +174,14 @@ export default function AddNewAssociation() {
         </Form.Item>
         <Form.Item wrapperCol={{ offset: 11 }}>
           <Button
-            className="buttonStyle"
+            type="default"
+            onClick={goBack}
+            icon={<ArrowLeftOutlined />}
+            style={{ marginRight: "10px" }}
+          >
+            Back
+          </Button>
+          <Button
             type="primary"
             htmlType="submit"
             icon={<ArrowRightOutlined />}
@@ -224,9 +239,64 @@ export default function AddNewAssociation() {
         >
           <Input type="text" />
         </Form.Item>
+        <Form.Item
+          name="password"
+          label="Password"
+          tooltip="Password must be at least 8 characters long and include at least one uppercase letter and one digit"
+          rules={[
+            {
+              required: true,
+              message: "Please input your password!",
+            },
+            {
+              min: 8,
+              message: "Password must be at least 8 characters long!",
+            },
+            {
+              pattern: /^(?=.*[A-Z])(?=.*\d).+$/,
+              message:
+                "Password must contain at least one uppercase letter and one number!",
+            },
+          ]}
+          hasFeedback
+        >
+          <Input.Password />
+        </Form.Item>
+
+        <Form.Item
+          name="confirmPassword"
+          label="Confirm Password"
+          dependencies={["password"]}
+          hasFeedback
+          rules={[
+            {
+              required: true,
+              message: "Please confirm your password!",
+            },
+            ({ getFieldValue }) => ({
+              validator(_, value) {
+                if (!value || getFieldValue("password") === value) {
+                  return Promise.resolve();
+                }
+                return Promise.reject(
+                  new Error("The two passwords that you entered do not match!")
+                );
+              },
+            }),
+          ]}
+        >
+          <Input.Password />
+        </Form.Item>
         <Form.Item wrapperCol={{ offset: 11 }}>
           <Button
-            className="buttonStyle"
+            type="default"
+            onClick={goBack}
+            icon={<ArrowLeftOutlined />}
+            style={{ marginRight: "10px" }}
+          >
+            Back
+          </Button>
+          <Button
             type="primary"
             htmlType="submit"
             icon={<ArrowRightOutlined />}
@@ -237,6 +307,7 @@ export default function AddNewAssociation() {
       </Form>
     );
   }
+  
 
   const onFinishLastStep = () => {
     const allDetails = {
@@ -246,12 +317,12 @@ export default function AddNewAssociation() {
         contactName: contactDetails.contactFullName,
         contactEmail: contactDetails.contactEmail,
         contactPhone: contactDetails.contactPhone,
+        password: contactDetails.password,
       },
     };
     addOrganization(allDetails);
     navigate("/");
   };
-  
 
   function LastForm({ onFinish }) {
     return (
@@ -260,7 +331,7 @@ export default function AddNewAssociation() {
           <h1>All set to add a new association</h1>
         </Form.Item>
         <Form.Item wrapperCol={{ offset: 11 }}>
-          <Button className="buttonStyle" type="primary" htmlType="submit">
+          <Button type="primary" htmlType="submit">
             Add Association
           </Button>
         </Form.Item>
@@ -314,15 +385,6 @@ export default function AddNewAssociation() {
     >
       <Steps current={current} onChange={setCurrent} items={steps} />
       {forms[current]}
-      <Button
-        className="buttonStyle"
-        type="dashed"
-        style={{ marginLeft: "37vw" }}
-        onClick={goBack}
-        icon={<ArrowLeftOutlined />}
-      >
-        {t("Schedule.BACK")}
-      </Button>
     </Space>
   );
 }

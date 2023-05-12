@@ -163,6 +163,10 @@ app.post("/AddOrganization", async (req, res) => {
     postalCode,
   } = req.body;
 
+  // hash the contact's password
+  const hashedPassword = await bcrypt.hash(associationContact.password, 10);
+  associationContact.password = hashedPassword;
+
   try {
     const address = new addressModel({
       city,

@@ -4,9 +4,6 @@ import { useTranslation } from "react-i18next";
 import { Space, Layout, Menu } from "antd";
 import {
   HomeOutlined,
-  LoginOutlined,
-  LogoutOutlined,
-  UserAddOutlined,
   DatabaseOutlined,
   ClockCircleOutlined,
   CalendarOutlined,
@@ -14,8 +11,6 @@ import {
   GroupOutlined,
   GlobalOutlined,
   TableOutlined,
-  SlidersOutlined,
-  InfoOutlined,
   PlusCircleOutlined,
 } from "@ant-design/icons";
 import "./App.css";
@@ -30,7 +25,6 @@ import MeetingsHistory from "./pages/meetingsHistory";
 import MakeTable from "./pages/Table";
 import Cards, { sendNo } from "./pages/associationsCards";
 import ContentI from "./pages/content";
-import CarouselGrid from "./pages/carousel";
 import CalendarApi from "./pages/calendar";
 import nazareth from "./images/NAZARETH_LOGO3.jpg";
 import PageNotFound from "./pages/pageNotFound";
@@ -113,8 +107,8 @@ const App = () => {
       },
     },
     {
-      key: "associations",
-      label: t("SideNav.assocs"),
+      key: "activities",
+      label: t("SideNav.activities"),
       icon: <GroupOutlined />,
       onClick: () => {
         navigate("/Cards");
@@ -126,15 +120,6 @@ const App = () => {
       icon: <PlusCircleOutlined  />, // Replace with an appropriate icon from '@ant-design/icons'
       onClick: () => {
         navigate("/AddActivity");
-      },
-    },
-
-    {
-      key: "carousel",
-      label: t("SideNav.carousel"),
-      icon: <SlidersOutlined />,
-      onClick: () => {
-        navigate("/carousel");
       },
     },
     {
@@ -226,7 +211,7 @@ const App = () => {
               <Route path="/ForgotPassword" element={<Forget />} />
               <Route
                 path="/AddNewAssociation"
-                element={logged ? <AddNewAssociation /> : <NotAuthorized />}
+                element={<AddNewAssociation />}
               />
               <Route
                 path="/ScheduleMeeting"
@@ -237,7 +222,6 @@ const App = () => {
               <Route path="/MakeTable" element={<MakeTable />} />
               <Route path="/Cards" element={<Cards />} />
               <Route path={"/content/:sendNo"} element={<ContentI />} />
-              <Route path="/carousel" element={<CarouselGrid />} />
               <Route path="/calendar" element={<CalendarApi />} />
               <Route
                 path="/Content"
@@ -250,7 +234,7 @@ const App = () => {
               <Route path="/ResetPassword" element={<ResetPassword />} />
               <Route
                 path="/AddActivity"
-                element={logged ? <AddActivity /> : <NotAuthorized />}
+                element={<AddActivity />}
               />
             </Routes>
           </Content>

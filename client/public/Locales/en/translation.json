@@ -30,13 +30,11 @@
         "newMeeting": "Book Meeting",
         "meetingsHistory": "Meetings History",
         "table": "table",
-        "assocs": "Assoications",
-        "carousel": "Carousel",
+        "activities": "Activities",
         "calendar": "Calendar",
         "login": "Login",
         "register": "Register",
         "logout": "Logout",
-        "try": "Try",
         "dashboard": "Dashboard"
     },
     "Login": {

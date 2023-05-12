@@ -30,13 +30,11 @@
         "newMeeting": "تحديد لقاء",
         "meetingsHistory": "اللقائات السابقة",
         "table": "جدول",
-        "assocs": "الجمعيات",
-        "carousel": "عرض دائري",
+        "activities": "الفعاليات",
         "calendar": "الرزنامة",
         "login": "تسجيل دخول",
         "register": "مستخدم جديد",
         "logout": "تسجيل خروج",
-        "try": "تجربة",
         "dashboard": "رسوم بيانية"
     },
     "Login": {
