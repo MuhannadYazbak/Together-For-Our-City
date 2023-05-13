@@ -344,28 +344,49 @@ app.put('/users/:id', async (req, res) => {
   }
 });
 
-// app.put('/users/:id', async (req, res) => {
-//   console.log('req = ', req);
-//   const { firstName, lastName, email, phone, password } = req.body;
-//   const {city, neighborhood, postalCode} = req.body.addressDetails;
-//   try {
-//     const newuser = await userModel.findByIdAndUpdate(req.params.id, {
-//       firstName,
-//       lastName,
-//       email,
-//       phone,
-//       password,
-//       city,
-//       neighborhood,
-//       postalCode
-//     }, { new: true });
-//     console.log("Updated to: ", newuser);
-//     res.status(200).json({  newuser });
-//   } catch (error) {
-//     console.error(error);
-//     res.status(500).json({ message: 'Server error' });
-//   }
-// });
+// add organization
+app.post("/AddOrganization", async (req, res) => {
+  const {
+    associationName,
+    associationSpeciality,
+    associationDescription,
+    associationWebsite,
+    associationContact,
+    city,
+    neighborhood,
+    streetNo,
+    postalCode,
+  } = req.body;
+
+  try {
+    const address = new addressModel({
+      city,
+      neighborhood,
+      streetNo,
+      postalCode,
+    });
+
+    const savedAddress = await address.save();
+
+    const organization = new organizationModel({
+      associationName,
+      associationSpeciality,
+      associationDescription,
+      associationAddress: savedAddress._id,
+      associationWebsite,
+      associationContact,
+    });
+
+    console.log("organization: ", organization);
+
+    await organization.save();
+    res.status(200).send(["Inserted Organization", organization]);
+    console.log("Inserted Organization");
+  } catch (error) {
+    console.log("Error while inserting organization: ", error);
+    res.status(400).send(error);
+  }
+});
 
 app.listen(3001, ()=>{
     console.log("Server running on port 3001 ...");
