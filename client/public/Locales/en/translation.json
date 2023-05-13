@@ -1,102 +1,130 @@
 {
-    "INTRODUCTION":{
-        "greeting": "Welcome ",
-        "reg": "Not yet a user, register new user",
-        "abstract": "Since Nazareth is our beloved city, we want to feel more connected to it. Here we are going to collect all diferrent associations to volunteer in, and thus improve the city and maybe decrease violence"
-    },
-    "HEADTITLE":{
-        "title": "Together for Nazareth"
-    },
-    "FOOTER":{
-        "dev": "Developed by Muhannad Yazbak and Ezz Marie © 2023"
-    },
-    "ADDASSOC":{
-        "assocD": "Association Details",
-        "contactD":"Contact Details",
-        "assocName": "Association Name",
-        "assocDesc": "Association Description",
-        "assocSpec": "Association Speciality",
-        "assocWeb": "Association Website",
-        "contactName": "Contact Name",
-        "contactEmail": "Contact Email",
-        "contactPhone": "Contact Phone",
-        "ADD": "Add",
-        "BACK": "Back"
-    },
     "SideNav":{
         "lang": "Language",
+        "english": "English",
+        "arabic": "Arabic",
+        "hebrew": "Hebrew",
         "home": "Home",
-        "addAssoc": "Add Association",
-        "newMeeting": "Book Meeting",
-        "meetingsHistory": "Meetings History",
-        "table": "table",
+        "profile": "Profile",
         "activities": "Activities",
-        "calendar": "Calendar",
-        "login": "Login",
-        "register": "Register",
-        "logout": "Logout",
-        "dashboard": "Dashboard"
+        "stats": "Statistics",
+        "organizations": "Organizations",
+        "users": "Users",
+        "contact": "Contacts"
     },
-    "Login": {
-        "email" : "Email",
-        "password": "Password",
+    "UpperNav":{
         "login": "Log-In",
-        "forgot": "Forgot Password",
-        "BACK": "Back"
+        "register": "Register",
+        "logout": "Log-Out",
+        "welcome": "Welcome"
     },
-    "Forgot":{
-        "title": "Forgot Password",
-        "email": "Email",
-        "reset": "Reset Password",
-        "BACK": "Back"
+    "Buttons":{
+        "next": "Next",
+        "login": "Log-In",
+        "register": "Register",
+        "backHome": "Back To Home",
+        "addPhone": "Add another phone",
+        "addAssoc" : "ِAdd Organization",
+        "addUser": "Confirm Add New User",
+        "back" : "Back"
     },
-    "Register": {
-        "title": "New User Register",
-        "first": "First Name",
-        "last": "Last Name",
+    "Titles":{
+        "homePage": "Home Page",
+        "registerPage": "Register Page",
+        "profilePage": "Profile Page",
+        "activitiesPage": "Activities Page",
+        "statsPage": "Statistics Page",
+        "addAssociationPage": "Add Organization Page",
+        "organizationsPage": "Organizations Page",
+        "usersPage": "Show Users Page",
+        "unAuth" : "You are not authorized to see this page, please login or back"
+    },
+    "Layouts":{
+        "header": "Together For Our City",
+        "footer": "All rights saved © 2023"
+    },
+    "RegForm":{
+        "firstName": "First Name",
+        "lastName": "Last Name",
         "email": "Email",
         "phone": "Phone",
         "password": "Password",
-        "rePass": "Re-Password",
-        "register": "Register",
-        "BACK": "Back"
-    },
-    "Schedule":{
-        "title": "Schedule A New Meeting",
-        "assoc": "Association",
-        "date": "Date",
-        "start": "Start Time",
-        "end": "End Time",
-        "schedule": "Schedule",
-        "BACK": "Back",
-        "Associations":{
-            "1": "Almanara",
-            "2": "Oggo",
-            "3": "Saint-Anne"
+        "repassword": "re-enter Password",
+        "Address": {
+            "city": "City",
+            "neighborhood": "Neighborhood",
+            "postalCode": "Postal-Code"
+        },
+        "userType": "User Type",
+        "userStatus": "User Status",
+        "Sections": {
+            "personal": "Personal Information",
+            "address": "Address",
+            "type": "User Type & Status",
+            "password": "Password"
         }
     },
-    "MeetingsHistory": {
-        "date": "Date",
-        "assoc": "Association",
-        "adress": "Adress",
-        "comment": "Comment",
-        "actions": "Actions",
-        "search": "Search by Association Name"
+    "Messages":{
+        "firstName": "Please enter your first name",
+        "lastName": "please enter your last name",
+        "email": "please enter a valid email",
+        "phone": "please enter a valid phone number",
+        "assocName": "Please enter Organization Name",
+        "assocDescription": "Please enter Organization Description",
+        "assocSpeciality": "Please enter Organization Speciality",
+        "assocWebSite": "Please enter the Organization's Website",
+        "neighborhood": "Please enter Neighborhood name",
+        "street": "Please enter Street name or number",
+        "postalCode": "Please enter the postal code",
+        "city": "please enter city name",
+        "userType": "Please choose an user type",
+        "userStatus": "Please choose an user status",
+        "password": "Please enter password",
+        "repassword": "Please re-enter your password",
+        "matching": "Passwords should be matched",
+        "normalUserReg": "This Page is to add normal volunteer, to add an Organization click here",
+        "orgReg": "This Page is to add Organization, to add a volunteer click here"
     },
-    "Content": {
-        "content": "Association",
-        "desc": "This is Association "
+    "Users": {
+        "normal": "Normal",
+        "contact": "Contact Person",
+        "admin": "Admin",
+        "active": "Active",
+        "inactive": "Inactive"
     },
-    "NotAuth": {
-        "text": "Sorry, You're not authorized to access this page, please sign in",
-        "signin": "Sign In"
+    "Steps": {
+        "assocDetails": "Organization Details",
+        "assocAddress": "Organization Address",
+        "assocContact": "Contact Person",
+        "assocFinish": "Details Confirmation",
+        "confirm": "Attention",
+        "userPersonal": "Persoanl Details",
+        "userAddress": "Address",
+        "userPassword": "Password" 
     },
-    "NotFound": {
-        "message": "Page does not exist, please navigate back to home page"
+    "AssocForm": {
+        "assocName": "Organization Name",
+        "assocDescription": "Organization Description",
+        "assocSpeciality": "Organization Speciality",
+        "assocWebSite": "Organization WebSite",
+        "assocAddressCity": "City Name",
+        "assocAddressNeighborhood": "Neighborhood Name",
+        "assocAddressStreet": "Street",
+        "assocAddressPostalCode": "Postal Code",
+        "assocContactFirstName": "First Name",
+        "assocContactLastName": "Last Name",
+        "assocContactEmail": "Email",
+        "assocContactPhone": "Phone",
+        "assocContactPassword": "Password",
+        "assocContactRepassword": "Re-type Password",
+        "allset": "All set, Confirm the data"
     },
-    "Speciality":{
-        "1": "Fun days with special need kids",
-        "2":"Help mentally and physically ill kids",
-        "3": "Socialize with teenagers in low socioeconomic situation"
+    "Cities": {
+        "nazareth": "Nazareth",
+        "haifa": "Haifa",
+        "telaviv": "Tel-Aviv",
+        "jerusalem": "Jerusalem",
+        "beersheva": "Beer-Sheva",
+        "mashhad": "Mashhad"
     }
 }
