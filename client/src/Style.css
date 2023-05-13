@@ -1,0 +1,179 @@
+ .fullScreenStyle {
+    width: 100%;
+    height: 100%;
+ }
+
+ .spaceStyle {
+  width: fit-content;
+  height: fit-content;
+ }
+
+ .centered {
+  /* width: 100%;
+  height: 100%; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* overflow: auto; */
+ }
+
+ .spanStyle {
+    font-size: large;
+    font-weight: 250%;
+    color: #282c34;
+    text-align: center;
+    display: flex;
+    
+
+ }
+
+ .stepsStyle {
+  /* width: max-content; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  
+  /* margin-right: 5px;
+  margin-left: 5px; */
+ }
+
+.formStyle {
+  width: 80vw;
+  height: 37vh;
+  /* padding-top: 5px;
+  padding-bottom: 5px;
+  display: flexbox;
+  overflow: auto; */
+}
+
+.headerStyle  {
+    background-Color: #282c34;
+    color: white;
+    height: fit-content;
+    width: 100%;
+    min-width: max-content;
+  }
+  
+  .contentStyle  {
+    text-align: center;
+    min-height: 120;
+    line-height: 120px;
+    color: black;
+    height: 80%;
+    width: 80%;
+    /* min-height: max-content;
+    height: fit-content;
+    width: fit-content; */
+  }
+  
+  .siderStyle {
+    text-align: center;
+    line-height: 120px;
+    background-color: crimson;
+    height: 100%;
+    width: fit-content;
+  }
+  
+  .footerStyle  {
+    text-align: center;
+    color: white;
+    background-color: #282c34;
+    height: fit-content;
+    width: 100%;
+  }
+  
+  .menuStyle  {
+    background-color: #282c34;
+    color: white;
+    height: 100vh;
+  }
+
+  .buttonStyle {
+    box-shadow: 2px 2px black;
+    transition-duration: 0.4s;
+    border-radius: 20;
+    border-color: black;
+    border-style: solid;
+  }
+
+  .messageBoxStyle{
+    width: fit-content;
+    height: fit-content;
+    border: 3px;
+    border-color: white;
+    color: white;
+    background-color: #282c34;
+    /* padding-top: 5px;
+    padding-bottom: 5px;
+    padding-right: 3px;
+    padding-left: 3px; */
+  }
+
+  .tableStyle {
+    width: fit-content;
+    height: fit-content;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: auto;
+    border: 2px;
+    border-radius: 14px;
+    border-color: #282c34;
+  }
+
+  .chartsSpaceStyle{
+    display: flexbox;
+    scroll-behavior: auto;
+    width: 85vw;
+    height: 50vh;
+  }
+
+  .dashboardCircleStyle{
+    width: 15vw;
+    height: 15vh;
+    margin-left: 5px;
+    margin-right: 5px;
+  }
+  
+  .dashboardSqaureStyle{
+    width: 28vw;
+    height: 30vh;
+    margin-left: 5px;
+    margin-right: 5px;
+  }
+
+  /* Media queries for responsive design */
+
+@media (max-width: 768px) {
+  .fullScreenStyle {
+      height: auto;
+  }
+  .spanStyle {
+    font-size: medium;
+    font-weight: 200%;
+    color: green;
+}
+  .spaceStyle {
+      width: 100vw;
+  }
+  .formStyle {
+      width: 100vw;
+  }
+  .dashboardCircleStyle {
+      width: 30vw;
+      height: 20vh;
+  }
+  .dashboardSqaureStyle {
+      width: 80vw;
+      height: 20vh;
+  }
+}
+
+/* @media (max-width: 480px) {
+  .spanStyle {
+      font-size: medium;
+      font-weight: 200%;
+      color: green;
+  }
+} */

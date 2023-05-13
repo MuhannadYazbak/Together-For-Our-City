@@ -1,103 +1,130 @@
 {
-    "INTRODUCTION": {
-        "greeting": "שלום ",
-        "reg": "עדיין לא משתמש, רישום משתמש",
-        "abstract": "מתוך אהבה לעיר שלנו נצרת, אנחנו רוצים להרגיש יותר משוייכים לה. לכן כאן נאסוף את כל המקומות שאפשר להתנדב בהם בכדי להגביר את השייכות ובתקווה שזה יפחית אלימות"
-    },
-    "HEADTITLE":{
-        "title": "ביחד למען נצרת"
-    },
-    "FOOTER":{
-        "dev": " 2023  © פותח על ידי מוהנד יזבכ ועז מרעי "
-    },
-    "ADDASSOC":{
-        "assocD": "פרטי עמותה",
-        "contactD":"פרטי איש קשר",
-        "assocName": "שם העמותה",
-        "assocDesc": "תאור העמותה",
-        "assocSpec": "התמחות העמותה",
-        "assocWeb": "אתר העמותה",
-        "contactName": "שם איש קשר",
-        "contactEmail": "אימייל",
-        "contactPhone": "מספר טלפון",
-        "ADD": "הוספה",
-        "BACK": "חזרה"
-    },
     "SideNav":{
         "lang": "שפה",
+        "english": "אנגלית",
+        "arabic": "ערבית",
+        "hebrew": "עברית",
         "home": "דף הבית",
-        "addAssoc": "הוספת עמותה",
-        "newMeeting": "הוספת מפגש",
-        "meetingsHistory": "היסטוריית מפגשים",
-        "table": "טבלה",
+        "profile": "פרופיל",
         "activities": "פעילויות",
-        "calendar": "לוח שנה",
+        "stats": "סטטיסטיקות",
+        "organizations": "העמותות",
+        "users": "משתמשים",
+        "contact": "אנשי קשר"
+    },
+    "UpperNav":{
         "login": "כניסה",
         "register": "משתמש חדש",
         "logout": "יציאה",
-        "try": "ניסוי",
-        "dashboard": "דשבורד"
+        "welcome": "ברכות"
     },
-    "Login": {
-        "email" : "אימייל",
-        "password": "סיסמה",
+    "Buttons":{
+        "next": "הבא",
         "login": "כניסה",
-        "forgot": "שכחתי סיסמה",
-        "BACK": "חזרה"
+        "register": "רשום משתמש",
+        "backHome": "חזרה לדף הבית",
+        "addPhone": "הוסף עוד טלפון",
+        "addAssoc" : "הוסף עמותה",
+        "addUser": "אמת והוסף משתמש חדש",
+        "back" : "חזור"
     },
-    "Forgot":{
-        "title": "שכחתי סיסמה",
-        "email": "אימייל",
-        "reset": "שחזר סיסמה",
-        "BACK": "חזרה"
+    "Titles":{
+        "homePage": "דף הבית",
+        "registerPage": "דף רישום משתמש חדש",
+        "profilePage": "דף הפרופיל",
+        "activitiesPage": "דף הפעילויות",
+        "statsPage": "דף הסטטיסטיקות",
+        "addAssociationPage": "דף הוספת עמותה",
+        "organizationsPage": "דף העמותות",
+        "usersPage": "דף הצגת המשתמשים",
+        "unAuth" : "אין לך סמכות לבקר בדף זה, אנא להתחבר או לצאת מדף זה"
     },
-    "Register": {
-        "title": "רישום משתמש חדש",
-        "first": "שם פרטי",
-        "last": "שם משפחה",
-        "email": "אימייל",
+    "Layouts":{
+        "header": "ביחד למען העיר שלנו",
+        "footer": "כל הזכויות שמורים © 2023"
+    },
+    "RegForm":{
+        "firstName": "שם פרטי",
+        "lastName": "שפ משפחה",
+        "email": "דואר אלקטרוני",
         "phone": "טלפון",
         "password": "סיסמה",
-        "rePass": "אשר סיסמה",
-        "register": "רשום",
-        "BACK": "חזרה"
-    },
-    "Schedule":{
-        "title": "קביעת מפגש חדש",
-        "assoc": "העמותה",
-        "date": "תאריך פגישה",
-        "start": "שעת התחלה",
-        "end": "שעת סיום",
-        "schedule": "אשר פגישה",
-        "BACK": "חזרה",
-        "Associations":{
-            "1": "אלמנארה",
-            "2": "אוגו",
-            "3": "הקדושה אן"
+        "repassword": "חזור על הסיסמה",
+        "Address": {
+            "city": "עיר",
+            "neighborhood": "שכונה",
+            "postalCode": "מיקוד"
+        },
+        "userType": "סוג המשתמש",
+        "userStatus": "מצב המשתמש",
+        "Sections": {
+            "personal": "פרטים אישיים",
+            "address": "כתובת",
+            "type": "סוג וסטטוס המשתמש",
+            "password": "סיסמה"
         }
     },
-    "MeetingsHistory": {
-        "date": "תאריך פגישה",
-        "assoc": "העמותה",
-        "adress": "כתובת",
-        "comment": "תגובה על המפגש",
-        "actions": "פעולות",
-        "search": "חיפוש לפי שם עמותה"
+    "Messages":{
+        "firstName": "אנא הקלד שם פרטי",
+        "lastName": "אנא הקלד שם משפחה",
+        "email": "אנא הקלד כתובת דואר אלקטרוני",
+        "phone": "אנא הקלד את מספר הטלפון",
+        "assocName": "אנא הקלד שם עמותה",
+        "assocDescription": "אנא הקלד תאור עמותה",
+        "assocSpeciality": "אנא הקלד התמחות עמותה",
+        "assocWebSite": "אנא הקלד אתר אינטרנט של העמותה",
+        "neighborhood": "אנא הקלד שם שכונה",
+        "street": "אנא הקלד שם או מספר רחוב",
+        "postalCode": "אנא הקלד מיקוד",
+        "city": "אנא הקלד את שם העיר",
+        "userType": "אנא בחר סוג משתמש",
+        "userStatus": "אנא בחר סטטוס המשתמש",
+        "password": "אנא הקלד סיסמה",
+        "repassword": "אנא להקליד מחדש את הסיסמה שלך",
+        "matching": "על שתי הסיסמאות להיות זהות",
+        "normalUserReg": "הדף הזה להוספת מתנדב, להוספת עמותה לחץ כאן",
+        "orgReg": "הדף הזה להוספת עמותה, להוספת מתהדב לחץ כאן"
     },
-    "Content": {
-        "content": "העמותה",
-        "desc": "פרטי עמותה "
+    "Users": {
+        "normal": "רגיל",
+        "contact": "איש קשר",
+        "admin": "מנהל",
+        "active": "פעיל",
+        "inactive": "לא פעיל"
     },
-    "NotAuth": {
-        "text": "סליחה, אין לך הרשאה לצפות בדף זה, אנא להתחבר קודם",
-        "signin": "כניסה"
+    "Steps": {
+        "assocDetails": "פרטי העמותה",
+        "assocAddress": "כתובת העמותה",
+        "assocContact": "איש הקשר",
+        "assocFinish": "אישור הפרטים",
+        "userPersonal": "פרטים אישיים",
+        "confirm": "שים לב",
+        "userAddress": "כתובת",
+        "userPassword": "סיסמה" 
     },
-    "NotFound": {
-        "message": "דפ לא קיים, בבקשה לחזור לדף הבית"
+    "AssocForm": {
+        "assocName": "שם העמותה",
+        "assocDescription": "תאור העמותה",
+        "assocSpeciality": "התמחות העמוצה",
+        "assocWebSite": "אתר העמותה",
+        "assocAddressCity": "עיר",
+        "assocAddressNeighborhood": "שכונה",
+        "assocAddressStreet": "רחוב",
+        "assocAddressPostalCode": "מיקוד",
+        "assocContactFirstName": "שם פרטי",
+        "assocContactLastName": "שם משפחה",
+        "assocContactEmail": "דואר אלטרוני",
+        "assocContactPhone": "טלפון",
+        "assocContactPassword": "סיסמה",
+        "assocContactRepassword": "חוזר על סיסמה",
+        "allset": "הכל מוכן, אמת את הנתונים"
     },
-    "Speciality":{
-        "1": "ימי כיף עם ילדים בעלי צרכים מיוחדים",
-        "2":"עזרה לילדים עם בעיות מנטליות ופיסיולוגיות",
-        "3": "קשר עם בני נוער דרך השירותים החברתיים"
+    "Cities": {
+        "nazareth": "נצרת",
+        "haifa": "חיפה",
+        "telaviv": "תל אביב",
+        "jerusalem": "ירושלים",
+        "beersheva": "באר שבע",
+        "mashhad": "משהד"
     }
 }
