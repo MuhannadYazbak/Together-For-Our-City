@@ -50,6 +50,9 @@
         "phone": "Phone",
         "password": "Password",
         "repassword": "re-enter Password",
+        "genderM": "Male",
+        "genderF": "Female",
+        "genderUn": "Unknown",
         "Address": {
             "city": "City",
             "neighborhood": "Neighborhood",
@@ -77,6 +80,7 @@
         "street": "Please enter Street name or number",
         "postalCode": "Please enter the postal code",
         "city": "please enter city name",
+        "gender": "Please select your gender",
         "userType": "Please choose an user type",
         "userStatus": "Please choose an user status",
         "password": "Please enter password",

@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import {useNavigate} from 'react-router-dom';
 import { useTranslation } from "react-i18next";
-import { Button, Space, Steps, Form, Input, ConfigProvider } from "antd";
+import { Button, Space, Steps, Form, Input, ConfigProvider, message } from "antd";
 import { ArrowRightOutlined,ArrowLeftOutlined, InfoCircleOutlined, HeatMapOutlined, ContactsOutlined, CheckCircleOutlined, UserSwitchOutlined} from '@ant-design/icons';
 import axios from 'axios';
 import '../Style.css';
@@ -27,6 +27,15 @@ const AddAssociation = () => {
     const onFinishStepZero = () => {
         setCurrent(1);
     };
+
+// Go back to previous step
+  const goBack = () => {
+    if (current > 0) {
+      setCurrent(current - 1);
+    } else {
+      navigate(-1);
+    }
+  };
 
     function Disclaimer ({onFinish}) {
         return (
@@ -71,9 +80,24 @@ const AddAssociation = () => {
                 <Form.Item label={t('AssocForm.assocWebSite')} name='assocWebsite'  rules={[{ required: true, message: t('Messages.assocWebSite')}]}>
                     <Input type='text' name='assocWebsite'  />
                 </Form.Item>
-                <Form.Item wrapperCol={{offset: 0}}>
-                    <Button className="buttonStyle" type="primary" htmlType="submit" icon={i18n.language !== 'en'? <ArrowRightOutlined/>: <ArrowLeftOutlined/>}>{t('Buttons.next')}</Button>
-                </Form.Item>
+                <Form.Item wrapperCol={{ offset: 11 }}>
+          <Button
+            type="default"
+            onClick={goBack}
+            icon={<ArrowLeftOutlined />}
+            style={{ marginRight: "10px" }}
+            disabled={current === 0}
+          >
+            Back
+          </Button>
+          <Button
+            type="primary"
+            htmlType="submit"
+            icon={<ArrowRightOutlined />}
+          >
+            Next
+          </Button>
+        </Form.Item>
             </Form>
         )
     }
@@ -103,9 +127,24 @@ const AddAssociation = () => {
                 <Form.Item label={t('AssocForm.assocAddressPostalCode')} name='postalCode' rules={[{ required: false, message: t('Messages.postalCode')}]}>
                     <Input type='number' name='postalCode' />
                 </Form.Item>
-                <Form.Item wrapperCol={{offset: 0}}>
-                    <Button className="buttonStyle" type="primary" htmlType="submit" icon={i18n.language !== 'en'? <ArrowRightOutlined/>: <ArrowLeftOutlined/>}>{t('Buttons.next')}</Button>
-                </Form.Item>
+                <Form.Item wrapperCol={{ offset: 11 }}>
+          <Button
+            type="default"
+            onClick={goBack}
+            icon={<ArrowLeftOutlined />}
+            style={{ marginRight: "10px" }}
+            disabled={current === 0}
+          >
+            Back
+          </Button>
+          <Button
+            type="primary"
+            htmlType="submit"
+            icon={<ArrowRightOutlined />}
+          >
+            Next
+          </Button>
+        </Form.Item>
             </Form>
         )
     }
@@ -135,16 +174,71 @@ const AddAssociation = () => {
                 <Form.Item label={t('AssocForm.assocContactPhone')} name='phone' rules={[{ required: true, message: t('Messages.phone')}]}>
                     <Input type='text' name='phone' />
                 </Form.Item>
-                <Form.Item label={t('AssocForm.assocContactPassword')} name='password'  rules={[{ required: true, message: t('Messages.password')}]}>
-                    <Input type='password' name='password' />
-                </Form.Item>
-                <Form.Item label={t('AssocForm.assocContactRepassword')} name='repassword'  rules={[{ required: true, message: t('Messages.repassword')}]}>
-                    <Input type='password' name='repassword' />
-                </Form.Item>
-                <Form.Item wrapperCol={{offset: 0}}>
-                    <Button className="buttonStyle" type="primary" htmlType="submit" icon={i18n.language !== 'en'? <ArrowRightOutlined/>: <ArrowLeftOutlined/>}>{t('Buttons.next')}</Button>
-                
-                </Form.Item>
+                <Form.Item
+          name="password"
+          label={t('AssocForm.assocContactPassword')}
+          tooltip="Password must be at least 8 characters long and include at least one uppercase letter and one digit"
+          rules={[
+            {
+              required: true,
+              message: t('Messages.password'),
+            },
+            {
+              min: 8,
+              message: "Password must be at least 8 characters long!",
+            },
+            {
+              pattern: /^(?=.*[A-Z])(?=.*\d).+$/,
+              message:
+                "Password must contain at least one uppercase letter and one number!",
+            },
+          ]}
+          hasFeedback
+        >
+          <Input.Password name='password'/>
+        </Form.Item>
+        <Form.Item
+          name="repassword"
+          label={t('AssocForm.assocContactRepassword')}
+          dependencies={["password"]}
+          hasFeedback
+          rules={[
+            {
+              required: true,
+              message: t('Messages.repassword'),
+            },
+            ({ getFieldValue }) => ({
+              validator(_, value) {
+                if (!value || getFieldValue("password") === value) {
+                  return Promise.resolve();
+                }
+                return Promise.reject(
+                  new Error("The two passwords that you entered do not match!")
+                );
+              },
+            }),
+          ]}
+        >
+          <Input.Password name='repassword'/>
+        </Form.Item>
+                <Form.Item wrapperCol={{ offset: 11 }}>
+          <Button
+            type="default"
+            onClick={goBack}
+            icon={<ArrowLeftOutlined />}
+            style={{ marginRight: "10px" }}
+            disabled={current === 0}
+          >
+            Back
+          </Button>
+          <Button
+            type="primary"
+            htmlType="submit"
+            icon={<ArrowRightOutlined />}
+          >
+            Next
+          </Button>
+        </Form.Item>
             </Form>
         )
     }
@@ -153,7 +247,8 @@ const AddAssociation = () => {
             await axios.post("http://localhost:3001/AddOrganization", assoc).then((response)=>{
                 if (response.status == 200){
                     console.log("posted Successfully ", assoc);
-                    navigate('/');
+                    message.success("Account Created Successfully!");
+                    navigate("/Login");
                 } else {
                     console.warn('Failed to Add new user, please check the data');
                 }
@@ -195,7 +290,6 @@ const AddAssociation = () => {
             />
         {forms[current]}
     </Space>
-    <Button className="buttonStyle" type='default' onClick={()=> navigate(-1)} icon={i18n.language === 'en' ? <ArrowRightOutlined /> : <ArrowLeftOutlined />}>{t('Buttons.back')}</Button>
     </ConfigProvider>
     )}
 

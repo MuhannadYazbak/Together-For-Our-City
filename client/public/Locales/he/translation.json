@@ -50,6 +50,9 @@
         "phone": "טלפון",
         "password": "סיסמה",
         "repassword": "חזור על הסיסמה",
+        "genderM": "זכר",
+        "genderF": "נקבה",
+        "genderUn": "לא ידוע",
         "Address": {
             "city": "עיר",
             "neighborhood": "שכונה",
@@ -77,6 +80,7 @@
         "street": "אנא הקלד שם או מספר רחוב",
         "postalCode": "אנא הקלד מיקוד",
         "city": "אנא הקלד את שם העיר",
+        "gender": "בבקשה בחר את המגדר שלך",
         "userType": "אנא בחר סוג משתמש",
         "userStatus": "אנא בחר סטטוס המשתמש",
         "password": "אנא הקלד סיסמה",

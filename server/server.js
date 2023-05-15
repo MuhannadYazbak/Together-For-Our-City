@@ -1,66 +1,82 @@
-const express = require('express');
-const bcrypt = require('bcryptjs');
-const cors = require('cors');
-const jwt = require('jsonwebtoken');
-const mongoose = require('mongoose');
-const userModel = require('./dataModels/userModel');
-const organizationModel = require('./dataModels/organizationModel');
-const activityModel = require('./dataModels/activityModel');
-const {requireAuth, requireAdmin} = require('./auth');
-const nodemailer = require('nodemailer')
-require('dotenv').config();
+const express = require("express");
+const bcrypt = require("bcryptjs");
+const cors = require("cors");
+const jwt = require("jsonwebtoken");
+const mongoose = require("mongoose");
+const userModel = require("./dataModels/userModel");
+const organizationModel = require("./dataModels/organizationModel");
+const activityModel = require("./dataModels/activityModel");
+const addressModel = require("./dataModels/addressModel");
+const { requireAuth, requireAdmin } = require("./auth");
+const nodemailer = require("nodemailer");
+require("dotenv").config();
 
-const userTypes = ['NormalUser', 'ContactPerson', 'Admin'];
-
+const userTypes = ["NormalUser", "ContactPerson", "Admin"];
 
 const app = express();
 app.use(cors());
 app.use(express.json());
 
-mongoose.connect('mongodb+srv://yazbakm:muhannad123@togetherfornazareth.3x9t2iv.mongodb.net/LetsVolunteer?retryWrites=true&w=majority', {
-  useNewUrlParser: true,
-});
-
+mongoose.connect(
+  "mongodb+srv://yazbakm:muhannad123@togetherfornazareth.3x9t2iv.mongodb.net/LetsVolunteer?retryWrites=true&w=majority",
+  {
+    useNewUrlParser: true,
+  }
+);
 
 app.post("/register", async (req, res) => {
-    console.log("User to be added ", req.body);
-    const firstName = req.body.personalDetails.firstName;
-    const lastName = req.body.personalDetails.lastName;
-    const email = req.body.personalDetails.email;
-    const phone = req.body.personalDetails.phone;
-    const password = req.body.passwordDetails.password;
-    const repassword = req.body.passwordDetails.repassword;
-    const city = req.body.addressDetails.city;
-    const neighborhood = req.body.addressDetails.neighborhood;
-    const postalCode = req.body.addressDetails.postalCode;
-    const hashedPassword = await bcrypt.hash(password, 10);  //hash the password with salt factor of 10
-    const passmatch = (password === repassword);
-    if (!passmatch){
-        res.status(401).send(["Passwords does not match"]);
-    }
-    const user =new userModel ({
+  console.log("User to be added ", req.body);
+  const firstName = req.body.personalDetails.firstName;
+  const lastName = req.body.personalDetails.lastName;
+  const email = req.body.personalDetails.email;
+  const phone = req.body.personalDetails.phone;
+  const password = req.body.passwordDetails.password;
+  const repassword = req.body.passwordDetails.repassword;
+  const city = req.body.addressDetails.city;
+  const neighborhood = req.body.addressDetails.neighborhood;
+  const streetNo = req.body.addressDetails.street;
+  const postalCode = req.body.addressDetails.postalCode;
+  const birthDate = req.body.personalDetails.birthdate;
+  const gender = req.body.personalDetails.gender;
+  const hashedPassword = await bcrypt.hash(password, 10); //hash the password with salt factor of 10
+  const passmatch = password === repassword;
+  if (!passmatch) {
+    res.status(401).send(["Passwords does not match"]);
+  }
+
+  try {
+    const address = new addressModel({
+      city: city,
+      neighborhood: neighborhood,
+      streetNo: streetNo,
+      postalCode: postalCode,
+    });
+
+    const savedAddress = await address.save();
+
+    const user = new userModel({
       firstName: firstName,
       lastName: lastName,
       email: email,
       phone: phone,
-      address: {
-        city: city,
-        neighborhood: neighborhood,
-        postalCode: postalCode,
-      },
+      birthDate: birthDate,
+      gender: gender,
+      address: savedAddress._id,
       password: hashedPassword,
     });
-    try {
-        await user.save();
-        // Create JWT
-        const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
 
-        res.status(200).json(token);
-        console.log("Inserted");
-      } catch (err) {
-        console.log(err, user);
-        res.status(406).send(["Failed to Add new user"]);
-      }
+    await user.save();
+    // Create JWT
+    const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
+      expiresIn: "1h",
+    });
+
+    res.status(200).json(token);
+    console.log("Inserted");
+  } catch (err) {
+    console.log(err);
+    res.status(406).send(["Failed to Add new user"]);
+  }
 });
 
 app.post("/addOrganization", async (req, res) => {
@@ -68,68 +84,77 @@ app.post("/addOrganization", async (req, res) => {
     assocName: req.body.assocDetails.assocName,
     assocDescription: req.body.assocDetails.assocDescription,
     assocSpeciality: req.body.assocDetails.assocSpeciality,
-    assocWebsite: req.body.assocDetails.assocWebsite
-  }
-  const addressDetails = {
-      city: req.body.addressDetails.city,
-      neighborhood: req.body.addressDetails.neighborhood,
-      street: req.body.addressDetails.street,
-      postalCode: req.body.addressDetails.postalCode
+    assocWebsite: req.body.assocDetails.assocWebsite,
   };
+  // const addressDetails = {
+  //   city: req.body.addressDetails.city,
+  //   neighborhood: req.body.addressDetails.neighborhood,
+  //   street: req.body.addressDetails.street,
+  //   postalCode: req.body.addressDetails.postalCode,
+  // };
   const contactDetails = {
     firstName: req.body.contactDetails.firstName,
-    lastName : req.body.contactDetails.lastName,
-    email : req.body.contactDetails.email,
-    phone : req.body.contactDetails.phone,
-    password : req.body.contactDetails.password
-  }
+    lastName: req.body.contactDetails.lastName,
+    email: req.body.contactDetails.email,
+    phone: req.body.contactDetails.phone,
+    password: req.body.contactDetails.password,
+  };
   const hashedPassword = await bcrypt.hash(contactDetails.password, 10); // hash the password with salt factor of 10
-  const passmatch = (contactDetails.password === req.body.contactDetails.repassword);
-  if (!passmatch){
-      res.status(401).send(["Passwords does not match"]);
+  const passmatch =
+    contactDetails.password === req.body.contactDetails.repassword;
+  if (!passmatch) {
+    res.status(401).send(["Passwords does not match"]);
   }
   contactDetails.password = hashedPassword;
-  const organization =new organizationModel ({
+
+  try {
+    const address = new addressModel({
+      city: req.body.addressDetails.city,
+      neighborhood: req.body.addressDetails.neighborhood,
+      streetNo: req.body.addressDetails.street,
+      postalCode: req.body.addressDetails.postalCode,
+    });
+
+  const savedAddress = await address.save();
+  const organization = new organizationModel({
     assocDetails: assocDetails,
-    addressDetails: addressDetails,
+    addressDetails: savedAddress,
     contactDetails: contactDetails,
   });
-  try {
-      await organization.save();
-      res.status(200).send(["Inserted organization", organization]);
-      console.log("Inserted Organization");
-    } catch (err) {
-      console.log(err, organization);
-      res.status(406).send(["Failed to Add new user"]);
-    }
+    await organization.save();
+    res.status(200).send(["Inserted organization", organization]);
+    console.log("Inserted Organization");
+  } catch (err) {
+    console.log(err);
+    res.status(406).send(["Failed to Add new user"]);
+  }
 });
 
-app.get('/users',requireAuth, requireAdmin, async (req, res) => {
-
-  await userModel.find()
+app.get("/users", requireAuth, requireAdmin, async (req, res) => {
+  await userModel
+    .find()
     .then((response) => {
-      console.log('Data = ', response);
+      console.log("Data = ", response);
       res.json(response);
     })
     .catch((error) => {
-      console.log('ERROR Fetching Data', error);
-      res.status(500).send('Error fetching data');
+      console.log("ERROR Fetching Data", error);
+      res.status(500).send("Error fetching data");
     });
 });
 
-app.get('/organizations',requireAuth, async (req, res) => {
-
-  await organizationModel.find()
+app.get("/organizations", requireAuth, async (req, res) => {
+  await organizationModel
+    .find()
     .then((response) => {
-      console.log('Data = ', response);
+      console.log("Data = ", response);
       res.json(response);
     })
     .catch((error) => {
-      console.log('ERROR Fetching Data', error);
-      res.status(500).send('Error fetching data');
+      console.log("ERROR Fetching Data", error);
+      res.status(500).send("Error fetching data");
     });
 });
-
 
 app.post("/login", async (req, res) => {
   const { email, password } = req.body;
@@ -143,9 +168,12 @@ app.post("/login", async (req, res) => {
   }
 
   // Create JWT
-  const tkn = jwt.sign({ userId: ru._id, userType: ru.userType }, process.env.JWT_SECRET);
-  console.log('JWT : ', tkn, ' user: ', ru);
-  res.status(200).json({tkn, ru});
+  const tkn = jwt.sign(
+    { userId: ru._id, userType: ru.userType },
+    process.env.JWT_SECRET
+  );
+  console.log("JWT : ", tkn, " user: ", ru);
+  res.status(200).json({ tkn, ru });
 });
 
 app.post("/forgotPassword", async (req, res) => {
@@ -168,29 +196,33 @@ app.post("/SendEmail", async (req, res) => {
     await userModel.updateOne({ email }, { resetPasswordToken: token });
     // Send an email with the reset password link
     const transporter = nodemailer.createTransport({
-      service: 'gmail',
+      service: "gmail",
       auth: {
-        user: 'finalProjectResetPW@gmail.com',
-        pass: 'voxlgaondzmwexke'
-      }
+        user: "finalProjectResetPW@gmail.com",
+        pass: "voxlgaondzmwexke",
+      },
     });
 
     // wont work on local host
-    const resetPasswordLink = `http://localhost:3000/ResetPassword/${encodeURIComponent(token)}`; // Replace with your reset password page URL
+    const resetPasswordLink = `http://localhost:3000/ResetPassword/${encodeURIComponent(
+      token
+    )}`; // Replace with your reset password page URL
 
     const mailOptions = {
-      from: 'finalProjectResetPW@gmail.com',
+      from: "finalProjectResetPW@gmail.com",
       to: email,
       subject: req.body.subject,
-      text: `${req.body.text} ${resetPasswordLink}`
+      text: `${req.body.text} ${resetPasswordLink}`,
     };
-    transporter.sendMail(mailOptions, function(error, info){
+    transporter.sendMail(mailOptions, function (error, info) {
       if (error) {
         console.log(error);
         res.status(500).send("Email not sent");
       } else {
-        console.log('Email sent: ' + info.response);
-        res.status(200).send("An email was sent, follow instructions to change password");
+        console.log("Email sent: " + info.response);
+        res
+          .status(200)
+          .send("An email was sent, follow instructions to change password");
       }
     });
   } else {
@@ -198,8 +230,8 @@ app.post("/SendEmail", async (req, res) => {
   }
 });
 
- // add activity
- app.post("/AddActivity", async (req, res) => {
+// add activity
+app.post("/AddActivity", async (req, res) => {
   const {
     associationName,
     associationSpeciality,
@@ -295,7 +327,7 @@ app.delete("/activity/:id", async (req, res) => {
   }
 });
 
-app.post('/joinActivity', requireAuth, async (req, res) => {
+app.post("/joinActivity", requireAuth, async (req, res) => {
   const { signedUser, activityId } = req.body;
   console.log("userId = ", signedUser._id, " activity = ", activityId);
   try {
@@ -310,7 +342,7 @@ app.post('/joinActivity', requireAuth, async (req, res) => {
       return res.status(404).send("User or activity not found");
     }
 
-    if (!user.joinedActivities.find(a => a.toString() === activityId)) {
+    if (!user.joinedActivities.find((a) => a.toString() === activityId)) {
       user.joinedActivities.push(activityId);
       await user.save();
     }
@@ -322,25 +354,29 @@ app.post('/joinActivity', requireAuth, async (req, res) => {
   }
 });
 
-app.put('/users/:id', async (req, res) => {
+app.put("/users/:id", async (req, res) => {
   console.log("req.body = ", req.body);
   const { firstName, lastName, email, phone } = req.body.personalDetails;
   const { city, neighborhood, postalCode } = req.body.addressDetails;
-  const {password} = req.body.passwordDetails;
+  const { password } = req.body.passwordDetails;
   try {
-    const newuser = await userModel.findByIdAndUpdate(req.params.id, {
-      firstName,
-      lastName,
-      email,
-      phone,
-      password: await bcrypt.hash(password,10),
-      address: { city, neighborhood, postalCode }
-    }, { new: false });
+    const newuser = await userModel.findByIdAndUpdate(
+      req.params.id,
+      {
+        firstName,
+        lastName,
+        email,
+        phone,
+        password: await bcrypt.hash(password, 10),
+        address: { city, neighborhood, postalCode },
+      },
+      { new: false }
+    );
     console.log("Updated to: ", newuser);
     res.status(200).json({ newuser });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: 'Server error' });
+    res.status(500).json({ message: "Server error" });
   }
 });
 
@@ -388,8 +424,8 @@ app.post("/AddOrganization", async (req, res) => {
   }
 });
 
-app.listen(3001, ()=>{
-    console.log("Server running on port 3001 ...");
-})
+app.listen(3001, () => {
+  console.log("Server running on port 3001 ...");
+});
 
 module.exports = app;

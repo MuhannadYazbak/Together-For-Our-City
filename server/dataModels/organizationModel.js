@@ -1,4 +1,6 @@
 const mongoose = require('mongoose');
+const Address = require('./addressModel');
+
 
 const assocDetailsSchema = new mongoose.Schema({
     assocName: { type: String, required: true },
@@ -8,12 +10,12 @@ const assocDetailsSchema = new mongoose.Schema({
 }
 );
 
-const addressDetailsSchema = new mongoose.Schema({
-    city: { type: String, required: true },
-    neighborhood: { type: String, required: true },
-    street: { type: String, required: true },
-    postalCode: { type: String, required: true }
-});
+// const addressDetailsSchema = new mongoose.Schema({
+//     city: { type: String, required: true },
+//     neighborhood: { type: String, required: true },
+//     street: { type: String, required: true },
+//     postalCode: { type: String, required: true }
+// });
 
 const contactDetailsSchema = new mongoose.Schema({
             firstName: { type: String, required: true },
@@ -32,7 +34,7 @@ const Organization = new mongoose.Schema(
             // assocWebsite: { type: String, required: true }
        // },
 
-        addressDetails: { type: addressDetailsSchema, required: true},
+        addressDetails: {type: mongoose.Schema.Types.ObjectId, ref: 'Addresses'},
         //     city: { type: String, required: true },
         //     neighborhood: { type: String, required: true },
         //     street: { type: String, required: true },

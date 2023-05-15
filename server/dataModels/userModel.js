@@ -1,10 +1,6 @@
 const mongoose = require('mongoose');
-const Address = new mongoose.Schema({
-    city: { type: String, required: true},
-    neighborhood: {type: String, required: true},
-    postalCode: {type: String, required: false},
+const Address = require('./addressModel');
 
-})
 const User = new mongoose.Schema(
 	{
 		firstName: { type: String, required: true},
@@ -12,9 +8,11 @@ const User = new mongoose.Schema(
         email: { type: String, required: true, unique: true },
         phone: { type: [String], required: false},
 		password: { type: String, required: true },
-        address: { type: Address, required: true},
+        address: {type: mongoose.Schema.Types.ObjectId, ref: 'Addresses'},
         userType: {type: String, enum: ['Normal', 'Contact', 'Admin'], default: 'Normal', required: true},
         userStatus: {type: String, enum: ['Active', 'Inactive'], default: 'Active', required: true},
+        birthDate: {type: Date, required: true},
+		gender: {type: String, required: true},
 		joinedActivities: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Activities' }],
 	},
 	{ timestamps: true, collection: 'Users' }
